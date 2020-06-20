@@ -27,4 +27,11 @@ public class AccountController {
         return res;
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public Object register(@RequestBody Account account){
+        Object res = accountService.register(account);
+        return res;
+    }
+
+
 }

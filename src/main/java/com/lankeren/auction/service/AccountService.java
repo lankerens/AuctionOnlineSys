@@ -12,4 +12,6 @@ public interface AccountService {
 
     public Object login(Account account);
 
+    public Object register(Account account);
+
 }

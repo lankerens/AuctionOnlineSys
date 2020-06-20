@@ -34,4 +34,16 @@ public class AccountServiceImpl implements AccountService {
         res.put("msg", "f");
         return res;
     }
+
+    @Override
+    public Object register(Account account) {
+        JSONObject res = new JSONObject();
+        if(StringUtils.isEmpty(account.getAccount()) || StringUtils.isEmpty(account.getPassword())){
+            res.put("msg","f");
+            return res;
+        }
+        accountMapper.registerAccount(account);
+        res.put("msg", "ok");
+        return res;
+    }
 }
