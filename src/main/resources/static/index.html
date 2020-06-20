@@ -6,6 +6,7 @@
 </head>
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/login-register.js"></script>
 <link rel="stylesheet" type="text/css" href="css/reset200802.css"/>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
 <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
@@ -23,7 +24,7 @@
                 "                    <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-pencil\"></span> 联系管理</a></li>\n" +
                 "                    <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-subtitles\"></span> 本站公告</a></li>"
         }else{
-           lis = " <li><a href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> "+ sto.getItem("accountName") +"</a></li>\n" +
+           lis = " <li><a href=\"#\" onclick='myInfoPage()'><span class=\"glyphicon glyphicon-user\"></span> "+ sto.getItem("accountName") +"</a></li>\n" +
                "            <li><a href=\"SaleGoods.html\"><span class=\"glyphicon glyphicon-gift\"></span> 发布商品</a></li>\n" +
                "            <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-pencil\"></span> 联系管理</a></li>\n" +
                "            <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-subtitles\"></span> 本站公告</a></li>";

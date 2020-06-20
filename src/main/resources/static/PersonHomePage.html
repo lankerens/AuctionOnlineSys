@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的主页-By-Lankeren</title>
+</head>
+<link rel="stylesheet" type="text/css" href="css/reset200802.css"/>
+<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/index.css"/>
+<link rel="stylesheet" type="text/css" href="css/PersonHome.css"/>
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/PersonHome.js"></script>
+
+
+<script>
+    function lankeren1() {
+        var sto = window.sessionStorage;
+        // console.log(typeof sto.getItem("accountName"));
+        // console.log(sto.getItem("accountName"));
+        var lis;
+        if (sto.getItem("accountName") == null) {
+            lis = "   <li><a href=\"login.html\"><span class=\"glyphicon glyphicon-log-in\"></span> 登录</a></li>\n" +
+                "                    <li><a href=\"register.html\"><span class=\"glyphicon glyphicon-user\"></span> 注册</a></li>\n" +
+                "                    <li><a href=\"SaleGoods.html\"><span class=\"glyphicon glyphicon-gift\"></span> 发布商品</a></li>\n" +
+                "                    <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-pencil\"></span> 联系管理</a></li>\n" +
+                "                    <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-subtitles\"></span> 本站公告</a></li>"
+        } else {
+            lis = " <li><a href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> " + sto.getItem("accountName") + "</a></li>\n" +
+                "            <li><a href=\"SaleGoods.html\"><span class=\"glyphicon glyphicon-gift\"></span> 发布商品</a></li>\n" +
+                "            <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-pencil\"></span> 联系管理</a></li>\n" +
+                "            <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-subtitles\"></span> 本站公告</a></li>";
+        }
+        // $(".lankeren1").innerHTML = lis;
+        document.write(lis);
+    }
+
+</script>
+
+<body>
+<!-- 头部  -->
+<nav class="top-wrapper-nav navbar navbar-default">
+    <div class="guding-width">
+        <nav role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">AuctionOnlineSys-By-Lankeren</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right lankeren1">
+                    <script>lankeren1();</script>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</nav>
+
+<!-- 头部二  -->
+<div class="top-sec-wrapper clearfix">
+
+    <div class="left-sec-img-logo">
+        <a href="./index.html"><img src="imgs/logo.png" alt=""></a>
+    </div>
+    <div class="mysearch-mytype">
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown">
+                所有分类 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">手机</a></li>
+                <li><a href="#">钻戒</a></li>
+                <li><a href="#">手表</a></li>
+                <li class="divider"></li>
+                <li><a href="#">图画</a></li>
+                <li><a href="#">瓷器</a></li>
+                <li><a href="#">旗袍</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="mysearch clearfix">
+        <form class="navbar-form" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">搜索</button>
+        </form>
+    </div>
+    <div class="myauction">
+        <ul class="">
+            <li><a href="./MyAuction.html"><span class="glyphicon glyphicon-shopping-cart"></span> 我的竞拍</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<!--  中间部分   -->
+
+<nav class="content-wrapper-nav">
+    <div class="content-wrapper-div">
+        <div class="content-wrapper-info-div clearfix">
+            <!--  左侧导航  -->
+            <div class="left-daohang">
+                <ul class="clearfix">
+                    <li><a class="myactive-daohang" href="#" onclick="changeActiveDaohang(this, 'right-info-div')">基本信息</a></li>
+                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-psw')">修改密码</a></li>
+                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-shopcart')">购物车</a></li>
+                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-myauction')">我的竞拍</a></li>
+                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-myGoods')">我的商品</a></li>
+                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-myOrderInfo')">我的订单</a></li>
+                    <li><a href="#" onclick="changeActiveDaohang(this)">申请商家</a></li>
+                    <li><a href="#" >退出登录</a></li>
+                    <li><a href="#" >返回首页</a></li>
+                </ul>
+
+            </div>
+
+
+            <!-- 右侧展示 -->
+            <div class="right-info-show-wrapper clearfix">
+
+                <div class="right-info-show">
+                    <!-- 基本信息 -->
+                    <div class="right-info-div myActiveInRightInfo">
+                        <div class="info-title clearfix">
+                                <p>基本信息</p>
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalmyinfo1">修改</button>
+                        </div>
+
+                        <div class="left-bottom-myinfo clearfix">
+
+                            <div class="left-myinfo">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">用户名</h3>
+                                    </div>
+                                    <div class="panel-body" id="myinfo-div-name">
+                                        lankeren
+                                    </div>
+                                </div>
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">账号</h3>
+                                    </div>
+                                    <div class="panel-body" id="myinfo-div-account">
+                                        lankeren
+                                    </div>
+                                </div>
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">本站身份</h3>
+                                    </div>
+                                    <div class="panel-body" id="myinfo-div-identity">
+                                        普通用户
+                                    </div>
+                                </div>
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">性别</h3>
+                                    </div>
+                                    <div class="panel-body" id="myinfo-div-sex">
+                                        男
+                                    </div>
+                                </div>
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">地址</h3>
+                                    </div>
+                                    <div class="panel-body" id="myinfo-div-address">
+                                        广东
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="right-myinfo">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">个性签名</h3>
+                                    </div>
+                                    <div class="panel-body" id="myinfo-div-sgin">
+                                        广东
+                                    </div>
+                                </div>
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">手机电话</h3>
+                                    </div>
+                                    <div class="panel-body" id="myinfo-div-phone">
+                                        广东
+                                    </div>
+                                </div>
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">电子邮箱</h3>
+                                    </div>
+                                    <div class="panel-body" id="myinfo-div-email">
+                                        广东
+                                    </div>
+                                </div>
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">爱好</h3>
+                                    </div>
+                                    <div class="panel-body" id="myinfo-div-love">
+                                        广东
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="myModalmyinfo1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        基本信息
+                                    </h4>
+                                </div>
+                                <!-- 身体部分 -->
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+                                        <label for="username">用户名</label>
+                                        <input type="text" class="form-control" id="username"
+                                               placeholder="" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="myaccount">账号</label>
+                                        <input type="text" class="form-control" id="myaccount"
+                                               placeholder="" value="测试-tom" readonly>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="myidentity">本站身份</label>
+                                        <input type="text" class="form-control" id="myidentity"
+                                               placeholder="" value="测试-普通用户" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mysgin">个性签名</label>
+                                        <input type="text" class="form-control" id="mysgin"
+                                               placeholder="" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mylove">爱好</label>
+                                        <input type="text" class="form-control" id="mylove"
+                                               placeholder="" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mysex">性别</label>
+                                        <input type="text" class="form-control" id="mysex"
+                                               placeholder="" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="mylocation">地址</label>
+                                        <input type="text" class="form-control" id="mylocation"
+                                               placeholder="" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="myphone">手机电话</label>
+                                        <input type="text" class="form-control" id="myphone"
+                                               placeholder="" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="myemail">电子邮箱</label>
+                                        <input type="text" class="form-control" id="myemail"
+                                               placeholder="" value="">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                    </button>
+                                    <button type="button" class="btn btn-primary">
+                                        提交更改
+                                    </button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+
+                    <!--  修改密码  -->
+                    <div class="right-info-psw myActiveInRightInfo">
+                        <div>
+                            <div class="info-title clearfix">
+                                <p>修改密码</p>
+                            </div>
+                        </div>
+
+                        <div class="myinfo-psw-update">
+                            <div class="form-group">
+                                <label for="mypassword0">原密码</label>
+                                <input type="password" class="form-control" id="mypassword0"
+                                      >
+                            </div>
+                            <div class="form-group">
+                                <label for="mypassword1">新密码</label>
+                                <input type="password" class="form-control" id="mypassword1"
+                                       data-toggle="tooltip" data-placement="right" title="密码至少包含字母&数字两种字符"   >
+                            </div>
+                            <div class="form-group">
+                                <label for="mypassword2">再次输入新密码</label>
+                                <input type="password" class="form-control" id="mypassword2"
+                                       data-toggle="tooltip" data-placement="right" title="必须与上面的密码一致" >
+                            </div>
+
+                           <div class="myinfo-psw-btn">
+                               <p>
+                                   <button type="button" class="btn btn-info" id="myinfo-updatePsw">提交更改</button>
+                               </p>
+                           </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <!--  购物车  -->
+                    <div class="right-info-shopcart myActiveInRightInfo">
+                        <!-- 标题 -->
+                        <div>
+                            <div class="info-title clearfix">
+                                <p>购物车</p>
+                            </div>
+                        </div>
+
+                        <!--  搜索框  -->
+                        <div class="shopcart-info-mysearch">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                搜索
+                                </button>
+                                </span>
+                                <input type="text" class="form-control" placeholder="按商品名称进行搜索">
+                                </div><!-- /input-group -->
+                            </div>
+
+
+                        <!--  列表内容  -->
+                        <div class="shopcart-info-listcontent">
+                            <div>
+                                <table class="table table-striped mytableListInfo">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>商品名称</th>
+                                        <th>当前竞价</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                        <td>
+                                            <a href="#">查看</a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="真的要删除我吗">删除</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sachin</td>
+                                        <td>Mumbai</td>
+                                        <td>560001</td>
+                                        <td>400003</td>
+                                        <td>
+                                            <a href="#">查看</a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="真的要删除我吗">删除</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Uma</td>
+                                        <td>Pune</td>
+                                        <td>560001</td>
+                                        <td>411027</td>
+                                        <td>
+                                            <a href="#">查看</a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="真的要删除我吗">删除</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <!--  显示的页数\几页  -->
+                            <div class="info-shopcart-pagesize">
+                                <div>当前第1页, 共1页</div>
+                            </div>
+
+                            <!--  上一页  下一页 -->
+                            <div class="info-shopcart-mypager">
+                                <ul class="pager">
+                                    <li><a href="#">上一页</a></li>
+                                    <li><a href="#">下一页</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+
+                        </div>
+
+                    <!--  我的竞拍 -->
+                    <div class="right-info-myauction myActiveInRightInfo">
+                        <!-- 标题 -->
+                        <div>
+                            <div class="info-title clearfix">
+                                <p>竞拍记录</p>
+                            </div>
+                        </div>
+
+                        <!--  搜索框 -- 与购物那里共用 -->
+                        <div class="shopcart-info-mysearch">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                搜索
+                                </button>
+                                </span>
+                                <input type="text" class="form-control" placeholder="按商品名称进行搜索">
+                            </div><!-- /input-group -->
+                        </div>
+
+                        <!--  列表内容    -->
+                        <div class="myauction-info-listcontent">
+                            <div>
+                                <table class="table table-striped mytableListInfo">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>商品名称</th>
+                                        <th>当前竞价</th>
+                                        <th>我的竞价</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                        <td>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="快来看看心意的物品有没有被人抢走呀">查看</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sachin</td>
+                                        <td>Mumbai</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>400003</td>
+                                        <td>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="快来看看心意的物品有没有被人抢走呀">查看</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Uma</td>
+                                        <td>Pune</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>411027</td>
+                                        <td>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="快来看看心意的物品有没有被人抢走呀">查看</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Uma</td>
+                                        <td>Pune</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>411027</td>
+                                        <td>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="快来看看心意的物品有没有被人抢走呀">查看</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Uma</td>
+                                        <td>Pune</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>411027</td>
+                                        <td>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="快来看看心意的物品有没有被人抢走呀">查看</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <!--  显示的页数\几页  -->
+                            <div class="info-myauction-pagesize">
+                                <div>当前第1页, 共8页</div>
+                            </div>
+
+                            <!--  上一页  下一页 -->
+                            <div class="info-myauction-mypager">
+                                <ul class="pager">
+                                    <li><a href="#">上一页</a></li>
+                                    <li><a href="#">下一页</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!--  我的商品  -->
+                    <div class="right-info-myGoods myActiveInRightInfo">
+
+                        <!-- 标题 -->
+                        <div>
+                            <div class="info-title clearfix">
+                                <p>我的商品</p>
+                            </div>
+                        </div>
+
+                        <!--  搜索框 -- 与购物那里共用 -->
+                        <div class="shopcart-info-mysearch">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                搜索
+                                </button>
+                                </span>
+                                <input type="text" class="form-control" placeholder="按商品名称进行搜索">
+                            </div><!-- /input-group -->
+                        </div>
+
+                        <!--  列表内容    -->
+                        <div class="myGoods-info-listcontent">
+                            <div>
+                                <table class="table table-striped mytableListInfo">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>商品名称</th>
+                                        <th>结束时间</th>
+                                        <th>起拍价</th>
+                                        <th>最高价</th>
+                                        <th>竞拍状态</th>
+                                        <th>订单状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                        <td>
+                                            <a href="#">查看</a>
+                                            <a href="#">编辑</a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="真的要删除我吗">删除</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sachin</td>
+                                        <td>Mumbai</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>400003</td>
+                                        <td>
+                                            <a href="#">查看</a>
+                                            <a href="#">编辑</a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="真的要删除我吗">删除</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Uma</td>
+                                        <td>Uma</td>
+                                        <td>Uma</td>
+                                        <td>Pune</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>411027</td>
+                                        <td>
+                                            <a href="#">查看</a>
+                                            <a href="#">编辑</a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="真的要删除我吗">删除</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Uma</td>
+                                        <td>Pune</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>411027</td>
+                                        <td>411027</td>
+                                        <td>411027</td>
+                                        <td>
+                                            <a href="#">查看</a>
+                                            <a href="#">编辑</a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="真的要删除我吗">删除</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Uma</td>
+                                        <td>Pune</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>411027</td>
+                                        <td>411027</td>
+                                        <td>411027</td>
+                                        <td>
+                                            <a href="#">查看</a>
+                                            <a href="#">编辑</a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="真的要删除我吗">删除</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <!--  显示的页数\几页  -->
+                            <div class="info-myGoods-pagesize">
+                                <div>当前第2页, 共11页</div>
+                            </div>
+
+                            <!--  上一页  下一页 -->
+                            <div class="info-myGoods-mypager">
+                                <ul class="pager">
+                                    <li><a href="#">上一页</a></li>
+                                    <li><a href="#">下一页</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <!--   我的订单 -->
+                    <div class="right-info-myOrderInfo myActiveInRightInfo">
+
+                        <!-- 标题 -->
+                        <div>
+                            <div class="info-title clearfix">
+                                <p>我的订单</p>
+                            </div>
+                        </div>
+
+                        <!--  搜索框 -- 与购物那里共用 -->
+                        <div class="shopcart-info-mysearch">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                搜索
+                                </button>
+                                </span>
+                                <input type="text" class="form-control" placeholder="按商品名称进行搜索">
+                            </div><!-- /input-group -->
+                        </div>
+
+                        <!--  列表内容    -->
+                        <div class="myOrderInfo-info-listcontent">
+                            <div>
+                                <table class="table table-striped mytableListInfo">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>订单编号</th>
+                                        <th>商品名称</th>
+                                        <th>价格</th>
+                                        <th>创建时间</th>
+                                        <th>订单状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>
+                                            <a href="#">查看</a>
+                                            <a href="#">确认收货</a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="再不付款就超时退回了呦">支付</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sachin</td>
+                                        <td>Mumbai</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>
+                                            <a href="#">查看</a>
+                                            <a href="#">确认收货</a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="再不付款就超时退回了呦">支付</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Uma</td>
+                                        <td>Uma</td>
+                                        <td>Uma</td>
+                                        <td>Pune</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>
+                                            <a href="#">查看</a>
+                                            <a href="#">确认收货</a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="再不付款就超时退回了呦">支付</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Uma</td>
+                                        <td>Pune</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>411027</td>
+                                        <td>411027</td>
+                                        <td>
+                                            <a href="#">查看</a>
+                                            <a href="#">确认收货</a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="再不付款就超时退回了呦">支付</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Uma</td>
+                                        <td>Pune</td>
+                                        <td>560001</td>
+                                        <td>560001</td>
+                                        <td>411027</td>
+                                        <td>411027</td>
+                                        <td>
+                                            <a href="#">查看</a>
+                                            <a href="#">确认收货</a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right"
+                                               title="再不付款就超时退回了呦">支付</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <!--  显示的页数\几页  -->
+                            <div class="info-myOrderInfo-pagesize">
+                                <div>当前第1页, 共3页</div>
+                            </div>
+
+                            <!--  上一页  下一页 -->
+                            <div class="info-myOrderInfo-mypager">
+                                <ul class="pager">
+                                    <li><a href="#">上一页</a></li>
+                                    <li><a href="#">下一页</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <!--  申请商家 -->
+                    <div></div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</nav>
+
+
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+
+</body>
+</html>

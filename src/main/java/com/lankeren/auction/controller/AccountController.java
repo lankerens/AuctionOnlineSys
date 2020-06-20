@@ -34,4 +34,13 @@ public class AccountController {
     }
 
 
+    @RequestMapping(value = "getAccountInfo", method = RequestMethod.POST)
+    public Object getAccountInfo(Account account){
+        Object res =  accountService.register(account);
+        return res;
+    }
+
+
+
+
 }

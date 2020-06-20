@@ -46,4 +46,12 @@ public class AccountServiceImpl implements AccountService {
         res.put("msg", "ok");
         return res;
     }
+
+    @Override
+    public Object getAccountInfo(Account account) {
+
+
+
+        return null;
+    }
 }

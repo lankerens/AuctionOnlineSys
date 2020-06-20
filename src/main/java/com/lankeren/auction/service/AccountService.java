@@ -14,4 +14,7 @@ public interface AccountService {
 
     public Object register(Account account);
 
+    public Object getAccountInfo(Account account);
+
+
 }
