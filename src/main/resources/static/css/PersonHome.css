@@ -24,7 +24,8 @@
     background-color: rgb(51,51,51);
     margin-top: 5px;
     color: white;
-    padding: 15px 30px;
+    /*padding: 15px 30px;*/
+    padding: 12px 30px;
     border-radius: 8px;
 }
 
@@ -150,9 +151,6 @@
 .myOrderInfo-info-listcontent{
     margin-top: 4%;
 }
-
-
-
 
 
 

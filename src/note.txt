@@ -1,0 +1,47 @@
+前端页面推荐将浏览器分辨率缩放到 1920*1080
+
+
+
+// html 发送请求模板
+    function login()
+    {
+        var data = {
+            "account": $("#account").val(),
+            "password": $("#password").val()
+        };
+        var jsonData = JSON.stringify(data);
+        console.log(jsonData);
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                // console.log(xmlhttp.responseText);
+                var res = xmlhttp.responseText;
+                var j = $.parseJSON(res);
+                if(j.msg === "ok"){
+                    // var storage = window.localStorage;
+                    var storage = window.sessionStorage;
+                    storage.setItem("account", JSON.stringify(j.account));
+                    window.location.href = "./index.html";
+                }else if(j.msg === "f"){
+                    console.log("用户名密码错误");
+                }
+
+            }
+        }
+        xmlhttp.open("POST","http://localhost:8080/login",true);
+        xmlhttp.setRequestHeader("Content-type","application/json");
+        xmlhttp.send(jsonData);
+
+
+    }
+

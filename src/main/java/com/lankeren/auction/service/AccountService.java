@@ -1,6 +1,7 @@
 package com.lankeren.auction.service;
 
 import com.lankeren.auction.bean.Account;
+import com.lankeren.auction.bean.AccountInfo;
 
 /**
  * @author lankeren
@@ -15,6 +16,9 @@ public interface AccountService {
     public Object register(Account account);
 
     public Object getAccountInfo(Account account);
+
+
+    public Object updateAccountInfo(AccountInfo accountInfo);
 
 
 }

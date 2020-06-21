@@ -2,10 +2,12 @@ package com.lankeren.auction.serviceImpl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lankeren.auction.bean.Account;
+import com.lankeren.auction.bean.AccountInfo;
 import com.lankeren.auction.mapper.AccountMapper;
 import com.lankeren.auction.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 /**
@@ -38,20 +40,46 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Object register(Account account) {
         JSONObject res = new JSONObject();
-        if(StringUtils.isEmpty(account.getAccount()) || StringUtils.isEmpty(account.getPassword())){
+        Integer b = accountMapper.getAccountIdByAccount(account.getAccount());
+        if(StringUtils.isEmpty(account.getAccount()) || StringUtils.isEmpty(account.getPassword()) || b != null){
             res.put("msg","f");
             return res;
         }
         accountMapper.registerAccount(account);
+        accountMapper.registerAccountInfo(account.getId());
         res.put("msg", "ok");
         return res;
     }
 
     @Override
     public Object getAccountInfo(Account account) {
+        JSONObject res = new JSONObject();
+        res.put("msg", "f");
+        if(StringUtils.isEmpty(account.getAccount())){
+            return res;
+        }
+        AccountInfo info = accountMapper.getAccountInfoByAccount(account);
+        if(info != null){
+            res.put("msg", "ok");
+            res.put("AccountInfo", info);
+            return res;
+        }
+        return res;
+    }
 
-
-
-        return null;
+    @Override
+    @Transactional(rollbackFor = {RuntimeException.class, Error.class})
+    public Object updateAccountInfo(AccountInfo accountInfo) {
+        JSONObject res = new JSONObject();
+        res.put("msg", "ok");
+        int f1 = accountMapper.updateAccountInfo(accountInfo);
+        int f2 = 1;
+        if(!"null".equals(accountInfo.getName())){
+            f2 = accountMapper.updateAccountName(accountInfo);
+        }
+        if(f1 ==  0|| f2 == 0){
+            res.put("msg", "f");
+        }
+        return res;
     }
 }

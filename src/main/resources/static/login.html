@@ -33,14 +33,13 @@
         {
             if (xmlhttp.readyState==4 && xmlhttp.status==200)
             {
-                console.log(xmlhttp.responseText);
+                // console.log(xmlhttp.responseText);
                 var res = xmlhttp.responseText;
                 var j = $.parseJSON(res);
                 if(j.msg === "ok"){
+                    // var storage = window.localStorage;
                     var storage = window.sessionStorage;
-                    storage.setItem("accountName", j.account.name);
-                    storage.setItem("accountId", j.account.id);
-                    storage.setItem("identity", j.account.identity);
+                    storage.setItem("account", JSON.stringify(j.account));
                     window.location.href = "./index.html";
                 }else if(j.msg === "f"){
                     console.log("用户名密码错误");

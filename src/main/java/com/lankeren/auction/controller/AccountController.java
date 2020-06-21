@@ -2,6 +2,7 @@ package com.lankeren.auction.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lankeren.auction.bean.Account;
+import com.lankeren.auction.bean.AccountInfo;
 import com.lankeren.auction.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,12 +36,17 @@ public class AccountController {
 
 
     @RequestMapping(value = "getAccountInfo", method = RequestMethod.POST)
-    public Object getAccountInfo(Account account){
-        Object res =  accountService.register(account);
+    public Object getAccountInfo(@RequestBody Account account){
+        Object res =  accountService.getAccountInfo(account);
         return res;
     }
 
 
+    @RequestMapping(value = "updateAccountInfo", method = RequestMethod.POST)
+    public Object updateAccountInfo(@RequestBody AccountInfo accountInfo){
+        Object res =  accountService.updateAccountInfo(accountInfo);
+        return res;
+    }
 
 
 }

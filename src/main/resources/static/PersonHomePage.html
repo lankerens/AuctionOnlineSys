@@ -8,32 +8,13 @@
 <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
 <link rel="stylesheet" type="text/css" href="css/PersonHome.css"/>
+<link rel="stylesheet" type="text/css" href="css/myVip.css"/>
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/pageHeader.js"></script>
 <script type="text/javascript" src="./js/PersonHome.js"></script>
 
-
 <script>
-    function lankeren1() {
-        var sto = window.sessionStorage;
-        // console.log(typeof sto.getItem("accountName"));
-        // console.log(sto.getItem("accountName"));
-        var lis;
-        if (sto.getItem("accountName") == null) {
-            lis = "   <li><a href=\"login.html\"><span class=\"glyphicon glyphicon-log-in\"></span> 登录</a></li>\n" +
-                "                    <li><a href=\"register.html\"><span class=\"glyphicon glyphicon-user\"></span> 注册</a></li>\n" +
-                "                    <li><a href=\"SaleGoods.html\"><span class=\"glyphicon glyphicon-gift\"></span> 发布商品</a></li>\n" +
-                "                    <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-pencil\"></span> 联系管理</a></li>\n" +
-                "                    <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-subtitles\"></span> 本站公告</a></li>"
-        } else {
-            lis = " <li><a href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> " + sto.getItem("accountName") + "</a></li>\n" +
-                "            <li><a href=\"SaleGoods.html\"><span class=\"glyphicon glyphicon-gift\"></span> 发布商品</a></li>\n" +
-                "            <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-pencil\"></span> 联系管理</a></li>\n" +
-                "            <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-subtitles\"></span> 本站公告</a></li>";
-        }
-        // $(".lankeren1").innerHTML = lis;
-        document.write(lis);
-    }
 
 </script>
 
@@ -87,7 +68,7 @@
     </div>
     <div class="myauction">
         <ul class="">
-            <li><a href="./MyAuction.html"><span class="glyphicon glyphicon-shopping-cart"></span> 我的竞拍</a></li>
+            <li><a href="./MyAuction.html"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车</a></li>
         </ul>
     </div>
 
@@ -102,14 +83,15 @@
             <div class="left-daohang">
                 <ul class="clearfix">
                     <li><a class="myactive-daohang" href="#" onclick="changeActiveDaohang(this, 'right-info-div')">基本信息</a></li>
+                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-myVIP')" >会员特权</a></li>
                     <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-psw')">修改密码</a></li>
                     <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-shopcart')">购物车</a></li>
                     <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-myauction')">我的竞拍</a></li>
                     <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-myGoods')">我的商品</a></li>
                     <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-myOrderInfo')">我的订单</a></li>
-                    <li><a href="#" onclick="changeActiveDaohang(this)">申请商家</a></li>
-                    <li><a href="#" >退出登录</a></li>
-                    <li><a href="#" >返回首页</a></li>
+                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-mysaler')">申请商家</a></li>
+                    <li><a href="./index.html"  data-toggle="tooltip" data-placement="bottom"
+                           title="真的要离开我这个页面了吗(Q.Q)" >返回首页</a></li>
                 </ul>
 
             </div>
@@ -120,10 +102,10 @@
 
                 <div class="right-info-show">
                     <!-- 基本信息 -->
-                    <div class="right-info-div myActiveInRightInfo">
+                    <div class="right-info-div ">
                         <div class="info-title clearfix">
                                 <p>基本信息</p>
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalmyinfo1">修改</button>
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalmyinfo1" onclick="myinfoUpdateBtn()" >修改</button>
                         </div>
 
                         <div class="left-bottom-myinfo clearfix">
@@ -134,7 +116,7 @@
                                         <h3 class="panel-title">用户名</h3>
                                     </div>
                                     <div class="panel-body" id="myinfo-div-name">
-                                        lankeren
+                                        lankeren(默认)
                                     </div>
                                 </div>
                                 <div class="panel panel-success">
@@ -142,7 +124,7 @@
                                         <h3 class="panel-title">账号</h3>
                                     </div>
                                     <div class="panel-body" id="myinfo-div-account">
-                                        lankeren
+                                        测试000
                                     </div>
                                 </div>
                                 <div class="panel panel-success">
@@ -158,7 +140,7 @@
                                         <h3 class="panel-title">性别</h3>
                                     </div>
                                     <div class="panel-body" id="myinfo-div-sex">
-                                        男
+                                        未知(默认)
                                     </div>
                                 </div>
                                 <div class="panel panel-info">
@@ -166,7 +148,7 @@
                                         <h3 class="panel-title">地址</h3>
                                     </div>
                                     <div class="panel-body" id="myinfo-div-address">
-                                        广东
+                                        未设置
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +160,7 @@
                                         <h3 class="panel-title">个性签名</h3>
                                     </div>
                                     <div class="panel-body" id="myinfo-div-sgin">
-                                        广东
+                                        未设置
                                     </div>
                                 </div>
                                 <div class="panel panel-info">
@@ -186,7 +168,7 @@
                                         <h3 class="panel-title">手机电话</h3>
                                     </div>
                                     <div class="panel-body" id="myinfo-div-phone">
-                                        广东
+                                        未设置
                                     </div>
                                 </div>
                                 <div class="panel panel-info">
@@ -194,7 +176,7 @@
                                         <h3 class="panel-title">电子邮箱</h3>
                                     </div>
                                     <div class="panel-body" id="myinfo-div-email">
-                                        广东
+                                        未设置
                                     </div>
                                 </div>
                                 <div class="panel panel-info">
@@ -202,7 +184,7 @@
                                         <h3 class="panel-title">爱好</h3>
                                     </div>
                                     <div class="panel-body" id="myinfo-div-love">
-                                        广东
+                                        无
                                     </div>
                                 </div>
 
@@ -240,13 +222,13 @@
                                     <div class="form-group">
                                         <label for="myaccount">账号</label>
                                         <input type="text" class="form-control" id="myaccount"
-                                               placeholder="" value="测试-tom" readonly>
+                                               placeholder="" value="" readonly>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="myidentity">本站身份</label>
                                         <input type="text" class="form-control" id="myidentity"
-                                               placeholder="" value="测试-普通用户" readonly>
+                                               placeholder="" value="" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="mysgin">个性签名</label>
@@ -286,7 +268,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                                     </button>
-                                    <button type="button" class="btn btn-primary">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="myinfoUpdateSubmitBtn()" >
                                         提交更改
                                     </button>
                                 </div>
@@ -302,6 +284,10 @@
                             </div>
                         </div>
 
+                        <!--  外界框 start  -->
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <!--  上面两个是外界框  -->
                         <div class="myinfo-psw-update">
                             <div class="form-group">
                                 <label for="mypassword0">原密码</label>
@@ -326,7 +312,10 @@
                            </div>
 
                         </div>
-
+                                <!--  外界框 the end div -->
+                            </div>
+                        </div>
+                        <!--  2  -->
 
                     </div>
 
@@ -804,7 +793,131 @@
                     </div>
 
                     <!--  申请商家 -->
-                    <div></div>
+                    <div class="right-info-mysaler myActiveInRightInfo">
+                        <!-- 标题 -->
+                        <div>
+                            <div class="info-title clearfix">
+                                <p>申请商家</p>
+                            </div>
+                        </div>
+
+                        <!--  外界框   -->
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                    <div class="mysaler-info-div">
+                                        <div class="form-group">
+                                            <label for="mysalerName">商家名称</label>
+                                            <input type="text" class="form-control" id="mysalerName"
+                                                    >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="myrealsalerName">经营者名称</label>
+                                            <input type="text" class="form-control" id="myrealsalerName"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mysalerAdress">商家地址</label>
+                                            <input type="text" class="form-control" id="mysalerAdress"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mysalerContact">商家联系方式</label>
+                                            <input type="text" class="form-control" id="mysalerContact"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mysalerEmail">电子邮件</label>
+                                            <input type="text" class="form-control" id="mysalerEmail"
+                                            >
+                                        </div>
+
+                                        <!--  提交申请按钮  -->
+                                       <div class="mysaler-info-btn">
+                                           <p>
+                                                <button type="button" class="btn btn-info">提交申请</button>
+                                           </p>
+                                       </div>
+
+                                    </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--  我的会员 -->
+                    <div class="right-info-myVIP myActiveInRightInfo">
+
+                        <!-- 标题 -->
+                        <div>
+                            <div class="info-title clearfix">
+                                <p>会员特权</p>
+                            </div>
+                        </div>
+
+                        <!--  主题内容  -->
+                        <div class="panel panel-default">
+                            <div class="panel-body clearfix">
+
+                                <!--  上半部分 -->
+                                <div class="myVIP-info-topPart clearfix">
+                                    <!-- 左半部分  -->
+                                    <div class="myVIP-info-topLeft clearfix">
+                                        <!-- 头像 -->
+                                        <div class="myVIP-info-topLeft1">
+                                            <img src="./imgs/headImg140.jpg" class="img-circle"
+                                                 data-toggle="tooltip" data-placement="top"
+                                                 title="这头像要是会旋转就好了">
+                                        </div>
+                                        <!--  名称 -->
+                                        <div class="myVIP-info-topLeft2">
+                                                <span class="myVIP-info-topLeft2-name">lankeren</span>
+                                                <span>个性签名...</span>
+                                        </div>
+
+                                        <!--  vip 图标  -->
+                                        <div class="myVIP-btn">
+                                            <button type="button" class="btn btn-default" disabled="disabled">VIP</button>
+                                            <!--<button type="button" class="btn btn-danger" >VIP</button>-->
+                                        </div>
+
+                                    </div>
+
+                                    <!-- 右半部分 -->
+                                    <div class="myVIP-info-topRight clearfix">
+                                        <div>
+                                            <button type="button" class="btn btn-warning">开通特权</button>
+                                            <!--<button type="button" class="btn btn-warning">续费</button>-->
+                                            <!--<button type="button" class="btn btn-default">更多</button>-->
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default dropdown-toggle"
+                                                        data-toggle="dropdown">
+                                                    更多 <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">赠送</a></li>
+                                                    <li><a href="#">查看开通记录</a></li>
+                                                    <li><a href="#">代金券</a></li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="#">其他</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <!--  下半部  -->
+                                <div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
 
                 </div>
 

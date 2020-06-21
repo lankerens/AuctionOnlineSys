@@ -12,18 +12,24 @@
 
 <script>
     function lankeren1() {
+        // var sto = window.localStorage;
         var sto = window.sessionStorage;
-        // console.log(typeof sto.getItem("accountName"));
-        // console.log(sto.getItem("accountName"));
+        var res0 = sto.getItem("account");
+        var account;
+        try {
+            account =  $.parseJSON(res0);
+        }catch (e) {
+            account = null;
+        }
         var lis ;
-        if(sto.getItem("accountName") == null){
+        if(account == null){
             lis = "   <li><a href=\"login.html\"><span class=\"glyphicon glyphicon-log-in\"></span> 登录</a></li>\n" +
                 "                    <li><a href=\"register.html\"><span class=\"glyphicon glyphicon-user\"></span> 注册</a></li>\n" +
                 "                    <li><a href=\"SaleGoods.html\"><span class=\"glyphicon glyphicon-gift\"></span> 发布商品</a></li>\n" +
                 "                    <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-pencil\"></span> 联系管理</a></li>\n" +
                 "                    <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-subtitles\"></span> 本站公告</a></li>"
         }else{
-            lis = " <li><a href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> "+ sto.getItem("accountName") +"</a></li>\n" +
+            lis = " <li><a href=\"#\" onclick='myInfoPage()'><span class=\"glyphicon glyphicon-user\"></span> "+ account.name +"</a></li>\n" +
                 "            <li><a href=\"SaleGoods.html\"><span class=\"glyphicon glyphicon-gift\"></span> 发布商品</a></li>\n" +
                 "            <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-pencil\"></span> 联系管理</a></li>\n" +
                 "            <li><a href=\"contactLankeren.html\"><span class=\"glyphicon glyphicon-subtitles\"></span> 本站公告</a></li>";
@@ -84,7 +90,7 @@
     </div>
     <div class="myauction">
         <ul class="">
-            <li><a href="./MyAuction.html"><span class="glyphicon glyphicon-shopping-cart"></span> 我的竞拍</a></li>
+            <li><a href="./MyAuction.html"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车</a></li>
         </ul>
     </div>
 
