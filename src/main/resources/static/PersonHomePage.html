@@ -6,11 +6,13 @@
 </head>
 <link rel="stylesheet" type="text/css" href="css/reset200802.css"/>
 <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="./layer/theme/default/layer.css"/>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
 <link rel="stylesheet" type="text/css" href="css/PersonHome.css"/>
 <link rel="stylesheet" type="text/css" href="css/myVip.css"/>
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./layer/layer.js"></script>
 <script type="text/javascript" src="./js/pageHeader.js"></script>
 <script type="text/javascript" src="./js/PersonHome.js"></script>
 
@@ -115,7 +117,7 @@
                                     <div class="panel-heading">
                                         <h3 class="panel-title">用户名</h3>
                                     </div>
-                                    <div class="panel-body" id="myinfo-div-name">
+                                    <div class="panel-body myinfo-div-name" id="myinfo-div-name">
                                         lankeren(默认)
                                     </div>
                                 </div>
@@ -159,7 +161,7 @@
                                     <div class="panel-heading">
                                         <h3 class="panel-title">个性签名</h3>
                                     </div>
-                                    <div class="panel-body" id="myinfo-div-sgin">
+                                    <div class="panel-body myinfo-div-sgin" id="myinfo-div-sgin">
                                         未设置
                                     </div>
                                 </div>
@@ -307,7 +309,7 @@
 
                            <div class="myinfo-psw-btn">
                                <p>
-                                   <button type="button" class="btn btn-info" id="myinfo-updatePsw">提交更改</button>
+                                   <button type="button" class="btn btn-info" onclick="myinfoUpdatePsw()">提交更改</button>
                                </p>
                            </div>
 
@@ -870,8 +872,8 @@
                                         </div>
                                         <!--  名称 -->
                                         <div class="myVIP-info-topLeft2">
-                                                <span class="myVIP-info-topLeft2-name">lankeren</span>
-                                                <span>个性签名...</span>
+                                                <span class="myVIP-info-topLeft2-name myinfo-div-name">lankeren(默认)</span>
+                                                <span class="myinfo-div-sgin">个性签名...</span>
                                         </div>
 
                                         <!--  vip 图标  -->

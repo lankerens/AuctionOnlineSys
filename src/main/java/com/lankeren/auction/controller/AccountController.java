@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * @author lankeren
  * @ClassName AccountController
@@ -47,6 +49,13 @@ public class AccountController {
         Object res =  accountService.updateAccountInfo(accountInfo);
         return res;
     }
+
+    @RequestMapping(value = "updateAccountPsw", method = RequestMethod.POST)
+    public Object updateAccountPsw(@RequestBody String map){
+        Object res =  accountService.updateAccountPsw(map);
+        return res;
+    }
+
 
 
 }

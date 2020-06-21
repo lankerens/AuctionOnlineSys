@@ -82,4 +82,23 @@ public class AccountServiceImpl implements AccountService {
         }
         return res;
     }
+
+    @Override
+    public Object updateAccountPsw(String map) {
+        JSONObject res = new JSONObject();
+        res.put("msg", "ok");
+        JSONObject obj = JSONObject.parseObject(map);
+        String password = (String)obj.get("password");
+        String oldPassword = (String)obj.get("oldPassword");
+        Integer id = (Integer) obj.get("id");
+        if(StringUtils.isEmpty(map) || StringUtils.isEmpty(password) || id == null || id <= 0){
+            res.put("msg", "f");
+            return res;
+        }
+        int f = accountMapper.updateAccountPsw(oldPassword, password, id);
+        if(f == 0){
+            res.put("msg", "f");
+        }
+        return res;
+    }
 }

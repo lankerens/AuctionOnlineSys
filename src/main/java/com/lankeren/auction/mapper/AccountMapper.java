@@ -39,5 +39,8 @@ public interface AccountMapper {
     @Update("UPDATE `account` SET `name` = #{name} WHERE `id` = #{aid}")
     int updateAccountName(AccountInfo accountInfo);
 
+    @Update("UPDATE `auctiononlinesys`.`account` SET `password` = #{psw} WHERE `id` = #{id} and password = #{old}")
+    int updateAccountPsw(String old, String psw, Integer id);
+
 
 }

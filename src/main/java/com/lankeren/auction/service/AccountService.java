@@ -20,5 +20,6 @@ public interface AccountService {
 
     public Object updateAccountInfo(AccountInfo accountInfo);
 
+    public Object updateAccountPsw(String map);
 
 }
