@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
+
 /**
  * @author lankeren
  * @ClassName AccountServiceImpl
@@ -45,6 +47,7 @@ public class AccountServiceImpl implements AccountService {
             res.put("msg","f");
             return res;
         }
+        account.setRegTime(LocalDateTime.now());
         accountMapper.registerAccount(account);
         accountMapper.registerAccountInfo(account.getId());
         res.put("msg", "ok");

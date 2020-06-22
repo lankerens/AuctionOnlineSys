@@ -22,7 +22,7 @@ function changeActiveDaohang(g, myclass) {
 }
 
 
-// 点击修改后的文字显示
+// 点击修改后的文字回显
 function myinfoUpdateBtn() {
     $("#username").val($("#myinfo-div-name").text().trim());
     $("#myaccount").val($("#myinfo-div-account").text().trim());
@@ -115,10 +115,11 @@ function flushMyInfo() {
         var userphone = $("#myinfo-div-phone");
         var useremail = $("#myinfo-div-email");
         var userlove = $("#myinfo-div-love");
-
+        var con = AccountInfo.identity;
+        if(con === 0){con = "普通用户";}else if(con === 1){con = "普通会员";}else if(con === 2){con = "卖家";}else if(con === 3){con = "管理员";}else if(con === 4){ con = "卖家会员";}
         Infojudge(AccountInfo.name, username);
         Infojudge(AccountInfo.account, useraccount);
-        Infojudge(AccountInfo.identity, useridentity);
+        Infojudge(con, useridentity);
         Infojudge(AccountInfo.sex, usersex);
         Infojudge(AccountInfo.location, useradress);
         Infojudge(AccountInfo.personalSign, usersgin);
@@ -141,7 +142,7 @@ function flushMyInfo() {
 // 进入页面就启用.
 window.onload = function () {
     flushMyInfo();
-
+    myVIPPart();
 };
 
 
@@ -207,10 +208,37 @@ function myTips(msg) {
     layer.msg(msg);
 };
 
-function myVIPInfoFlush() {
+
+// jq载入
+$(document).ready(function(){
+
+    // 头像旋转
+    $(".myHeadImgCircle").hover(function () {
+        // console.log("进来了吗");
+        $(".myHeadImgCircle").addClass("layui-anim-rotate layui-anim-loop");
+    }, function () {
+        $(".myHeadImgCircle").removeClass("layui-anim-rotate layui-anim-loop");
+    });
+
+
+});
+
+
+//  vip 部分
+function myVIPPart() {
+
+    var res0 = window.sessionStorage.getItem("account");
+    var account;
+    try {
+        account = $.parseJSON(res0);
+    }catch (e) {
+        account = null;
+    }
+    if (account.identity == 1 || account.identity == 4){
+        $("#myVIPIcon").removeClass("btn-default").addClass("btn-danger");
+        $("#myVIPWord").empty().text("续费特权");
+    }
 
 }
-
-
 
 

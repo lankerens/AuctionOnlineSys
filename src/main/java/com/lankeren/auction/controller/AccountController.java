@@ -50,6 +50,7 @@ public class AccountController {
         return res;
     }
 
+
     @RequestMapping(value = "updateAccountPsw", method = RequestMethod.POST)
     public Object updateAccountPsw(@RequestBody String map){
         Object res =  accountService.updateAccountPsw(map);

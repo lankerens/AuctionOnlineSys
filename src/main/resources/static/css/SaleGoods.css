@@ -1,65 +1,22 @@
-.middle-wrapper-goodTitle{
-    margin-top: 10px;
-}
-
-.goodstitle-info{
-    /*background-color: #bfa;*/
-    width: 80%;
-    height: 46px;
-    margin: 0 auto;
-    font-size: 28px;
-    line-height: 46px;
-    border-bottom: 2px solid pink;
-}
-
-.goodstitle-info li{
-    float: left;
-}
-
-.goodstitle-info div{
-    width: 300px;
-    height: 100px;
-    margin: 0px auto;
-}
-
 .saleGoods-info-div{
-    /*background-color: #bfa;*/
     width: 80%;
     margin: 0 auto;
-    padding-top: 20px;
-    /*padding-top: 2px;*/
-    font-size: 18px;
+}
+
+/* 覆盖默认值 */
+.saleGoods-info-div .layui-form-label{
+    width: 100px;
 }
 
 
-.info-div-div{
-    width: 60%;
-    margin: 0 auto;
-    /*background-color: #fba;*/
+.layui-input-block p{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
-.saleGoods-info-btn button{
-    float: left;
-    padding: 10px 100px;
-
+.layui-upload-drag{
+    margin-left: 10px;
 }
-
-.saleGoods-info-btn button:focus{
-    outline: 0 !important;
-}
-
-.saleGoods-info-btn{
-    width: 300px;
-    margin: 0 auto;
-    /*background-color: red;*/
-    padding-bottom: 60px;
-    padding-top: 20px;
-}
-
-
-
-
-
-
 
 

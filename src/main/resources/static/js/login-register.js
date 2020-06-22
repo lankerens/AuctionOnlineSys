@@ -1,5 +1,15 @@
 function myInfoPage() {
     var storge = window.sessionStorage;
+
+    var b = storge.getItem("AccountInfo");
+    console.log(b);
+    console.log(typeof b);
+    if(b != null){
+        console.log("不为空呀");
+        // 利用之前存的....
+        goOtherPage($.parseJSON(b));
+    }
+
     var res0 = storge.getItem("account");
     var account;
     try {
@@ -31,15 +41,8 @@ function myInfoPage() {
             var res = xmlhttp.responseText;
             var j = $.parseJSON(res);
             if(j.msg === "ok"){
-                if(j.AccountInfo.identity === 0 || j.AccountInfo.identity === 1 || j.AccountInfo.identity === 2){
-                    storge.setItem("AccountInfo", JSON.stringify(j.AccountInfo));
-                    href = "./PersonHomePage.html";
-                }else if(j.AccountInfo.identity === 3){
-
-                }else{
-                    href = "./404.html";
-                }
-                window.location.href = href;
+                storge.setItem("AccountInfo", JSON.stringify(j.AccountInfo));
+                goOtherPage(j.AccountInfo);
             }else if(j.msg === "f"){
                 console.log("出错了");
             }
@@ -52,6 +55,17 @@ function myInfoPage() {
 
 }
 
+
+function goOtherPage(AccountInfo) {
+    if(AccountInfo.identity === 0 || AccountInfo.identity === 1 || AccountInfo.identity === 2 || AccountInfo.identity === 4){
+        href = "./PersonHomePage.html";
+    }else if(AccountInfo.identity === 3){
+        href = "./lankeren.html";
+    }else{
+        href = "./404.html";
+    }
+    window.location.href = href;
+}
 
 
 

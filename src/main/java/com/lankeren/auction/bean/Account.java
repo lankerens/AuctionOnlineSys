@@ -1,5 +1,9 @@
 package com.lankeren.auction.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDateTime;
+
 /**
  * @author lankeren
  * @ClassName Account
@@ -14,7 +18,14 @@ public class Account {
     private Integer identity;
     private Integer status;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime regTime;
+
     public Account() {
+    }
+
+    public void setRegTime(LocalDateTime regTime) {
+        this.regTime = regTime;
     }
 
     public Integer getId() {
@@ -70,9 +81,11 @@ public class Account {
         return "Account{" +
                 "id=" + id +
                 ", account='" + account + '\'' +
+                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", identity=" + identity +
                 ", status=" + status +
+                ", regTime=" + regTime +
                 '}';
     }
 }

@@ -120,6 +120,8 @@
 
 .shopcart-info-mysearch{
     width: 40%;
+    /*  上边距后加的  */
+    margin-top: 6px;
 }
 
 /*  购物车列表上方距离  */
