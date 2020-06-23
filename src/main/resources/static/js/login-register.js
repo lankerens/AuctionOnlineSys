@@ -68,4 +68,21 @@ function goOtherPage(AccountInfo) {
 }
 
 
+// 购物车跳转
+function shoppingCart() {
+    var storge = window.sessionStorage;
+    var b = storge.getItem("account");
+    if(b != null){
+        myInfoPage();
+    }else{
+        window.location.href = "./login.html";
+    }
+
+
+}
+
+
+
+
+
 

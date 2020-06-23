@@ -5,10 +5,12 @@
     <title>网上拍卖系统-By-Lankeren</title>
 </head>
 <link rel="stylesheet" type="text/css" href="css/reset200802.css"/>
+<link rel="stylesheet" type="text/css" href="./layui/css/layui.css"/>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
 <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./layui/layui.js"></script>
 <script type="text/javascript" src="./js/pageHeader.js"></script>
 <script type="text/javascript" src="./js/login-register.js"></script>
 
@@ -16,7 +18,7 @@
 
 </script>
 
-<body>
+<body class="mybody">
 <!-- 头部  -->
 <nav class="top-wrapper-nav navbar navbar-default">
     <div class="guding-width">
@@ -66,43 +68,159 @@
     </div>
     <div class="myauction">
         <ul class="">
-            <li><a href="./MyAuction.html"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车</a></li>
+            <li><a href="javascript:;" onclick="shoppingCart()"><span class="glyphicon glyphicon-shopping-cart"></span>
+                购物车</a></li>
         </ul>
     </div>
 
 </div>
 
 
+<!-- 中间部分  -->
+<nav>
 
-<!-- 头部三切换卡  -->
-<nav class="top3-wrapper-nav">
-    <div class="top3-div">
-        <ul>
-            <li><a class="myactive" href="index.html  ">优拍卖</a></li>
-            <li><a href="OnePrice.html">一口价</a></li>
-            <li><a href="404.html">其他</a></li>
-        </ul>
-    </div>
-</nav>
+    <div class="middle-content-div">
+        <!-- 选项卡切换 -->
+        <div class="clearfix">
+            <ul class="layui-nav layui-bg-cyan">
+                <li class="layui-nav-item layui-this"><a href="">拍品列表</a></li>
+                <li class="layui-nav-item "><a href="">定价秒购</a></li>
+                <li class="layui-nav-item "><a href="">AuctionOnlineSys</a></li>
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">By-Lankeren</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">By-Lankeren</a></dd>
+                        <dd><a href="">By-Lankeren</a></dd>
+                        <dd><a href="">By-Lankeren</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
 
-<!-- 中间展示页 -->
-<nav class="center-wrapper-nav clearfix">
-    <!-- 进行中、即将开始 -->
-    <div class="the-auction-card clearfix">
-        <div class="auction-running-card clearfix">
-                <div><a class="myauctionactive" href="#">14：00<span>正在拍卖</span></a></div>
-                <div><a href="#">16：00<span>即将开始</span></a></div>
-                <div><a href="#">18：00<span>即将开始</span></a></div>
-                <div><a href="#">20：00<span>即将开始</span></a></div>
-                <div><a href="#">22：00<span>即将开始</span></a></div>
+        <!--  列表内容 -->
+        <div class="middle-content-list">
+
+
+            <!--  拍品列表 -->
+            <div class="theAuctionList clearfix">
+                <!-- 底部面板 -->
+                <div style="padding: 20px; background-color: #F2F2F2;">
+                    <!--  显示几页  -->
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            共2页,还剩12件拍卖品正在竞拍中
+                        </div>
+                    </div>
+
+                    <div class="layui-row layui-col-space15">
+                        <!-- 一 -->
+                        <div class="layui-col-md3">
+                            <div class="layui-card">
+                                <div class="layui-card-header">拍卖卖家: lankeren</div>
+                                <div class="layui-card-body clearfix">
+                                    <a href="#" class="myAuctionListA">
+                                        <img class="img-responsive" src="./test/lankeren_2020-06-22_17-46-26.png"
+                                             alt="">
+                                        <dl style="margin-top: 10px">
+                                            <dd style="font-size: 20px; color: black">商品名称</dd>
+                                        </dl>
+                                    </a>
+                                    <div class="layui-col-md7">
+                                        <span style="font-size: 17px">当前竞拍价: 2223元</span><br>
+                                        <span>已有50人参与竞拍</span>
+                                    </div>
+                                    <div class="layui-col-md5">
+                                        <button type="button" class="layui-btn">立即竞拍</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--  二  -->
+                        <div class="layui-col-md3">
+                            <div class="layui-card">
+                                <div class="layui-card-header">拍卖卖家: lankeren</div>
+                                <div class="layui-card-body clearfix">
+                                    <a href="#" class="myAuctionListA">
+                                        <img class="img-responsive" src="./test/lankeren_2020-06-22_17-46-26.png"
+                                             alt="">
+                                        <dl style="margin-top: 10px">
+                                            <dd style="font-size: 20px; color: black">商品名称</dd>
+                                        </dl>
+                                    </a>
+                                    <div class="layui-col-md7">
+                                        <span style="font-size: 17px">当前竞拍价: 2223元</span><br>
+                                        <span>已有50人参与竞拍</span>
+                                    </div>
+                                    <div class="layui-col-md5">
+                                        <button type="button" class="layui-btn">立即竞拍</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--  三  -->
+                        <div class="layui-col-md3">
+                            <div class="layui-card">
+                                <div class="layui-card-header">拍卖卖家: lankeren</div>
+                                <div class="layui-card-body clearfix">
+                                    <a href="#" class="myAuctionListA">
+                                        <img class="img-responsive" src="./test/lankeren_2020-06-22_17-46-26.png"
+                                             alt="">
+                                        <dl style="margin-top: 10px">
+                                            <dd style="font-size: 20px; color: black">商品名称</dd>
+                                        </dl>
+                                    </a>
+                                    <div class="layui-col-md7">
+                                        <span style="font-size: 17px">当前竞拍价: 2223元</span><br>
+                                        <span>已有50人参与竞拍</span>
+                                    </div>
+                                    <div class="layui-col-md5">
+                                        <button type="button" class="layui-btn">立即竞拍</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--  四  -->
+                        <div class="layui-col-md3">
+                            <div class="layui-card">
+                                <div class="layui-card-header">拍卖卖家: lankeren</div>
+                                <div class="layui-card-body clearfix">
+                                    <a href="#" class="myAuctionListA">
+                                        <img class="img-responsive" src="./test/lankeren_2020-06-22_17-46-26.png"
+                                             alt="">
+                                        <dl style="margin-top: 10px">
+                                            <dd style="font-size: 20px; color: black">商品名称</dd>
+                                        </dl>
+                                    </a>
+                                    <div class="layui-col-md7">
+                                        <span style="font-size: 17px">当前竞拍价: 2223元</span><br>
+                                        <span>已有50人参与竞拍</span>
+                                    </div>
+                                    <div class="layui-col-md5">
+                                        <button type="button" class="layui-btn">立即竞拍</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 分页 -->
+                    <div id="myAuctionListPage"></div>
+                </div>
+            </div>
+
+
+            <!--  定价秒购  -->
+            <div></div>
+
         </div>
     </div>
 
-    <!-- 商品列表 -->
-    <div></div>
-
-
 </nav>
+
 
 <!-- 底部  -->
 <nav>

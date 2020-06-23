@@ -24,3 +24,32 @@ function lankeren1() {
     // $(".lankeren1").innerHTML = lis;
     document.write(lis);
 }
+
+
+layui.use(['element', 'laypage'], function() {
+    var element = layui.element
+        , laypage = layui.laypage; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+    //监听导航点击
+    element.on('nav(demo)', function (elem) {
+        //console.log(elem)
+        layer.msg(elem.text());
+    });
+
+
+    // 分页
+    //总页数大于页码总数
+    laypage.render({
+        elem: 'myAuctionListPage'
+        ,count: 20 //数据总数
+        ,jump: function(obj){
+            console.log(obj)
+        }
+    });
+
+});
+
+
+
+
+

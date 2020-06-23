@@ -76,96 +76,47 @@
     text-decoration-line: none;
 }
 
-.top3-wrapper-nav{
-    /*background-color: #bfa;*/
-    border-bottom: 2px solid pink;
-}
-
-.top3-div{
-    /*background-color: #fba;*/
-    width: 80%;
-    height: 44px;
-    margin: 0 auto;
-    padding-left: 15px;
-}
-
-.top3-div li{
-    float: left;
-    line-height: 44px;
-}
-
-.top3-div a{
-    display: block;
-    width: 116px;
-    height: 44px;
-    box-sizing: border-box;
-    text-align: center;
-    font-size: 16px;
-    color: rgb(119,119,160);
-}
-
-.top3-div a:hover{
-    color: pink;
-    text-decoration-line: none;
-}
-
-
-
-
-/* 中间 */
-.center-wrapper-nav{
-    /*background-color: #bfa;*/
-    margin-top: 15px;
-}
-
-.the-auction-card{
-    width: 80%;
-    margin: 0 auto;
-    padding-left: 20px;
-    height: 60px;
-    line-height: 60px;
-}
-
-.auction-running-card{
-    display: flex;
-}
-
-.auction-running-card div{
-    flex: 1;
-    text-align: center;
-    font-size: 17px;
-}
-
-.auction-running-card a{
-    display: block;
-    color: black;
-}
-
-.auction-running-card a:hover{
-    text-decoration-line: none;
-    color: orange;
-}
-
-.auction-running-card span{
-    margin-left: 10px;
-    padding: 5px 5px;
-    border: 1px solid pink;
-    border-radius: 5px;
-}
-
-/* 进行中 */
-.myauctionactive{
-    background-color: orange;
-    color: white !important;
-    font-weight: bold;
-}
-
-/* 去掉点击a后出现的下划线  */
-.auction-running-card a:focus{text-decoration: none}
-
-.myauction a:focus{text-decoration: none}
-
-
 button:focus{
     outline: 0 !important;
 }
+
+.mybody a:hover{
+    text-decoration-line: none;
+}
+
+.mybody a:focus{
+    text-decoration-line: none;
+    outline: 0;
+}
+
+/*  导航栏 */
+.layui-nav-child a{
+    line-height: 36px;
+    padding: 5px 0;
+}
+
+
+.middle-content-div{
+    width: 80%;
+    margin: 10px auto 0 auto;
+}
+
+
+.middle-content-list .hiddenMyContentIndex{
+    display: none;
+}
+
+.layui-card-body{
+    text-align: center;
+}
+
+.theAuctionList img{
+    width: 300px;
+    height: 160px;
+    margin: 0 auto;
+}
+
+.myAuctionListA{
+    display: block;
+}
+
