@@ -43,4 +43,7 @@ public interface AccountMapper {
     int updateAccountPsw(String old, String psw, Integer id);
 
 
+    @Select("select identity from account where account = #{account}")
+    Integer getIdentityByAccount(String account);
+
 }

@@ -63,7 +63,8 @@ function myinfoUpdateSubmitBtn() {
         "personalSign": $("#mysgin").val(),
         "love": $("#mylove").val(),
         "account": $("#myaccount").val(),
-        "identity": $("#myidentity").val()
+        // "identity": $("#myidentity").val()
+        "identity": AccountInfo.identity
     };
     var jsonData = JSON.stringify(data);
     console.log(jsonData);
@@ -190,6 +191,7 @@ function myinfoUpdatePsw(){
                     myTips("修改成功");
                 } else if (j.msg === "f") {
                     console.log("出现了不可预知的错误");
+                    myTips("出现了不可预知的错误");
                 }
 
             }
@@ -209,7 +211,7 @@ function myTips(msg) {
 };
 
 
-// jq载入
+
 $(document).ready(function(){
 
     // 头像旋转
@@ -221,7 +223,58 @@ $(document).ready(function(){
     });
 
 
+    //申请商家部分
+    layui.use(['form'], function () {
+        var form = layui.form;
+        layui.$("#mySalerToApply").on("click", function () {
+            var data = form.val('salerToApplyForm');
+            console.log(JSON.stringify(data));
+            salerToApply(data);
+        });
+    });
+
+
 });
+
+
+//  商家申请
+function salerToApply(data) {
+    var res0 = window.sessionStorage.getItem("account");
+    var account;
+    try {
+        account = $.parseJSON(res0);
+    }catch (e) {
+        account = null;
+    }
+    data.account = account.account;
+    var jsonData = JSON.stringify(data);
+    console.log(jsonData);
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    } else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            // console.log(xmlhttp.responseText);
+            var res = xmlhttp.responseText;
+            var j = $.parseJSON(res);
+            if (j.msg === "ok") {
+                myTips("提交成功");
+            } else if (j.msg === "f") {
+                myTips("提交失败");
+            } else if(j.msg === "exists"){
+                myTips("你已经提交过了，请耐心等待管理员审核.");
+            }
+
+        }
+    }
+    xmlhttp.open("POST", "http://localhost:8080/salerApply", true);
+    xmlhttp.setRequestHeader("Content-type", "application/json");
+    xmlhttp.send(jsonData);
+
+}
 
 
 //  vip 部分
@@ -240,5 +293,11 @@ function myVIPPart() {
     }
 
 }
+
+
+
+
+
+
 
 
