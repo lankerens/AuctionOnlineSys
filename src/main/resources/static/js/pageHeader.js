@@ -39,13 +39,13 @@ layui.use(['element', 'laypage'], function() {
 
     // 分页
     //总页数大于页码总数
-    laypage.render({
-        elem: 'myAuctionListPage'
-        ,count: 20 //数据总数
-        ,jump: function(obj){
-            console.log(obj)
-        }
-    });
+    // laypage.render({
+    //     elem: 'myAuctionListPage'
+    //     ,count: 20 //数据总数
+    //     ,jump: function(obj){
+    //         // console.log(obj)
+    //     }
+    // });
 
 });
 

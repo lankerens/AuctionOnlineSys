@@ -32,8 +32,10 @@ public class GoodAuction {
     private String ensure;
 
 
+
     public GoodAuction() {
     }
+
 
     public String getPackMail() {
         return packMail;

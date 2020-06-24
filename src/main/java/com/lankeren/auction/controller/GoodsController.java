@@ -1,6 +1,7 @@
 package com.lankeren.auction.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lankeren.auction.bean.AuctionRecord;
 import com.lankeren.auction.bean.GoodAuction;
 import com.lankeren.auction.bean.SalerInfo;
 import com.lankeren.auction.service.GoodsService;
@@ -53,6 +54,35 @@ public class GoodsController {
         Object res =  goodsService.salerApply(salerInfo);
         return res;
     }
+
+
+    @RequestMapping(value = "/getAuctionList/{currentPage}/{pageSize}", method = RequestMethod.GET)
+    public  Object getAuctionList(@PathVariable Integer currentPage, @PathVariable Integer pageSize){
+        Object res =  goodsService.getAuctionList(currentPage, pageSize);
+        return res;
+    }
+
+
+    @RequestMapping(value = "/getGoodInfoById/{id}", method = RequestMethod.GET)
+    public  Object getGoodInfoById(@PathVariable Integer id){
+        Object res =  goodsService.getGoodInfoById(id);
+        return res;
+    }
+
+
+    @RequestMapping(value = "/addShopCart/{aid}/{gid}", method = RequestMethod.GET)
+    public  Object addShopCart(@PathVariable Integer aid, @PathVariable Integer gid){
+        Object res =  goodsService.addShopCart(aid, gid);
+        return res;
+    }
+
+
+    @RequestMapping(value = "/auction", method = RequestMethod.GET)
+    public  Object auction(@RequestBody AuctionRecord auctionRecord){
+        Object res =  goodsService.auction(auctionRecord);
+        return res;
+    }
+
 
 
 }

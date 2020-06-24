@@ -85,13 +85,15 @@
     <div class="goodinfoPage">
 
         <div class="layui-row layui-col-space15">
+
+
             <!--  左侧图片 -->
             <div class="layui-col-md4 my-left-pic-icon">
                 <img id="big-pic-imgtag" class="img-responsive" src="./test/lankeren_2020-06-22_17-46-26.png" alt="">
                 <span class="layui-badge layui-bg-orange">该商品</span>
-                <span class="layui-badge layui-bg-green">包邮</span>
-                <span class="layui-badge layui-bg-green">假一赔十</span>
-                <span class="layui-badge layui-bg-gray">协议保障</span>
+                <span class="layui-badge layui-bg-gray" id="myPackMailSpan">包邮</span>
+                <span class="layui-badge layui-bg-gray" id = "myOiMeiSpan">假一赔十</span>
+                <span class="layui-badge layui-bg-gray" id="myEnsureSpan">协议保障</span>
                 <br>
                 <br>
 
@@ -104,27 +106,27 @@
             <div class="layui-col-md8 my-right-auctionInfo">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h3>这里是商品名称-测试商品</h3>
+                        <h3 id="myGoodTitle">这里是商品名称-测试商品</h3>
                         <dl>
                             <dd>
-                                <span>发布时间：2020-06-23 16:21</span>
-                                <span>结束时间：2020-06-23 16:21</span>
+                                <span>发布时间：<span id="startTime">2020-06-23 16:21</span></span>
+                                <span>结束时间：<span id="endTime">2020-06-23 16:21</span></span>
                             </dd>
-                            <dd>所属分类：古剑</dd>
-                            <dd>起拍价：1000元</dd>
-                            <dd>当前竞拍价：<span style="color: red">23333元</span></dd>
+                            <dd>所属分类：<span id="myTypeGoodInfo">未知</span></dd>
+                            <dd>起拍价：<span id="startPrice">-9999</span>元</dd>
+                            <dd>当前竞拍价：<span id="nowPrice" style="color: red">-9999元</span></dd>
                             <dd>
                                 <hr >
-                                这是商品描述,这是商品描述这是商品描述这是商品描述这是商品描述这是商品描述这是商品描述这是商品描述这是商品描述这是商品描述这是商品描述这是商品描述
+                               <span id="myGoodDes">这是商品描述</span>
                                 <hr >
                             </dd>
-                            <dd>状态： <span style="color: #0000FF">正在拍卖</span><hr></dd>
+                            <dd>状态： <span id="GoodInfoStatus" style="color: #0000FF">未知</span><hr></dd>
                             <dd>
                                 <form class="layui-form layui-form-pane" action="">
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">我的竞价</label>
                                         <div class="layui-input-inline">
-                                            <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                            <input id="myPricePlus" type="text" name="username" lay-verify="required" placeholder="竞拍最低限-999元" autocomplete="off" class="layui-input">
                                         </div>
                                         <button type="button" class="layui-btn myAuctionBtnInGoodInfo">竞拍</button>
                                     </div>
@@ -137,6 +139,9 @@
                     </div>
                 </div>
             </div>
+
+
+            <!-- end spance15 -->
         </div>
 
 
