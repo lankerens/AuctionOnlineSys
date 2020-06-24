@@ -16,7 +16,7 @@ public class AuctionRecord {
     private String goodName;
     private Double startPrice;
     private Double nowPrice;
-    private Double pricePlus;
+    private Double myPlus;
     private Integer accountId;
     private String accountName;
     private Integer status;
@@ -67,12 +67,12 @@ public class AuctionRecord {
         this.nowPrice = nowPrice;
     }
 
-    public Double getPricePlus() {
-        return pricePlus;
+    public Double getMyPlus() {
+        return myPlus;
     }
 
-    public void setPricePlus(Double pricePlus) {
-        this.pricePlus = pricePlus;
+    public void setMyPlus(Double myPlus) {
+        this.myPlus = myPlus;
     }
 
     public Integer getAccountId() {

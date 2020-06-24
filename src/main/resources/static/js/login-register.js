@@ -99,17 +99,26 @@ $(document).ready(function () {
 
 
     $("body").on("click", '.myAuctionListA, .myAuctionsListBtnIndex', function () {
-        var id = 0;
+        var s = window.sessionStorage;
+        var res0 = s.getItem("account"); var account ;
+        var aid = -1;
+        try {
+            account = $.parseJSON(res0);
+            aid = account.id;
+        }catch (e) {
+            account = null;
+        }
+        var gid = 0;
         if ($(this)[0].tagName === "A") {
-            id = $(this)[0].parentNode.id;
+            gid = $(this)[0].parentNode.id;
         } else {
-            id = $(this)[0].parentNode.parentNode.id;
+            gid = $(this)[0].parentNode.parentNode.id;
         }
 
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "http://localhost:8080/getGoodInfoById/" + id,
+            url: "http://localhost:8080/getGoodInfoById/" + gid + "/" + aid,
             async: false,
             success: function (data) {
                 console.log(data);
@@ -118,7 +127,7 @@ $(document).ready(function () {
 
                 window.location.href = "./GoodInfo.html";
             },
-            errors: function (e) {
+            error: function (e) {
                 console.log("查看商品信息失败...");
                 window.location.href = "./404.html";
             }
@@ -151,7 +160,7 @@ function setAuctionListContent(AuctionListData) {
                 "                                    </a>\n" +
                 "                                    <div class=\"layui-col-md7\">\n" +
                 "                                        <span style=\"font-size: 17px\">当前竞拍价: " + theList[i].nowPrice + "元</span><br>\n" +
-                "                                        <span>已有" + theList[i].aucNum + "人参与竞拍</span>\n" +
+                "                                        <span>已有" + theList[i].aucNum + "次参与竞拍</span>\n" +
                 "                                    </div>\n" +
                 "                                    <div class=\"layui-col-md5\">\n" +
                 "                                        <button type=\"button\" class=\"layui-btn myAuctionsListBtnIndex\">立即竞拍</button>\n" +

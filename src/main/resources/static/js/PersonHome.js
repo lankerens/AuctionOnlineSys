@@ -211,6 +211,15 @@ function myTips(msg) {
 };
 
 
+function btnConfirm(){
+    //询问框
+    layer.confirm('你确定要删除这条记录吗？', {
+        btn: ['确认','取消'] //按钮
+    }, function(data){
+        layer.msg('删除成功', {icon: 1});
+    });
+}
+
 
 $(document).ready(function(){
 

@@ -119,9 +119,9 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public Object getGoodInfoById(Integer id) {
+    public Object getGoodInfoById(Integer gid, Integer aid) {
         JSONObject res = new JSONObject();
-        Map<String, Object> goodInfo = goodsMapper.getGoodInfoById(id);
+        Map<String, Object> goodInfo = goodsMapper.getGoodInfoById(gid, aid);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         goodInfo.put("start_time", formatter.format(((Timestamp) goodInfo.get("start_time")).toLocalDateTime()));
         goodInfo.put("end_time", formatter.format(((Timestamp) goodInfo.get("end_time")).toLocalDateTime()));
@@ -135,14 +135,44 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public Object addShopCart(Integer aid, Integer gid) {
         JSONObject res = new JSONObject();
-
+        if(aid == null || gid == null){
+            res.put("msg", "f");
+            return res;
+        }
+        try {
+            Integer exists = goodsMapper.shoppingCartAddDel(aid, gid);
+            if(exists > 0){
+                res.put("msg", "cancle");
+                return res;
+            }else if(exists == 0){
+                int i = goodsMapper.saveShoppingCart(aid, gid);
+                if(i > 0){
+                    res.put("msg", "ok");
+                }
+            }
+        }catch (Exception e){
+            res.put("msg", "f");
+            return res;
+        }
         return res;
     }
 
     @Override
+    @Transactional(rollbackFor = {RuntimeException.class, Error.class})
     public Object auction(AuctionRecord auctionRecord) {
         JSONObject res = new JSONObject();
-
+        res.put("msg", "f");
+        if(auctionRecord == null || auctionRecord.getMyPlus() == null || auctionRecord.getMyPlus() < goodsMapper.getMixPricePlus(auctionRecord.getGid()))
+        { return res; }
+        auctionRecord.setNowPrice(auctionRecord.getStartPrice() + auctionRecord.getMyPlus());
+        auctionRecord.setCreateTime(LocalDateTime.now());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        auctionRecord.setEndTime(LocalDateTime.parse(auctionRecord.geteTime(), formatter));
+        auctionRecord.setStartTime(LocalDateTime.parse(auctionRecord.getsTime(), formatter));
+        Integer i = goodsMapper.saveAuctionRecord(auctionRecord);
+        goodsMapper.updateNowPrice(auctionRecord.getGid(), auctionRecord.getNowPrice());
+        if(i != 1){return res;}
+        res.put("msg", "ok");
         return res;
     }
 }

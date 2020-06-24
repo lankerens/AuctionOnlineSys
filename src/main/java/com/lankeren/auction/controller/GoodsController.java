@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.lankeren.auction.bean.AuctionRecord;
 import com.lankeren.auction.bean.GoodAuction;
 import com.lankeren.auction.bean.SalerInfo;
+import com.lankeren.auction.service.AccountService;
 import com.lankeren.auction.service.GoodsService;
+import com.lankeren.auction.serviceImpl.AccountServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -63,9 +65,9 @@ public class GoodsController {
     }
 
 
-    @RequestMapping(value = "/getGoodInfoById/{id}", method = RequestMethod.GET)
-    public  Object getGoodInfoById(@PathVariable Integer id){
-        Object res =  goodsService.getGoodInfoById(id);
+    @RequestMapping(value = "/getGoodInfoById/{gid}/{aid}", method = RequestMethod.GET)
+    public  Object getGoodInfoById(@PathVariable Integer gid, @PathVariable Integer aid){
+        Object res =  goodsService.getGoodInfoById(gid, aid);
         return res;
     }
 
@@ -77,7 +79,7 @@ public class GoodsController {
     }
 
 
-    @RequestMapping(value = "/auction", method = RequestMethod.GET)
+    @RequestMapping(value = "/auction", method = RequestMethod.POST)
     public  Object auction(@RequestBody AuctionRecord auctionRecord){
         Object res =  goodsService.auction(auctionRecord);
         return res;

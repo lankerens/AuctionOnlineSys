@@ -15,7 +15,7 @@ public interface GoodsService {
 
     public Object getAuctionList(Integer currentPage, Integer pageSize);
 
-    public Object getGoodInfoById(Integer id);
+    public Object getGoodInfoById(Integer gid, Integer aid);
 
     public Object addShopCart(Integer aid, Integer gid);
 

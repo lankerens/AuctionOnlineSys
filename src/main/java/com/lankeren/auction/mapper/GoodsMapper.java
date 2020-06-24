@@ -1,13 +1,7 @@
 package com.lankeren.auction.mapper;
 
-import com.lankeren.auction.bean.GoodAuction;
-import com.lankeren.auction.bean.GoodCard;
-import com.lankeren.auction.bean.GoodEnsure;
-import com.lankeren.auction.bean.SalerInfo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import com.lankeren.auction.bean.*;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
@@ -51,15 +45,42 @@ public interface GoodsMapper {
     Map<String, Integer> getAucNums(String nowTime);
 
 
-
-    @Select("SELECT a.id, a.good_name, a.start_price, a.start_time, a.pic, a.price_plus, a.end_time, a.account_id, a.goods_dec, a.`status` , a.now_price, a.saler_name, b.goodType, e.pack_mail, e.oimei, e.ensure FROM goods_auction a " +
+    /**
+     *  goodInfo 页面
+     * @param gid aid
+     * @return
+     */
+    @Select("SELECT a.id, a.good_name, a.start_price, a.start_time, a.pic, a.price_plus, a.end_time, a.account_id, " +
+            "a.goods_dec, a.`status` , a.now_price, a.saler_name, b.goodType, e.pack_mail, e.oimei, e.ensure, " +
+            "(select count(*) from shoppingcart where aid = #{aid} and gid = #{gid}) Exshoppingcart FROM goods_auction a " +
             " LEFT JOIN goodtype b ON b.id = a.good_type " +
             " LEFT JOIN goods_ensure e ON e.gid = a.id " +
             "WHERE " +
-            " a.id = #{id}")
-    Map<String, Object> getGoodInfoById(Integer id);
+            " a.id = #{gid}")
+    Map<String, Object> getGoodInfoById(Integer gid, Integer aid);
 
 
+    @Select("SELECT count(*) from shoppingcart where aid = #{aid} and gid = #{gid}")
+    Integer shoppingCartIsExists(Integer aid, Integer gid);
+
+    @Insert("INSERT INTO `auctiononlinesys`.`shoppingcart`(`gid`, `aid`) VALUES (#{gid}, #{aid})")
+    Integer saveShoppingCart(Integer aid, Integer gid);
+
+
+    @Insert("INSERT INTO `auction_record`(`good_name`, `start_price`, `now_price`, `my_plus`, `account_id`, `account_name`, `status`, " +
+            "`end_time`, `start_time`, `saler_id`, `gid`, `create_time`) " +
+            "VALUES (#{goodName}, #{startPrice}, #{nowPrice}, #{myPlus}, #{accountId}, #{accountName}, #{status}, #{endTime}, #{startTime}, " +
+            "#{salerId}, #{gid}, #{createTime})")
+    Integer saveAuctionRecord(AuctionRecord auctionRecord);
+
+    @Select("SELECT price_plus from goods_auction where id = #{gid}")
+    Double getMixPricePlus(Integer gid);
+
+    @Update("UPDATE `goods_auction` SET `now_price` = #{nowPrice} WHERE `id` = #{gid}")
+    Integer updateNowPrice(Integer gid, double nowPrice);
+
+    @Delete("DELETE from shoppingcart where gid = #{gid} and aid = #{aid}")
+    Integer shoppingCartAddDel(Integer aid, Integer gid);
 
 
 }
