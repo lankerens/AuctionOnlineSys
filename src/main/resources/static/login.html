@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <title>AuctionOnlineSys-登录-By-Lankeren</title>
 </head>
-<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/reset200802.css"/>
 <link rel="stylesheet" type="text/css" href="css/login.css"/>
 <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="./layer/theme/default/layer.css"/>
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./layer/layer.js"></script>
+
 
 <script>
     // 登录
@@ -42,7 +45,8 @@
                     storage.setItem("account", JSON.stringify(j.account));
                     window.location.href = "./index.html";
                 }else if(j.msg === "f"){
-                    console.log("用户名密码错误");
+                    console.log("用户名密码错误 或者 你的账号已被锁定~联系管理解锁");
+                    myTips("用户名密码错误 或者 你的账号已被锁定~联系管理解锁");
                 }
 
             }
@@ -50,9 +54,12 @@
         xmlhttp.open("POST","http://localhost:8080/login",true);
         xmlhttp.setRequestHeader("Content-type","application/json");
         xmlhttp.send(jsonData);
-
-
     }
+
+    function myTips(msg) {
+        //提示层
+        layer.msg(msg);
+    };
 
 </script>
 

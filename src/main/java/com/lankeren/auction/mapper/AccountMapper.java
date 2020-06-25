@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface AccountMapper {
 
-    @Select("select * from account where account = #{account}")
+    @Select("select * from account where account = #{account} and status = 1")
     Account getAccountByaccount(String account);
 
     @Insert("INSERT INTO `account`(`account`, `password`, `reg_time`) VALUES (#{account}, #{password}, #{regTime})")

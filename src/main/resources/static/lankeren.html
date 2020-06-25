@@ -91,14 +91,14 @@
             <!--  左侧导航  -->
             <div class="left-daohang">
                 <ul class="clearfix">
-                    <li><a class="myactive-daohang" href="#" onclick="adminDaohang(this, 'right-info-div')">基本信息</a></li>
-                    <li><a href="#" onclick="adminDaohang(this, 'right-info-myVIP')" >会员特权</a></li>
-                    <li><a href="#" onclick="adminDaohang(this, 'right-info-psw')">修改密码</a></li>
-                    <li><a href="#" onclick="adminDaohang(this, 'right-info-adminUser'); ">用户管理</a></li>
-                    <li><a href="#" onclick="adminDaohang(this, 'right-info-adminGoods')">商品信息管理</a></li>
-                    <li><a href="#" onclick="adminDaohang(this, 'right-info-adminAuctions')">商品竞拍记录管理</a></li>
-                    <li><a href="#" onclick="adminDaohang(this, 'right-info-adminOrder')">订单管理</a></li>
-                    <li><a href="#" onclick="adminDaohang(this, 'right-info-adminSaler')">商家申请情况</a></li>
+                    <li><a class="myactive-daohang" href="javascript:;" onclick="adminDaohang(this, 'right-info-div')">基本信息</a></li>
+                    <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-myVIP')" >会员特权</a></li>
+                    <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-psw')">修改密码</a></li>
+                    <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-adminUser'); ">用户管理</a></li>
+                    <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-adminGoods')">商品信息管理</a></li>
+                    <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-adminAuctions')">商品竞拍记录管理</a></li>
+                    <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-adminOrder')">订单管理</a></li>
+                    <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-adminSaler')">商家申请情况</a></li>
                     <li><a href="./index.html"  data-toggle="tooltip" data-placement="bottom"
                            title="真的要离开我这个页面了吗(Q.Q)" >返回首页</a></li>
                 </ul>
@@ -358,8 +358,12 @@
                             <table class="layui-hide" id="test" lay-filter="test"></table>
 
                             <script type="text/html" id="barDemo">
-                                <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="edit" onclick="disableUserAccount(this);">禁用</a>
-                                <a class="layui-btn layui-btn-xs" lay-event="edit">密码重置</a>
+                                {{#  if(d.status === 1){ }}
+                                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="forbidden" >禁用</a>
+                                {{#  } else { }}
+                                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="forbidden" >激活</a>
+                                {{#  } }}
+                                <a class="layui-btn layui-btn-xs" lay-event="pswReset">密码重置</a>
                                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                             </script>
 
@@ -378,10 +382,10 @@
                                             ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
                                             ,{field:'name', title:'用户名', width:120}
                                             ,{field:'account', title:'账号', width:120, sort: true}
-                                            ,{field:'identity', title:'用户身份', width:100, sort: true}
+                                            ,{field:'identity', title:'用户身份', width:100, sort: true, templet:function (d) {return showUserIdentity(d.identity);}}
                                             ,{field:'email', title:'电子邮箱', width:160}
                                             ,{field:'phone', title:'手机号', width:120, sort: true}
-                                            ,{field:'reg_time', title:'注册时间', sort: true}
+                                            ,{field:'reg_time', title:'注册时间', sort: true, templet:function (d) {return showTime(d.reg_time);}}
                                             ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}
                                         ]]
                                         ,page: true
@@ -436,10 +440,10 @@
 
                         <!--  列表内容    -->
                         <div class="adminGoods-info-listcontent">
-                                    <table class="layui-hide" id="adGoodsInfo" lay-filter="test"></table>
+                                    <table class="layui-hide" id="adGoodsInfo" lay-filter="adGoodsInfo"></table>
 
                                     <script type="text/html" id="adOptions">
-                                        <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
+                                        <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
                                         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                                     </script>
 
@@ -449,22 +453,22 @@
 
                                             table.render({
                                                 elem: '#adGoodsInfo'
-                                                ,url:"http://localhost:8080/getUserList"
+                                                ,url:"http://localhost:8080/getGoodAuctionList"
                                                 ,toolbar: '#toolbarDemo'
-                                                ,title: '用户数据表'
+                                                ,title: '商品信息数据表'
                                                 ,totalRow: true
                                                 ,cols: [[
                                                     {type: 'checkbox', fixed: 'left'}
                                                     ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
-                                                    ,{field:'name', title:'商品名称', width:120}
-                                                    ,{field:'account', title:'分类', width:120, sort: true}
-                                                    ,{field:'identity', title:'卖家', width:100, sort: true}
-                                                    ,{field:'email', title:'起拍价', width:160}
-                                                    ,{field:'phone', title:'竞拍增量', width:120, sort: true}
-                                                    ,{field:'reg_time', title:'当前竞拍价(元)', sort: true}
-                                                    ,{field:'reg_time', title:'截止时间', sort: true}
-                                                    ,{field:'reg_time', title:'状态', sort: true}
-                                                    ,{fixed: 'right', title:'操作', toolbar: '#adOptions', width:200}
+                                                    ,{field:'good_name', title:'商品名称', width:120}
+                                                    ,{field:'good_type', title:'分类', width:80, sort: true, templet:function (d) {return showGoodType(d.good_type);}}
+                                                    ,{field:'saler_name', title:'卖家', width:100, sort: true}
+                                                    ,{field:'start_price', title:'起拍价', width:80}
+                                                    ,{field:'price_plus', title:'竞拍增量', width:100, sort: true}
+                                                    ,{field:'now_price', title:'当前竞拍价(元)',width:140, sort: true}
+                                                    ,{field:'end_time', title:'截止时间',  sort: true, templet:function (d) {return showTime(d.end_time);}}
+                                                    ,{field:'status', title:'状态', width:80, sort: true, templet:function (d) {return showGoodsStatus(d.status);}}
+                                                    ,{fixed: 'right', title:'操作', toolbar: '#adOptions', width:120}
                                                 ]]
                                                 ,page: true
                                             });
@@ -472,6 +476,8 @@
                                         });
                                     </script>
 
+
+                    </div>
 
                     </div>
 
@@ -499,100 +505,42 @@
 
                         <!--  列表内容    -->
                         <div class="adminAuctions-info-listcontent">
-                            <div>
-                                <table class="table table-striped mytableListInfo">
-                                    <thead>
-                                    <tr>
-                                        <th>序号</th>
-                                        <th>商品名称</th>
-                                        <th>起始价</th>
-                                        <th>当前竞拍价格</th>
-                                        <th>竞拍增量</th>
-                                        <th>拍卖者</th>
-                                        <th>竞拍状态</th>
-                                        <th>开始时间</th>
-                                        <th>截止时间</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>8</td>
-                                        <td>8</td>
-                                        <td>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除我吗">删除</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>8</td>
-                                        <td>8</td>
-                                        <td>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除我吗">删除</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>4</td>
-                                        <td>8</td>
-                                        <td>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除我吗">删除</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>8</td>
-                                        <td>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除我吗">删除</a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
 
-                            </div>
+                            <table class="layui-hide" id="adAuctionRecord" lay-filter="adAuctionRecord"></table>
 
-                            <!--  显示的页数\几页  -->
-                            <div class="info-adminAuctions-pagesize">
-                                <div>当前第2页, 共11页</div>
-                            </div>
+                            <script type="text/html" id="adAuctionRed">
+                                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                            </script>
 
-                            <!--  上一页  下一页 -->
-                            <div class="info-adminAuctions-mypager">
-                                <ul class="pager">
-                                    <li><a href="#">上一页</a></li>
-                                    <li><a href="#">下一页</a></li>
-                                </ul>
-                            </div>
+                            <script>
+                                layui.use('table', function(){
+                                    var table = layui.table;
+
+                                    table.render({
+                                        elem: '#adAuctionRecord'
+                                        ,url:"http://localhost:8080/getAuctionRecordList"
+                                        ,toolbar: '#toolbarDemo'
+                                        ,title: '商品信息数据表'
+                                        ,totalRow: true
+                                        ,cols: [[
+                                            {type: 'checkbox', fixed: 'left'}
+                                            ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
+                                            ,{field:'good_name', title:'商品名称', width:120}
+                                            ,{field:'start_price', title:'起始价', width:80, sort: true}
+                                            ,{field:'now_price', title:'当前竞拍价格(元)', width:140, sort: true}
+                                            ,{field:'my_plus', title:'竞拍增量(元)', width:100}
+                                            ,{field:'account_name', title:'拍卖者', width:100, sort: true}
+                                            ,{field:'status', title:'竞拍状态',width:100, sort: true, templet:function (d) {return showAuctionStatus(d.status);}}
+                                            ,{field:'start_time', title:'开始时间',  sort: true, templet:function (d) {return showTime(d.start_time);}}
+                                            ,{field:'end_time', title:'截止时间',  sort: true, templet:function (d) {return showTime(d.end_time);}}
+                                            ,{field:'create_time', title:'竞拍时间',  sort: true, templet:function (d) {return showTime(d.create_time);}}
+                                            ,{fixed: 'right', title:'操作', toolbar: '#adAuctionRed', width:80}
+                                        ]]
+                                        ,page: true
+                                    });
+
+                                });
+                            </script>
 
                         </div>
 
@@ -625,15 +573,9 @@
                         <div class="adminUser-info-listcontent">
                             <table class="layui-hide" id="order" lay-filter="order"></table>
 
-                            <script type="text/html" id="toolbarOrder">
-                                <div class="layui-btn-container">
-                                    <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-                                    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-                                    <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
-                                </div>
-                            </script>
+
                             <script type="text/html" id="barOrder">
-                                <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
+                                <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
                                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                             </script>
 
@@ -643,45 +585,28 @@
 
                                     table.render({
                                         elem: '#order'
-                                        ,url:'./test/order.json'
-                                        ,toolbar: '#toolbarOrder'
+                                        ,url:'http://localhost:8080/getOrderList'
+                                        ,toolbar: '#toolbarOrder' // 工具栏的id
                                         ,title: '订单数据表'
                                         ,totalRow: true
                                         ,cols: [[
                                             {type: 'checkbox', fixed: 'left'}
-                                            ,{field:'orderId', title:'订单编号', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
+                                            ,{field:'order_id', title:'订单编号', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
                                             ,{field:'account', title:'下单账号', width:100}
-                                            ,{field:'goodName', title:'拍品名称', width:100, sort: true}
-                                            ,{field:'startPrice', title:'起始价格', width:80, sort: true, totalRow: true}
-                                            ,{field:'endPrice', title:'到手价格', width:80, sort: true, totalRow: true}
-                                            ,{field:'salerName', title:'卖家名称', width:80}
+                                            ,{field:'good_name', title:'拍品名称', width:100, sort: true}
+                                            ,{field:'start_price', title:'起始价格', width:80, sort: true, totalRow: true}
+                                            ,{field:'end_price', title:'到手价格', width:80, sort: true, totalRow: true}
+                                            ,{field:'account_name', title:'卖家名称', width:80}
                                             ,{field:'salerAddress', title:'发货地址'}
-                                            ,{field:'accounntAddress', title:'收货地址'}
-                                            ,{field:'createTime', title:'创建时间', sort: true}
-                                            ,{field:'status', title:'订单状态', sort: true, width:80}
+                                            ,{field:'address', title:'收货地址'}
+                                            ,{field:'create_time', title:'创建时间', sort: true, templet:function (d) {return showTime(d.create_time);}}
+                                            ,{field:'status', title:'订单状态', sort: true, width:80, templet:function (d) {return showOrderStatus(d.status);}}
                                             ,{fixed: 'right', title:'操作', toolbar: '#barOrder', width:120}
                                         ]]
                                         ,page: true
                                     });
-
-                                    //工具栏事件
-                                    table.on('toolbar(order)', function(obj){
-                                        var checkStatus = table.checkStatus(obj.config.id);
-                                        switch(obj.event){
-                                            case 'getCheckData':
-                                                var data = checkStatus.data;
-                                                layer.alert(JSON.stringify(data));
-                                                break;
-                                            case 'getCheckLength':
-                                                var data = checkStatus.data;
-                                                layer.msg('选中了：'+ data.length + ' 个');
-                                                break;
-                                            case 'isAll':
-                                                layer.msg(checkStatus.isAll ? '全选': '未全选')
-                                                break;
-                                        };
-                                    });
                                 });
+
                             </script>
 
                         </div>
@@ -712,88 +637,46 @@
 
                         <!--  列表内容    -->
                         <div class="adminSaler-info-listcontent">
-                            <div>
-                                <table class="table table-striped mytableListInfo">
-                                    <thead>
-                                    <tr>
-                                        <th>序号</th>
-                                        <th>商家名称</th>
-                                        <th>经营者</th>
-                                        <th>联系方式</th>
-                                        <th>电子邮箱</th>
-                                        <th>申请理由</th>
-                                        <th>申请账号</th>
-                                        <th>状态</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>8</td>
-                                        <td>
-                                            <a href="#">同意</a>
-                                            <a href="#">拒绝</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除吗">删除</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>8</td>
-                                        <td>
-                                            <a href="#">同意</a>
-                                            <a href="#">拒绝</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除吗">删除</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>8</td>
-                                        <td>
-                                            <a href="#">同意</a>
-                                            <a href="#">拒绝</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除吗">删除</a>
-                                        </td>
-                                    </tr>
 
-                                    </tbody>
-                                </table>
+                            <table class="layui-hide" id="adsalerApply" lay-filter="adsalerApply"></table>
 
-                            </div>
+                            <script type="text/html" id="adAPPLY">
+                                {{# if(d.status == 0){}}
+                                    <a class="layui-btn layui-btn-xs" lay-event="agree">同意</a>
+                                    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="refuse">拒绝</a>
+                                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                {{# } else { }}
+                                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                {{#  } }}
+                            </script>
 
-                            <!--  显示的页数\几页  -->
-                            <div class="info-adminSaler-pagesize">
-                                <div>当前第1页, 共3页</div>
-                            </div>
+                            <script>
+                                layui.use('table', function(){
+                                    var table = layui.table;
 
-                            <!--  上一页  下一页 -->
-                            <div class="info-adminSaler-mypager">
-                                <ul class="pager">
-                                    <li><a href="#">上一页</a></li>
-                                    <li><a href="#">下一页</a></li>
-                                </ul>
-                            </div>
+                                    table.render({
+                                        elem: '#adsalerApply'
+                                        ,url:"http://localhost:8080/getSalerApply"
+                                        ,toolbar: '#toolbarDemo'
+                                        ,title: '商家申请数据表'
+                                        ,totalRow: true
+                                        ,cols: [[
+                                            {type: 'checkbox', fixed: 'left'}
+                                            ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
+                                            ,{field:'busine_name', title:'商家名称', width:120}
+                                            ,{field:'saler_name', title:'经营者', width:80, sort: true}
+                                            ,{field:'busine_contact', title:'联系方式', width:140, sort: true}
+                                            ,{field:'saler_email', title:'电子邮箱', width:100}
+                                            ,{field:'apply_reason', title:'申请理由', width:100, sort: true}
+                                            ,{field:'account', title:'申请账号',width:100, sort: true}
+                                            ,{field:'status', title:'状态',  sort: true, templet:function (d) {return showSalerApply(d.status);}}
+                                            ,{fixed: 'right', title:'操作', toolbar: '#adAPPLY', width:200}
+                                        ]]
+                                        ,page: true
+                                    });
+
+                                });
+                            </script>
 
                         </div>
 

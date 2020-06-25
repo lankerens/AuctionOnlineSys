@@ -2,10 +2,7 @@ package com.lankeren.auction.controller;
 
 import com.lankeren.auction.service.LankerenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author lankeren
@@ -25,26 +22,26 @@ public class LankerenController {
         return res;
     }
 
-    @RequestMapping(value = "/getGoodAuctionList/{curr}/{pageSize}", method = RequestMethod.GET)
-    public  Object getGoodAuctionList( @PathVariable Integer curr, @PathVariable Integer pageSize){
+    @RequestMapping(value = "/getGoodAuctionList", method = RequestMethod.GET)
+    public  Object getGoodAuctionList(@RequestParam("page") Integer curr, @RequestParam("limit") Integer pageSize){
         Object res =  lankerenService.getGoodAuctionList(curr, pageSize);
         return res;
     }
 
-    @RequestMapping(value = "/getAuctionRecordList/{curr}/{pageSize}", method = RequestMethod.GET)
-    public  Object getAuctionRecordList( @PathVariable Integer curr, @PathVariable Integer pageSize){
+    @RequestMapping(value = "/getAuctionRecordList", method = RequestMethod.GET)
+    public  Object getAuctionRecordList(@RequestParam("page") Integer curr, @RequestParam("limit") Integer pageSize){
         Object res =  lankerenService.getAuctionRecordList(curr, pageSize);
         return res;
     }
 
-    @RequestMapping(value = "/getOrderList/{curr}/{pageSize}", method = RequestMethod.GET)
-    public  Object getOrderList( @PathVariable Integer curr, @PathVariable Integer pageSize){
+    @RequestMapping(value = "/getOrderList", method = RequestMethod.GET)
+    public  Object getOrderList(@RequestParam("page") Integer curr, @RequestParam("limit") Integer pageSize){
         Object res =  lankerenService.getOrderList(curr, pageSize);
         return res;
     }
 
-    @RequestMapping(value = "/getSalerApply/{curr}/{pageSize}", method = RequestMethod.GET)
-    public  Object getSalerApply( @PathVariable Integer curr, @PathVariable Integer pageSize){
+    @RequestMapping(value = "/getSalerApply", method = RequestMethod.GET)
+    public  Object getSalerApply(@RequestParam("page") Integer curr, @RequestParam("limit") Integer pageSize){
         Object res =  lankerenService.getSalerApply(curr, pageSize);
         return res;
     }

@@ -531,6 +531,7 @@ function myAuction() {
                 "                                        <td>" + myAuctionRecordList[i].good_name + "</td>\n" +
                 "                                        <td>" + myAuctionRecordList[i].now_price + "</td>\n" +
                 "                                        <td>" + myAuctionRecordList[i].my_plus + "</td>\n" +
+                "                                        <td>" + myAuctionRecordList[i].create_time + "</td>\n" +
                 "                                        <td>" + statusArray[myAuctionRecordList[i].status] + "</td>\n" +
                 "                                        <td>\n" +
                 "                                            <a href=\"#\" data-toggle=\"tooltip\" data-placement=\"right\"\n" +

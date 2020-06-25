@@ -34,30 +34,29 @@ public class LankerenServiceImpl implements LankerenService {
     @Override
     public Object getGoodAuctionList(Integer curr, Integer pageSize) {
         PageHelper.startPage(curr, pageSize);
-        return theSame(lankerenMapper.getGoodAuctionList() , "list");
+        return theSame(lankerenMapper.getGoodAuctionList() , "data");
     }
 
     @Override
     public Object getAuctionRecordList(Integer curr, Integer pageSize) {
         PageHelper.startPage(curr, pageSize);
-        return theSame(lankerenMapper.getAuctionRecordList() , "list");
+        return theSame(lankerenMapper.getAuctionRecordList() , "data");
     }
 
     @Override
     public Object getOrderList(Integer curr, Integer pageSize) {
         PageHelper.startPage(curr, pageSize);
-        return theSame( lankerenMapper.getOrderList() , "list");
+        return theSame( lankerenMapper.getOrderList() , "data");
     }
 
     @Override
     public Object getSalerApply(Integer curr, Integer pageSize) {
         PageHelper.startPage(curr, pageSize);
-        return theSame(lankerenMapper.getSalerApply() , "list");
+        return theSame(lankerenMapper.getSalerApply() , "data");
     }
 
 
     private Object theSame(List<Map<String, Object>> list, String name){
-        JSONObject res0 = new JSONObject();
         JSONObject res1 = new JSONObject();
         try {
             PageInfo<Map<String, Object>> pageInfo = new PageInfo<>(list);
