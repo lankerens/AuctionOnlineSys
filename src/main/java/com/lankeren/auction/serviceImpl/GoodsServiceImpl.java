@@ -184,7 +184,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public Object getAuctionRecord(Integer aid, Integer curr, Integer pageSize) {
         PageHelper.startPage(curr, pageSize);
-        return theSame(aid, curr, pageSize, goodsMapper.getAuctionRecord(aid) , "AuctionRecordList");
+        return theSame(aid, curr, pageSize, goodsMapper.getAuctionRecord(aid) , "list");
     }
 
     private Object theSame(Integer aid, Integer curr, Integer pageSize, List<Map<String, Object>> list, String name){
@@ -201,13 +201,27 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public Object getMyAuction(Integer aid, Integer curr, Integer pageSize) {
         PageHelper.startPage(curr, pageSize);
-        return theSame(aid, curr, pageSize, goodsMapper.getMyAuction(aid) , "myAuctionList");
+        return theSame(aid, curr, pageSize, goodsMapper.getMyAuction(aid) , "list");
     }
 
     @Override
     public Object getOrderList(Integer aid, Integer curr, Integer pageSize) {
         PageHelper.startPage(curr, pageSize);
-        return theSame(aid, curr, pageSize, goodsMapper.getOrderList(aid) , "myOrderList");
+        return theSame(aid, curr, pageSize, goodsMapper.getOrderList(aid) , "list");
+    }
+
+    @Override
+    public Object delMyGoods(Integer aid, Integer gid) {
+        JSONObject res = new JSONObject();
+        res.put("msg", "f");
+        if(aid == null || gid == null){
+            return res;
+        }
+        Integer f = goodsMapper.delMyGoods(aid, gid);
+        if(f != 0){
+            res.put("msg", "ok");
+        }
+        return res;
     }
 
 

@@ -29,4 +29,6 @@ public interface GoodsService {
 
     public Object getOrderList(Integer aid, Integer curr, Integer pageSize);
 
+    public Object delMyGoods(Integer aid, Integer gid);
+
 }

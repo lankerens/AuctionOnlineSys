@@ -115,7 +115,11 @@ public class GoodsController {
     }
 
 
-
+    @RequestMapping(value = "/delMyGoods/{aid}/{gid}", method = RequestMethod.GET)
+    public  Object delMyGoods(@PathVariable Integer aid, @PathVariable Integer gid){
+        Object res =  goodsService.delMyGoods(aid, gid);
+        return res;
+    }
 
 
 }

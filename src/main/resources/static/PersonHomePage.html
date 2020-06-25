@@ -90,9 +90,9 @@
                     <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myVIP')" >会员特权</a></li>
                     <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-psw')">修改密码</a></li>
                     <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-shopcart');myShoppingCart();">购物车</a></li>
-                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myauction')">我的竞拍</a></li>
-                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myGoods')">我的商品</a></li>
-                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myOrderInfo')">我的订单</a></li>
+                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myauction');myAuction();">我的竞拍</a></li>
+                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myGoods');getMyAuctionInfo();">我的商品</a></li>
+                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myOrderInfo'); getMyOrderList();">我的订单</a></li>
                     <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-mysaler')">申请商家</a></li>
                     <li><a href="./index.html"  data-toggle="tooltip" data-placement="bottom"
                            title="真的要离开我这个页面了吗(Q.Q)" >返回首页</a></li>
@@ -367,16 +367,10 @@
 
                             <!--  显示的页数\几页  -->
                             <div class="info-shopcart-pagesize">
-                                <div class="pagesTotalcart">当前第1页, 共1页</div>
+                                <div class="pagesTotal">当前第1页, 共1页</div>
                             </div>
 
-                            <!--  上一页  下一页 -->
-                            <div class="info-shopcart-mypager">
-                                <ul class="pager">
-                                    <li><a href="javascript:;" class="myPagerPre">上一页</a></li>
-                                    <li><a href="javascript:;" class="myPagerNex">下一页</a></li>
-                                </ul>
-                            </div>
+                            <script>mypagerdiv();</script>
 
                         </div>
 
@@ -412,68 +406,16 @@
                                     <tr>
                                         <th>序号</th>
                                         <th>商品名称</th>
-                                        <th>当前竞价</th>
-                                        <th>我的竞价</th>
+                                        <th>当前竞价(+后元)</th>
+                                        <th>我的竞价(+元)</th>
                                         <th>状态</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="快来看看心意的物品有没有被人抢走呀">查看</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sachin</td>
-                                        <td>Mumbai</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>400003</td>
-                                        <td>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="快来看看心意的物品有没有被人抢走呀">查看</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Uma</td>
-                                        <td>Pune</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>411027</td>
-                                        <td>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="快来看看心意的物品有没有被人抢走呀">查看</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Uma</td>
-                                        <td>Pune</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>411027</td>
-                                        <td>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="快来看看心意的物品有没有被人抢走呀">查看</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Uma</td>
-                                        <td>Pune</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>411027</td>
-                                        <td>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="快来看看心意的物品有没有被人抢走呀">查看</a>
-                                        </td>
-                                    </tr>
+                                    <tbody id="myaucton-table">
+
+
+
                                     </tbody>
                                 </table>
 
@@ -481,16 +423,10 @@
 
                             <!--  显示的页数\几页  -->
                             <div class="info-myauction-pagesize">
-                                <div>当前第1页, 共8页</div>
+                                <div class="pagesTotal">当前第1页, 共1页</div>
                             </div>
 
-                            <!--  上一页  下一页 -->
-                            <div class="info-myauction-mypager">
-                                <ul class="pager">
-                                    <li><a href="#">上一页</a></li>
-                                    <li><a href="#">下一页</a></li>
-                                </ul>
-                            </div>
+                            <script>mypagerdiv();</script>
 
                         </div>
 
@@ -534,82 +470,9 @@
                                         <th>操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>
-                                            <a href="#">查看</a>
-                                            <a href="#">编辑</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除我吗">删除</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sachin</td>
-                                        <td>Mumbai</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>400003</td>
-                                        <td>
-                                            <a href="#">查看</a>
-                                            <a href="#">编辑</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除我吗">删除</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Uma</td>
-                                        <td>Uma</td>
-                                        <td>Uma</td>
-                                        <td>Pune</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>411027</td>
-                                        <td>
-                                            <a href="#">查看</a>
-                                            <a href="#">编辑</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除我吗">删除</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Uma</td>
-                                        <td>Pune</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>411027</td>
-                                        <td>411027</td>
-                                        <td>411027</td>
-                                        <td>
-                                            <a href="#">查看</a>
-                                            <a href="#">编辑</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除我吗">删除</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Uma</td>
-                                        <td>Pune</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>411027</td>
-                                        <td>411027</td>
-                                        <td>411027</td>
-                                        <td>
-                                            <a href="#">查看</a>
-                                            <a href="#">编辑</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除我吗">删除</a>
-                                        </td>
-                                    </tr>
+                                    <tbody id="myGoods-table">
+
+
                                     </tbody>
                                 </table>
 
@@ -617,16 +480,11 @@
 
                             <!--  显示的页数\几页  -->
                             <div class="info-myGoods-pagesize">
-                                <div>当前第2页, 共11页</div>
+                                <div class="pagesTotal">当前第1页, 共1页</div>
                             </div>
 
-                            <!--  上一页  下一页 -->
-                            <div class="info-myGoods-mypager">
-                                <ul class="pager">
-                                    <li><a href="#">上一页</a></li>
-                                    <li><a href="#">下一页</a></li>
-                                </ul>
-                            </div>
+
+                            <script>mypagerdiv();</script>
 
                         </div>
 
@@ -661,7 +519,6 @@
                                 <table class="table table-striped mytableListInfo">
                                     <thead>
                                     <tr>
-                                        <th>序号</th>
                                         <th>订单编号</th>
                                         <th>商品名称</th>
                                         <th>价格</th>
@@ -670,77 +527,11 @@
                                         <th>操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>
-                                            <a href="#">查看</a>
-                                            <a href="#">确认收货</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="再不付款就超时退回了呦">支付</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sachin</td>
-                                        <td>Mumbai</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>
-                                            <a href="#">查看</a>
-                                            <a href="#">确认收货</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="再不付款就超时退回了呦">支付</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Uma</td>
-                                        <td>Uma</td>
-                                        <td>Uma</td>
-                                        <td>Pune</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>
-                                            <a href="#">查看</a>
-                                            <a href="#">确认收货</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="再不付款就超时退回了呦">支付</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Uma</td>
-                                        <td>Pune</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>411027</td>
-                                        <td>411027</td>
-                                        <td>
-                                            <a href="#">查看</a>
-                                            <a href="#">确认收货</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="再不付款就超时退回了呦">支付</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Uma</td>
-                                        <td>Pune</td>
-                                        <td>560001</td>
-                                        <td>560001</td>
-                                        <td>411027</td>
-                                        <td>411027</td>
-                                        <td>
-                                            <a href="#">查看</a>
-                                            <a href="#">确认收货</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="再不付款就超时退回了呦">支付</a>
-                                        </td>
-                                    </tr>
+                                    <tbody id="myOrder-table">
+
+
+
+
                                     </tbody>
                                 </table>
 
@@ -748,16 +539,10 @@
 
                             <!--  显示的页数\几页  -->
                             <div class="info-myOrderInfo-pagesize">
-                                <div>当前第1页, 共3页</div>
+                                <div class="pagesTotal">当前第1页, 共1页</div>
                             </div>
 
-                            <!--  上一页  下一页 -->
-                            <div class="info-myOrderInfo-mypager">
-                                <ul class="pager">
-                                    <li><a href="#">上一页</a></li>
-                                    <li><a href="#">下一页</a></li>
-                                </ul>
-                            </div>
+                            <script>mypagerdiv();</script>
 
                         </div>
 

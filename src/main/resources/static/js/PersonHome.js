@@ -244,10 +244,6 @@ $(document).ready(function () {
         });
     });
 
-
-    $(".myPagerPre").attr("onclick", '').attr("onclick", "myPagerPre('myCartList')");
-    $(".myPagerNex").attr("onclick", '').attr("onclick", "myPagerNex('myCartList')");
-
 });
 
 
@@ -259,6 +255,8 @@ function salerToApply(data) {
         account = $.parseJSON(res0);
     } catch (e) {
         account = null;
+        myTips("您好像还没登录呢!");
+        return ;
     }
     data.account = account.account;
     var jsonData = JSON.stringify(data);
@@ -329,7 +327,7 @@ function personalAjax(url, name) {
                 var storage = window.sessionStorage;
                 storage.setItem(name, JSON.stringify(data));
                 // setMyPageHelper(data.data.totalSize, data.data.AuctionNums);
-                $(".pagesTotalcart").empty().text("当前第" + mycurrentPage + "页, 共" + data.totalSize + "页");
+                $(".pagesTotal").empty().text("当前第" + mycurrentPage + "页, 共" + data.totalSize + "页");
 
             }
 
@@ -340,6 +338,7 @@ function personalAjax(url, name) {
     })
 }
 
+var mygoodsStatus = ["已下架", "拍卖中", "未开始", "已结束", "已成交", "不存在"];
 
 function myShoppingCart() {
     if (account == null) {
@@ -348,7 +347,7 @@ function myShoppingCart() {
     }
     var url = "http://localhost:8080/getShoppingCartList/" + account.id + "/" + mycurrentPage + "/" + 1;
     var na = "myCartList";
-    var myCartList = personalAjax(url, na);
+    personalAjax(url, na);
     var res0 = window.sessionStorage.getItem("myCartList");
     var myCartList;
     try {
@@ -359,23 +358,12 @@ function myShoppingCart() {
     if (myCartList != null) {
         $("#myShoopingCart-table").empty();
         for (var i in myCartList) {
-            var sta = myCartList[i].status;
-            if (sta === "0") {
-                sta = "已下架";
-            } else if (sta === "1") {
-                sta = "拍卖中";
-            } else if (sta === "2") {
-                sta = "已结束";
-            } else if (sta === "3") {
-                sta = "已成交";
-            } else {
-                sta = "不存在";
-            }
+
             var trs = "    <tr>\n" +
                 "                                        <td>" + myCartList[i].id + "</td>\n" +
                 "                                        <td>" + myCartList[i].good_name + "</td>\n" +
                 "                                        <td>" + myCartList[i].now_price + "</td>\n" +
-                "                                        <td>" + sta + "</td>\n" +
+                "                                        <td>" + mygoodsStatus[myCartList[i].status] + "</td>\n" +
                 "                                        <td>\n" +
                 "                                            <a href=\"javascript:;\" onclick=\"goodInfo(" + myCartList[i].id + ")\">查看</a>\n" +
                 "                                            <a href=\"javascript:;\" data-toggle=\"tooltip\" data-placement=\"right\"\n" +
@@ -385,6 +373,8 @@ function myShoppingCart() {
 
             $("#myShoopingCart-table").append(trs);
         }
+        $(".myPagerPre").attr("onclick", '').attr("onclick", "myPagerPre('myCartList')");
+        $(".myPagerNex").attr("onclick", '').attr("onclick", "myPagerNex('myCartList')");
 
     }
 }
@@ -427,7 +417,6 @@ function btnConfirm(id) {
     });
 }
 
-
 // 删除购物车中的
 function delShoppingCart(gid) {
     var aid = account.id == null ? -1 : account.id;
@@ -440,12 +429,11 @@ function delShoppingCart(gid) {
             console.log(data);
         },
         error: function (e) {
-            console.log("查看商品信息失败...");
+            console.log("删除失败...");
             window.location.href = "./404.html";
         }
     });
 }
-
 
 function myPagerPre(name) {
     console.log("进来了吗111");
@@ -455,6 +443,16 @@ function myPagerPre(name) {
             case "myCartList":
                 myShoppingCart();
                 break;
+            case "myAuctionRecordList":
+                myAuction();
+                break;
+            case "auctionInfoList":
+                getMyAuctionInfo();
+                break;
+            case "myOrderList":
+                getMyOrderList();
+                break;
+
             default:
                 ;
         }
@@ -478,9 +476,220 @@ function myPagerNex(name) {
                 case "myCartList":
                     myShoppingCart();
                     break;
+                case "myAuctionRecordList":
+                    myAuction();
+                    break;
+                case "auctionInfoList":
+                    getMyAuctionInfo();
+                    break;
+                case "myOrderList":
+                    getMyOrderList();
+                    break;
                 default:
                     ;
             }
         }
     }
 }
+
+
+function mypagerdiv() {
+    var divs = "                            <!--  上一页  下一页 -->\n" +
+        "                            <div class=\"info-shopcart-mypager\">\n" +
+        "                                <ul class=\"pager\">\n" +
+        "                                    <li><a href=\"javascript:;\" class=\"myPagerPre\">上一页</a></li>\n" +
+        "                                    <li><a href=\"javascript:;\" class=\"myPagerNex\">下一页</a></li>\n" +
+        "                                </ul>\n" +
+        "                            </div>";
+    document.write(divs);
+}
+
+var statusArray = ["未开始", "正在拍卖", "已成交"];
+
+//  竞拍记录
+function myAuction() {
+    if (account == null) {
+        myTips("请先登录");
+        return;
+    }
+    var url = "http://localhost:8080/getAuctionRecord/" + account.id + "/" + mycurrentPage + "/" + 1;
+    var na = "myAuctionRecordList";
+    personalAjax(url, na);
+    var res0 = window.sessionStorage.getItem("myAuctionRecordList");
+    var myAuctionRecordList;
+    try {
+        myAuctionRecordList = $.parseJSON(res0).list;
+    } catch (e) {
+        myAuctionRecordList = null;
+    }
+    if (myAuctionRecordList != null) {
+        $("#myaucton-table").empty();
+        for (var i in myAuctionRecordList) {
+
+            var auctionTables = "    <tr>\n" +
+                "                                        <td>" + myAuctionRecordList[i].id + "</td>\n" +
+                "                                        <td>" + myAuctionRecordList[i].good_name + "</td>\n" +
+                "                                        <td>" + myAuctionRecordList[i].now_price + "</td>\n" +
+                "                                        <td>" + myAuctionRecordList[i].my_plus + "</td>\n" +
+                "                                        <td>" + statusArray[myAuctionRecordList[i].status] + "</td>\n" +
+                "                                        <td>\n" +
+                "                                            <a href=\"#\" data-toggle=\"tooltip\" data-placement=\"right\"\n" +
+                "                                               title=\"快来看看心意的物品有没有被人抢走呀\" onclick=\"goodInfo(" + myAuctionRecordList[i].gid + ")\">查看</a>\n" +
+                "                                        </td>\n" +
+                "                                    </tr>";
+
+            $("#myaucton-table").append(auctionTables);
+        }
+
+        $(".myPagerPre").attr("onclick", '').attr("onclick", "myPagerPre('myAuctionRecordList')");
+        $(".myPagerNex").attr("onclick", '').attr("onclick", "myPagerNex('myAuctionRecordList')");
+    }
+}
+
+var myOrderStatus = ["待支付", "待发货", "超时支付失效", "运送中", "已完成", "暂无订单"];
+
+// 我的商品
+function getMyAuctionInfo() {
+    if (account == null) {
+        myTips("请先登录");
+        return;
+    } else {
+        if (account.identity < 2) {
+            myTips("你好像还不是卖家呢");
+            return;
+        }
+    }
+    var url = "http://localhost:8080/getMyAuction/" + account.id + "/" + mycurrentPage + "/" + 1;
+    var na = "auctionInfoList";
+    personalAjax(url, na);
+    var res0 = window.sessionStorage.getItem("auctionInfoList");
+    var auctionInfoList;
+    try {
+        auctionInfoList = $.parseJSON(res0).list;
+    } catch (e) {
+        auctionInfoList = null;
+    }
+    if (auctionInfoList != null) {
+        $("#myGoods-table").empty();
+        for (var i in auctionInfoList) {
+            var orderStatus = auctionInfoList[i].orderStatus;
+            if (orderStatus === undefined) {
+                orderStatus = 5;
+            }
+            var tbodys = "<tr>\n" +
+                "                                        <td>" + auctionInfoList[i].id + "</td>\n" +
+                "                                        <td>" + auctionInfoList[i].good_name + "</td>\n" +
+                "                                        <td>" + auctionInfoList[i].end_time + "</td>\n" +
+                "                                        <td>" + auctionInfoList[i].start_price + "</td>\n" +
+                "                                        <td>" + auctionInfoList[i].now_price + "</td>\n" +
+                "                                        <td>" + mygoodsStatus[auctionInfoList[i].status] + "</td>\n" +
+                "                                        <td>" + myOrderStatus[orderStatus] + "</td>\n" +
+                "                                        <td>\n" +
+                "                                            <a href=\"javascript:;\" onclick=\"goodInfo(" + auctionInfoList[i].id + ")\">查看</a>\n" +
+                "                                            <a href=\"javascript:;\">编辑</a>\n" +
+                "                                            <a href=\"javascript:;\" data-toggle=\"tooltip\" data-placement=\"right\"\n" +
+                "                                               title=\"真的要删除我吗\" onclick=\"btnConfirmGoods(" + auctionInfoList[i].id + ")\">删除</a>\n" +
+                "                                        </td>\n" +
+                "                                    </tr>";
+
+
+            $("#myGoods-table").append(tbodys);
+        }
+
+        $(".myPagerPre").attr("onclick", '').attr("onclick", "myPagerPre('auctionInfoList')");
+        $(".myPagerNex").attr("onclick", '').attr("onclick", "myPagerNex('auctionInfoList')");
+    }
+
+}
+
+
+function btnConfirmGoods(gid) {
+    //询问框
+    layer.confirm('你确定要删除这条记录吗？', {
+        btn: ['确认', '取消'] //按钮
+    }, function () {
+        layer.msg('删除成功', {icon: 1});
+        // 确认
+        delMyGoods(gid);
+        getMyAuctionInfo();
+    }, function (e) {
+        console.log(e);
+    });
+}
+
+function delMyGoods(gid) {
+    var aid = account.id == null ? -1 : account.id;
+    if (aid === -1) {
+        myTips("请先登录？？？");
+        return;
+    }
+    $.ajax({
+        type: "get",
+        dataType: "json",
+        url: "http://localhost:8080/delMyGoods/" + aid + "/" + gid,
+        async: false,
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (e) {
+            console.log("删除失败...");
+            window.location.href = "./404.html";
+        }
+    });
+}
+
+// 我的订单
+function getMyOrderList() {
+    if (account == null) {
+        myTips("请先登录");
+        return;
+    }
+    var url = "http://localhost:8080/getOrderList/" + account.id + "/" + mycurrentPage + "/" + 1;
+    var na = "MyOrderList";
+    personalAjax(url, na);
+    var res0 = window.sessionStorage.getItem("MyOrderList");
+    var MyOrderList;
+    try {
+        MyOrderList = $.parseJSON(res0).list;
+    } catch (e) {
+        MyOrderList = null;
+    }
+    if (MyOrderList != null) {
+        $("#myOrder-table").empty();
+        for (var i in MyOrderList) {
+            var orderStatus = MyOrderList[i].status;
+            var divs = " <tr>\n" +
+                "                                        <td>" + MyOrderList[i].order_id + "</td>\n" +
+                "                                        <td>" + MyOrderList[i].good_name + "</td>\n" +
+                "                                        <td>" + MyOrderList[i].end_price + "</td>\n" +
+                "                                        <td>" + MyOrderList[i].create_time + "</td>\n" +
+                "                                        <td>" + myOrderStatus[MyOrderList[i].status] + "</td>\n" +
+                "                                        <td>\n" +
+                "                                            <a href=\"javascript:;\">查看</a>";
+
+            var p = "";
+            // 待支付
+            if (orderStatus === 1) {
+                p = "<a href=\"javascript:;\" data-toggle=\"tooltip\" data-placement=\"right\"\n" +
+                    "            title=\"再不付款就超时退回了呦\">支付</a>\n" +
+                    "                </td>\n" +
+                    "                </tr>";
+            } else if (orderStatus === 3) {
+                p = "<a href=\"javascript:;\">确认收货</a>\n" +
+                    "                </td>\n" +
+                    "                </tr>";
+            }
+
+            divs = divs + p;
+            $("#myOrder-table").append(divs);
+
+        }
+        $(".myPagerPre").attr("onclick", '').attr("onclick", "myPagerPre('myOrderList')");
+        $(".myPagerNex").attr("onclick", '').attr("onclick", "myPagerNex('myOrderList')");
+
+    }
+}
+
+
+
+
