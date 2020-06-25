@@ -3,7 +3,7 @@ package com.lankeren.auction.service;
 public interface LankerenService {
 
 
-    public Object getUserList( Integer curr, Integer pageSize);
+    public Object getUserList( Integer page, Integer limit);
 
     public Object getGoodAuctionList( Integer curr, Integer pageSize);
 

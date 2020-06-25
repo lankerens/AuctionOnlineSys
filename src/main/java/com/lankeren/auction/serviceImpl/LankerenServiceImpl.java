@@ -26,44 +26,51 @@ public class LankerenServiceImpl implements LankerenService {
     private  LankerenMapper lankerenMapper;
 
     @Override
-    public Object getUserList(Integer curr, Integer pageSize) {
-        return theSame(curr, pageSize, lankerenMapper.getUserList() , "adUserList");
+    public Object getUserList(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+        return theSame(lankerenMapper.getUserList() , "data");
     }
 
     @Override
     public Object getGoodAuctionList(Integer curr, Integer pageSize) {
-        return theSame(curr, pageSize, lankerenMapper.getGoodAuctionList() , "adGoodAuctionList");
+        PageHelper.startPage(curr, pageSize);
+        return theSame(lankerenMapper.getGoodAuctionList() , "list");
     }
 
     @Override
     public Object getAuctionRecordList(Integer curr, Integer pageSize) {
-        return theSame(curr, pageSize, lankerenMapper.getAuctionRecordList() , "adAuctionRecordList");
+        PageHelper.startPage(curr, pageSize);
+        return theSame(lankerenMapper.getAuctionRecordList() , "list");
     }
 
     @Override
     public Object getOrderList(Integer curr, Integer pageSize) {
-        return theSame(curr, pageSize, lankerenMapper.getOrderList() , "adOrderList");
+        PageHelper.startPage(curr, pageSize);
+        return theSame( lankerenMapper.getOrderList() , "list");
     }
 
     @Override
     public Object getSalerApply(Integer curr, Integer pageSize) {
-        return theSame(curr, pageSize, lankerenMapper.getSalerApply() , "adSalerApplyList");
+        PageHelper.startPage(curr, pageSize);
+        return theSame(lankerenMapper.getSalerApply() , "list");
     }
 
 
-    private Object theSame(Integer curr, Integer pageSize, List<Map<String, Object>> list, String name){
-        JSONObject res = new JSONObject();
+    private Object theSame(List<Map<String, Object>> list, String name){
+        JSONObject res0 = new JSONObject();
+        JSONObject res1 = new JSONObject();
         try {
-            PageHelper.startPage(curr, pageSize);
             PageInfo<Map<String, Object>> pageInfo = new PageInfo<>(list);
-            res.put("msg", "ok");
-            res.put(name, list);
-            res.put("totalSize", pageInfo.getPages());
+            res1.put("msg", "ok");
+            res1.put("code", "0");
+            res1.put(name, list);
+            res1.put("count", pageInfo.getTotal());
         }catch (Exception e){
-            res.put("msg", "f");
-            return  res;
+            res1.put("msg", "f");
+            res1.put("count", 0);
+            return  res1;
         }
-        return res;
+        return res1;
     }
 
 }

@@ -29,7 +29,7 @@ public class AccountServiceImpl implements AccountService {
         JSONObject res = new JSONObject();
         String password = account.getPassword();
         Account byaccount = accountMapper.getAccountByaccount(account.getAccount());
-        if(!StringUtils.isEmpty(password) && account.getPassword().equals(password)){
+        if(byaccount != null && !StringUtils.isEmpty(password) && account.getPassword().equals(password)){
             res.put("msg", "ok");
             byaccount.setPassword("null");
             res.put("account", byaccount);

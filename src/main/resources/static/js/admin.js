@@ -21,8 +21,11 @@ function adminDaohang(g, myclass) {
 
     var div0 = $("." + myclass);
     div0.removeClass("myActiveInRightInfo");
+
+    adcurrentPage = 1;
 }
 
+var adcurrentPage = 1;
 
 // jq载入
 $(document).ready(function(){
@@ -37,6 +40,60 @@ $(document).ready(function(){
 
 
 
-
-
 });
+
+
+function adminAjax(url, name) {
+
+    $.ajax({
+        type: "get",
+        dataType: "json",
+        url: url,
+        async: false,
+        success: function (data) {
+            console.log(data);
+            if (data.msg === "ok") {
+                var storage = window.sessionStorage;
+                storage.setItem(name, JSON.stringify(data.data));
+
+            }
+
+        },
+        error: function (e) {
+            console.log("获取列表失败" + e);
+        }
+    })
+}
+
+function getUserList() {
+    if (account == null) {
+        myTips("请先登录");
+        return;
+    } else {
+        if (account.identity != 3) {
+            myTips("你好像不是管理员呢~~");
+            return ;
+        }
+    }
+    var url = "http://localhost:8080/getUserList/";
+    var na = "UserList";
+    adminAjax(url, na);
+    var res0 = window.sessionStorage.getItem("UserList");
+    var UserList ;
+    try {
+        UserList = $.parseJSON(res0).list;
+    }catch (e) {
+        UserList = null;
+    }
+    if(UserList != null){
+
+
+    }
+}
+
+
+function disableUserAccount(a) {
+    console.log(a.parentNode.parentNode.parentNode.childNodes[1].innerText);
+}
+
+

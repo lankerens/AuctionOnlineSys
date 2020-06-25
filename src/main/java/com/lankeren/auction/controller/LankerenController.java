@@ -19,9 +19,9 @@ public class LankerenController {
     @Autowired
     private LankerenService lankerenService;
 
-    @RequestMapping(value = "/getMyAuction/{curr}/{pageSize}", method = RequestMethod.GET)
-    public  Object getUserList( @PathVariable Integer curr, @PathVariable Integer pageSize){
-        Object res =  lankerenService.getUserList(curr, pageSize);
+    @RequestMapping(value = "/getUserList", method = RequestMethod.GET)
+    public  Object getUserList( Integer page,  Integer limit){
+        Object res =  lankerenService.getUserList(page, limit);
         return res;
     }
 
