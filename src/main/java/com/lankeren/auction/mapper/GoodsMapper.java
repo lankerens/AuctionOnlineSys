@@ -83,4 +83,22 @@ public interface GoodsMapper {
     Integer shoppingCartAddDel(Integer aid, Integer gid);
 
 
+    @Select("SELECT g.id, g.good_name, g.now_price, g.`status` from goods_auction g " +
+            "LEFT JOIN shoppingcart s on g.id = s.gid " +
+            "where s.aid = #{aid}")
+    List<Map<String , Object>> getShoppingCartList(Integer aid);
+
+
+    @Select("SELECT a.id , a.good_name, a.now_price, a.my_plus, a.`status` from auction_record a WHERE account_id = #{aid}")
+    List<Map<String, Object>> getAuctionRecord(Integer aid);
+
+    @Select("SELECT g.id, g.good_name, g.end_time, g.start_price, g.now_price, g.`status` from goods_auction g where account_id = #{aid}")
+    List<Map<String , Object>> getMyAuction(Integer aid);
+
+
+    @Select("SELECT o.order_id, o.good_name, o.end_price, o.create_time, o.`status` from `order`o where account_id = #{aid}")
+    List<Map<String , Object>> getOrderList(Integer aid);
+
+
+
 }

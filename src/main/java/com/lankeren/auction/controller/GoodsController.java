@@ -86,5 +86,36 @@ public class GoodsController {
     }
 
 
+    @RequestMapping(value = "/getShoppingCartList/{aid}/{curr}/{pageSize}", method = RequestMethod.GET)
+    public  Object getShoppingCartList(@PathVariable Integer aid, @PathVariable Integer curr, @PathVariable Integer pageSize){
+        Object res =  goodsService.getShoppingCartList(aid, curr, pageSize);
+        return res;
+    }
+
+
+    @RequestMapping(value = "/getAuctionRecord/{aid}/{curr}/{pageSize}", method = RequestMethod.GET)
+    public  Object getAuctionRecord(@PathVariable Integer aid, @PathVariable Integer curr, @PathVariable Integer pageSize){
+        Object res =  goodsService.getAuctionRecord(aid, curr, pageSize);
+        return res;
+    }
+
+
+    @RequestMapping(value = "/getMyAuction/{aid}/{curr}/{pageSize}", method = RequestMethod.GET)
+    public  Object getMyAuction(@PathVariable Integer aid, @PathVariable Integer curr, @PathVariable Integer pageSize){
+        Object res =  goodsService.getMyAuction(aid, curr, pageSize);
+        return res;
+    }
+
+
+
+    @RequestMapping(value = "/getOrderList/{aid}/{curr}/{pageSize}", method = RequestMethod.GET)
+    public  Object getOrderList(@PathVariable Integer aid, @PathVariable Integer curr, @PathVariable Integer pageSize){
+        Object res =  goodsService.getOrderList(aid, curr, pageSize);
+        return res;
+    }
+
+
+
+
 
 }

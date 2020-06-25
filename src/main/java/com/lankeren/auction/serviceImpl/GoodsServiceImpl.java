@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -175,4 +174,41 @@ public class GoodsServiceImpl implements GoodsService {
         res.put("msg", "ok");
         return res;
     }
+
+    @Override
+    public Object getShoppingCartList(Integer aid, Integer curr, Integer pageSize) {
+        PageHelper.startPage(curr, pageSize);
+        return theSame(aid, curr, pageSize, goodsMapper.getShoppingCartList(aid), "list");
+    }
+
+    @Override
+    public Object getAuctionRecord(Integer aid, Integer curr, Integer pageSize) {
+        PageHelper.startPage(curr, pageSize);
+        return theSame(aid, curr, pageSize, goodsMapper.getAuctionRecord(aid) , "AuctionRecordList");
+    }
+
+    private Object theSame(Integer aid, Integer curr, Integer pageSize, List<Map<String, Object>> list, String name){
+        JSONObject res = new JSONObject();
+        res.put("msg", "f");
+        if(aid == null){ return res; }
+        PageInfo<Map<String, Object>> pageInfo = new PageInfo<>(list);
+        res.put(name, list);
+        res.put("msg", "ok");
+        res.put("totalSize", pageInfo.getPages());
+        return res;
+    }
+
+    @Override
+    public Object getMyAuction(Integer aid, Integer curr, Integer pageSize) {
+        PageHelper.startPage(curr, pageSize);
+        return theSame(aid, curr, pageSize, goodsMapper.getMyAuction(aid) , "myAuctionList");
+    }
+
+    @Override
+    public Object getOrderList(Integer aid, Integer curr, Integer pageSize) {
+        PageHelper.startPage(curr, pageSize);
+        return theSame(aid, curr, pageSize, goodsMapper.getOrderList(aid) , "myOrderList");
+    }
+
+
 }

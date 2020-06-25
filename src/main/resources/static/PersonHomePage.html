@@ -86,14 +86,14 @@
             <!--  左侧导航  -->
             <div class="left-daohang">
                 <ul class="clearfix">
-                    <li><a class="myactive-daohang" href="#" onclick="changeActiveDaohang(this, 'right-info-div')">基本信息</a></li>
-                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-myVIP')" >会员特权</a></li>
-                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-psw')">修改密码</a></li>
-                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-shopcart')">购物车</a></li>
-                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-myauction')">我的竞拍</a></li>
-                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-myGoods')">我的商品</a></li>
-                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-myOrderInfo')">我的订单</a></li>
-                    <li><a href="#" onclick="changeActiveDaohang(this, 'right-info-mysaler')">申请商家</a></li>
+                    <li><a class="myactive-daohang" href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-div')">基本信息</a></li>
+                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myVIP')" >会员特权</a></li>
+                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-psw')">修改密码</a></li>
+                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-shopcart');myShoppingCart();">购物车</a></li>
+                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myauction')">我的竞拍</a></li>
+                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myGoods')">我的商品</a></li>
+                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myOrderInfo')">我的订单</a></li>
+                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-mysaler')">申请商家</a></li>
                     <li><a href="./index.html"  data-toggle="tooltip" data-placement="bottom"
                            title="真的要离开我这个页面了吗(Q.Q)" >返回首页</a></li>
                 </ul>
@@ -344,7 +344,6 @@
                                 </div><!-- /input-group -->
                             </div>
 
-
                         <!--  列表内容  -->
                         <div class="shopcart-info-listcontent">
                             <div>
@@ -353,45 +352,14 @@
                                     <tr>
                                         <th>序号</th>
                                         <th>商品名称</th>
-                                        <th>当前竞价</th>
+                                        <th>当前竞价(元)</th>
                                         <th>状态</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>
-                                            <a href="#">查看</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除我吗">删除</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sachin</td>
-                                        <td>Mumbai</td>
-                                        <td>560001</td>
-                                        <td>400003</td>
-                                        <td>
-                                            <a href="#">查看</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除我吗">删除</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Uma</td>
-                                        <td>Pune</td>
-                                        <td>560001</td>
-                                        <td>411027</td>
-                                        <td>
-                                            <a href="#">查看</a>
-                                            <a href="#" data-toggle="tooltip" data-placement="right"
-                                               title="真的要删除我吗">删除</a>
-                                        </td>
-                                    </tr>
+                                    <tbody id="myShoopingCart-table">
+
+
                                     </tbody>
                                 </table>
 
@@ -399,14 +367,14 @@
 
                             <!--  显示的页数\几页  -->
                             <div class="info-shopcart-pagesize">
-                                <div>当前第1页, 共1页</div>
+                                <div class="pagesTotalcart">当前第1页, 共1页</div>
                             </div>
 
                             <!--  上一页  下一页 -->
                             <div class="info-shopcart-mypager">
                                 <ul class="pager">
-                                    <li><a href="#">上一页</a></li>
-                                    <li><a href="#">下一页</a></li>
+                                    <li><a href="javascript:;" class="myPagerPre">上一页</a></li>
+                                    <li><a href="javascript:;" class="myPagerNex">下一页</a></li>
                                 </ul>
                             </div>
 

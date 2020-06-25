@@ -19,6 +19,7 @@ function changeActiveDaohang(g, myclass) {
     var div0 = $("." + myclass);
     div0.removeClass("myActiveInRightInfo");
 
+    mycurrentPage = 1;
 }
 
 
@@ -117,7 +118,17 @@ function flushMyInfo() {
         var useremail = $("#myinfo-div-email");
         var userlove = $("#myinfo-div-love");
         var con = AccountInfo.identity;
-        if(con === 0){con = "普通用户";}else if(con === 1){con = "普通会员";}else if(con === 2){con = "卖家";}else if(con === 3){con = "管理员";}else if(con === 4){ con = "卖家会员";}
+        if (con === 0) {
+            con = "普通用户";
+        } else if (con === 1) {
+            con = "普通会员";
+        } else if (con === 2) {
+            con = "卖家";
+        } else if (con === 3) {
+            con = "管理员";
+        } else if (con === 4) {
+            con = "卖家会员";
+        }
         Infojudge(AccountInfo.name, username);
         Infojudge(AccountInfo.account, useraccount);
         Infojudge(con, useridentity);
@@ -150,7 +161,7 @@ window.onload = function () {
 //  修改密码
 
 // $("#myinfo-updatePsw").click( function () {
-function myinfoUpdatePsw(){
+function myinfoUpdatePsw() {
     var p = $("#mypassword0").val();
     var p1 = $("#mypassword1").val();
     var p2 = $("#mypassword2").val();
@@ -210,18 +221,9 @@ function myTips(msg) {
     layer.msg(msg);
 };
 
+var mycurrentPage = 1;
 
-function btnConfirm(){
-    //询问框
-    layer.confirm('你确定要删除这条记录吗？', {
-        btn: ['确认','取消'] //按钮
-    }, function(data){
-        layer.msg('删除成功', {icon: 1});
-    });
-}
-
-
-$(document).ready(function(){
+$(document).ready(function () {
 
     // 头像旋转
     $(".myHeadImgCircle").hover(function () {
@@ -243,6 +245,9 @@ $(document).ready(function(){
     });
 
 
+    $(".myPagerPre").attr("onclick", '').attr("onclick", "myPagerPre('myCartList')");
+    $(".myPagerNex").attr("onclick", '').attr("onclick", "myPagerNex('myCartList')");
+
 });
 
 
@@ -252,7 +257,7 @@ function salerToApply(data) {
     var account;
     try {
         account = $.parseJSON(res0);
-    }catch (e) {
+    } catch (e) {
         account = null;
     }
     data.account = account.account;
@@ -273,7 +278,7 @@ function salerToApply(data) {
                 myTips("提交成功");
             } else if (j.msg === "f") {
                 myTips("提交失败");
-            } else if(j.msg === "exists"){
+            } else if (j.msg === "exists") {
                 myTips("你已经提交过了，请耐心等待管理员审核.");
             }
 
@@ -293,20 +298,189 @@ function myVIPPart() {
     var account;
     try {
         account = $.parseJSON(res0);
-    }catch (e) {
+    } catch (e) {
         account = null;
     }
-    if (account.identity == 1 || account.identity == 4){
+    if (account.identity == 1 || account.identity == 4) {
         $("#myVIPIcon").removeClass("btn-default").addClass("btn-danger");
         $("#myVIPWord").empty().text("续费特权");
     }
 
 }
 
+var res1 = window.sessionStorage.getItem("account");
+var account;
+try {
+    account = $.parseJSON(res1);
+} catch (e) {
+    account = null;
+}
+
+function personalAjax(url, name) {
+
+    $.ajax({
+        type: "get",
+        dataType: "json",
+        url: url,
+        async: false,
+        success: function (data) {
+            console.log(data);
+            if (data.msg === "ok") {
+                var storage = window.sessionStorage;
+                storage.setItem(name, JSON.stringify(data));
+                // setMyPageHelper(data.data.totalSize, data.data.AuctionNums);
+                $(".pagesTotalcart").empty().text("当前第" + mycurrentPage + "页, 共" + data.totalSize + "页");
+
+            }
+
+        },
+        error: function (e) {
+            console.log("获取列表失败" + e);
+        }
+    })
+}
 
 
+function myShoppingCart() {
+    if (account == null) {
+        myTips("请先登录");
+        return;
+    }
+    var url = "http://localhost:8080/getShoppingCartList/" + account.id + "/" + mycurrentPage + "/" + 1;
+    var na = "myCartList";
+    var myCartList = personalAjax(url, na);
+    var res0 = window.sessionStorage.getItem("myCartList");
+    var myCartList;
+    try {
+        myCartList = $.parseJSON(res0).list;
+    } catch (e) {
+        myCartList = null;
+    }
+    if (myCartList != null) {
+        $("#myShoopingCart-table").empty();
+        for (var i in myCartList) {
+            var sta = myCartList[i].status;
+            if (sta === "0") {
+                sta = "已下架";
+            } else if (sta === "1") {
+                sta = "拍卖中";
+            } else if (sta === "2") {
+                sta = "已结束";
+            } else if (sta === "3") {
+                sta = "已成交";
+            } else {
+                sta = "不存在";
+            }
+            var trs = "    <tr>\n" +
+                "                                        <td>" + myCartList[i].id + "</td>\n" +
+                "                                        <td>" + myCartList[i].good_name + "</td>\n" +
+                "                                        <td>" + myCartList[i].now_price + "</td>\n" +
+                "                                        <td>" + sta + "</td>\n" +
+                "                                        <td>\n" +
+                "                                            <a href=\"javascript:;\" onclick=\"goodInfo(" + myCartList[i].id + ")\">查看</a>\n" +
+                "                                            <a href=\"javascript:;\" data-toggle=\"tooltip\" data-placement=\"right\"\n" +
+                "                                               title=\"真的要删除我吗\" onclick=\"btnConfirm(" + myCartList[i].id + ")\">删除</a>\n" +
+                "                                        </td>\n" +
+                "                                    </tr>";
+
+            $("#myShoopingCart-table").append(trs);
+        }
+
+    }
+}
 
 
+// 查看商品信息
+function goodInfo(gid) {
+    var aid = account.id == null ? -1 : account.id;
+    $.ajax({
+        type: "get",
+        dataType: "json",
+        url: "http://localhost:8080/getGoodInfoById/" + gid + "/" + aid,
+        async: false,
+        success: function (data) {
+            console.log(data);
+            var s = window.sessionStorage;
+            s.setItem("GoodInfo", JSON.stringify(data.GoodInfo));
+
+            window.location.href = "./GoodInfo.html";
+        },
+        error: function (e) {
+            console.log("查看商品信息失败...");
+            window.location.href = "./404.html";
+        }
+    });
+}
 
 
+function btnConfirm(id) {
+    //询问框
+    layer.confirm('你确定要删除这条记录吗？', {
+        btn: ['确认', '取消'] //按钮
+    }, function (gid) {
+        layer.msg('删除成功', {icon: 1});
+        // 确认
+        delShoppingCart(id);// 服务器删除
+        myShoppingCart(); // 相应刷新
+    }, function (e) {
+        console.log(e);
+    });
+}
 
+
+// 删除购物车中的
+function delShoppingCart(gid) {
+    var aid = account.id == null ? -1 : account.id;
+    $.ajax({
+        type: "get",
+        dataType: "json",
+        url: "http://localhost:8080/addShopCart/" + aid + "/" + gid,
+        async: false,
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (e) {
+            console.log("查看商品信息失败...");
+            window.location.href = "./404.html";
+        }
+    });
+}
+
+
+function myPagerPre(name) {
+    console.log("进来了吗111");
+    if (mycurrentPage > 1) {
+        mycurrentPage = mycurrentPage - 1;
+        switch (name) {
+            case "myCartList":
+                myShoppingCart();
+                break;
+            default:
+                ;
+        }
+    }
+}
+
+function myPagerNex(name) {
+    console.log("进来了吗222");
+    var storage = window.sessionStorage;
+    var res0 = storage.getItem(name);
+    var data;
+    try {
+        data = $.parseJSON(res0);
+    } catch (e) {
+        data = null;
+    }
+    if (data != null) {
+        if (mycurrentPage < data.totalSize) {
+            mycurrentPage = mycurrentPage + 1;
+            switch (name) {
+                case "myCartList":
+                    myShoppingCart();
+                    break;
+                default:
+                    ;
+            }
+        }
+    }
+}

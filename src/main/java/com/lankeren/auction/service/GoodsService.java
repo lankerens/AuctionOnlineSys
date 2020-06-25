@@ -21,4 +21,12 @@ public interface GoodsService {
 
     public Object auction(AuctionRecord auctionRecord);
 
+    public Object getShoppingCartList(Integer aid, Integer curr, Integer pageSize);
+
+    public Object getAuctionRecord(Integer aid, Integer curr, Integer pageSize);
+
+    public Object getMyAuction(Integer aid, Integer curr, Integer pageSize);
+
+    public Object getOrderList(Integer aid, Integer curr, Integer pageSize);
+
 }
