@@ -91,16 +91,18 @@
             <!--  左侧导航  -->
             <div class="left-daohang">
                 <ul class="clearfix">
-                    <li><a class="myactive-daohang" href="javascript:;" onclick="adminDaohang(this, 'right-info-div')">基本信息</a></li>
-                    <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-myVIP')" >会员特权</a></li>
+                    <li><a class="myactive-daohang" href="javascript:;" onclick="adminDaohang(this, 'right-info-div')">基本信息</a>
+                    </li>
+                    <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-myVIP')">会员特权</a></li>
                     <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-psw')">修改密码</a></li>
                     <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-adminUser'); ">用户管理</a></li>
                     <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-adminGoods')">商品信息管理</a></li>
-                    <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-adminAuctions')">商品竞拍记录管理</a></li>
+                    <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-adminAuctions')">商品竞拍记录管理</a>
+                    </li>
                     <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-adminOrder')">订单管理</a></li>
                     <li><a href="javascript:;" onclick="adminDaohang(this, 'right-info-adminSaler')">商家申请情况</a></li>
-                    <li><a href="./index.html"  data-toggle="tooltip" data-placement="bottom"
-                           title="真的要离开我这个页面了吗(Q.Q)" >返回首页</a></li>
+                    <li><a href="./index.html" data-toggle="tooltip" data-placement="bottom"
+                           title="真的要离开我这个页面了吗(Q.Q)">返回首页</a></li>
                 </ul>
 
             </div>
@@ -115,7 +117,9 @@
                     <div class="right-info-div ">
                         <div class="info-title clearfix">
                             <p>基本信息</p>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalmyinfo1" onclick="myinfoUpdateBtn()" >修改</button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalmyinfo1"
+                                    onclick="myinfoUpdateBtn()">修改
+                            </button>
                         </div>
 
                         <div class="left-bottom-myinfo clearfix">
@@ -205,7 +209,6 @@
                         </div>
 
 
-
                     </div>
 
                     <!--  修改密码  -->
@@ -229,17 +232,19 @@
                                     <div class="form-group">
                                         <label for="mypassword1">新密码</label>
                                         <input type="password" class="form-control" id="mypassword1"
-                                               data-toggle="tooltip" data-placement="right" title="密码至少包含字母&数字两种字符"   >
+                                               data-toggle="tooltip" data-placement="right" title="密码至少包含字母&数字两种字符">
                                     </div>
                                     <div class="form-group">
                                         <label for="mypassword2">再次输入新密码</label>
                                         <input type="password" class="form-control" id="mypassword2"
-                                               data-toggle="tooltip" data-placement="right" title="必须与上面的密码一致" >
+                                               data-toggle="tooltip" data-placement="right" title="必须与上面的密码一致">
                                     </div>
 
                                     <div class="myinfo-psw-btn">
                                         <p>
-                                            <button type="button" class="btn btn-info" onclick="myinfoUpdatePsw()">提交更改</button>
+                                            <button type="button" class="btn btn-info" onclick="myinfoUpdatePsw()">
+                                                提交更改
+                                            </button>
                                         </p>
                                     </div>
 
@@ -252,7 +257,8 @@
                     </div>
 
                     <!-- 模态框（Modal） -->
-                    <div class="modal fade" id="myModalmyinfo1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="myModalmyinfo1" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -321,7 +327,8 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                                     </button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="myinfoUpdateSubmitBtn()" >
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                            onclick="myinfoUpdateSubmitBtn()">
                                         提交更改
                                     </button>
                                 </div>
@@ -358,56 +365,81 @@
                             <table class="layui-hide" id="test" lay-filter="test"></table>
 
                             <script type="text/html" id="barDemo">
+                                {{#  if(d.identity != 3){ }}
                                 {{#  if(d.status === 1){ }}
-                                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="forbidden" >禁用</a>
+                                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="forbidden">禁用</a>
                                 {{#  } else { }}
-                                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="forbidden" >激活</a>
+                                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="forbidden">激活</a>
                                 {{#  } }}
                                 <a class="layui-btn layui-btn-xs" lay-event="pswReset">密码重置</a>
                                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                {{#  } else { }}
+                                <a class="layui-btn layui-btn-xs" lay-event="myad">管理员</a>
+                                {{#  } }}
                             </script>
 
                             <script>
-                                layui.use('table', function(){
+                                layui.use('table', function () {
                                     var table = layui.table;
 
                                     table.render({
                                         elem: '#test'
-                                        ,url:"http://localhost:8080/getUserList"
-                                        ,toolbar: '#toolbarDemo'
-                                        ,title: '用户数据表'
-                                        ,totalRow: true
-                                        ,cols: [[
+                                        , url: "http://localhost:8080/getUserList"
+                                        , toolbar: '#toolbarDemo'
+                                        , title: '用户数据表'
+                                        , totalRow: true
+                                        , cols: [[
                                             {type: 'checkbox', fixed: 'left'}
-                                            ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
-                                            ,{field:'name', title:'用户名', width:120}
-                                            ,{field:'account', title:'账号', width:120, sort: true}
-                                            ,{field:'identity', title:'用户身份', width:100, sort: true, templet:function (d) {return showUserIdentity(d.identity);}}
-                                            ,{field:'email', title:'电子邮箱', width:160}
-                                            ,{field:'phone', title:'手机号', width:120, sort: true}
-                                            ,{field:'reg_time', title:'注册时间', sort: true, templet:function (d) {return showTime(d.reg_time);}}
-                                            ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}
+                                            , {
+                                                field: 'id',
+                                                title: 'ID',
+                                                width: 80,
+                                                fixed: 'left',
+                                                unresize: true,
+                                                sort: true,
+                                                totalRowText: '合计'
+                                            }
+                                            , {field: 'name', title: '用户名', width: 120}
+                                            , {field: 'account', title: '账号', width: 120, sort: true}
+                                            , {
+                                                field: 'identity',
+                                                title: '用户身份',
+                                                width: 100,
+                                                sort: true,
+                                                templet: function (d) {
+                                                    return showUserIdentity(d.identity);
+                                                }
+                                            }
+                                            , {field: 'email', title: '电子邮箱', width: 160}
+                                            , {field: 'phone', title: '手机号', width: 120, sort: true}
+                                            , {
+                                                field: 'reg_time', title: '注册时间', sort: true, templet: function (d) {
+                                                    return showTime(d.reg_time);
+                                                }
+                                            }
+                                            , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200}
                                         ]]
-                                        ,page: true
+                                        , page: true
                                     });
 
 
                                     //工具栏事件
-                                    table.on('toolbar(test)', function(obj){
+                                    table.on('toolbar(test)', function (obj) {
                                         var checkStatus = table.checkStatus(obj.config.id);
-                                        switch(obj.event){
+                                        switch (obj.event) {
                                             case 'getCheckData':
                                                 var data = checkStatus.data;
                                                 layer.alert(JSON.stringify(data));
                                                 break;
                                             case 'getCheckLength':
                                                 var data = checkStatus.data;
-                                                layer.msg('选中了：'+ data.length + ' 个');
+                                                layer.msg('选中了：' + data.length + ' 个');
                                                 break;
                                             case 'isAll':
-                                                layer.msg(checkStatus.isAll ? '全选': '未全选')
+                                                layer.msg(checkStatus.isAll ? '全选' : '未全选')
                                                 break;
-                                        };
+                                        }
+                                        ;
                                     });
                                 });
                             </script>
@@ -440,44 +472,72 @@
 
                         <!--  列表内容    -->
                         <div class="adminGoods-info-listcontent">
-                                    <table class="layui-hide" id="adGoodsInfo" lay-filter="adGoodsInfo"></table>
+                            <table class="layui-hide" id="adGoodsInfo" lay-filter="adGoodsInfo"></table>
 
-                                    <script type="text/html" id="adOptions">
-                                        <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
-                                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-                                    </script>
+                            <script type="text/html" id="adOptions">
+                                <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+                                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                            </script>
 
-                                    <script>
-                                        layui.use('table', function(){
-                                            var table = layui.table;
+                            <script>
+                                layui.use('table', function () {
+                                    var table = layui.table;
 
-                                            table.render({
-                                                elem: '#adGoodsInfo'
-                                                ,url:"http://localhost:8080/getGoodAuctionList"
-                                                ,toolbar: '#toolbarDemo'
-                                                ,title: '商品信息数据表'
-                                                ,totalRow: true
-                                                ,cols: [[
-                                                    {type: 'checkbox', fixed: 'left'}
-                                                    ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
-                                                    ,{field:'good_name', title:'商品名称', width:120}
-                                                    ,{field:'good_type', title:'分类', width:80, sort: true, templet:function (d) {return showGoodType(d.good_type);}}
-                                                    ,{field:'saler_name', title:'卖家', width:100, sort: true}
-                                                    ,{field:'start_price', title:'起拍价', width:80}
-                                                    ,{field:'price_plus', title:'竞拍增量', width:100, sort: true}
-                                                    ,{field:'now_price', title:'当前竞拍价(元)',width:140, sort: true}
-                                                    ,{field:'end_time', title:'截止时间',  sort: true, templet:function (d) {return showTime(d.end_time);}}
-                                                    ,{field:'status', title:'状态', width:80, sort: true, templet:function (d) {return showGoodsStatus(d.status);}}
-                                                    ,{fixed: 'right', title:'操作', toolbar: '#adOptions', width:120}
-                                                ]]
-                                                ,page: true
-                                            });
+                                    table.render({
+                                        elem: '#adGoodsInfo'
+                                        , url: "http://localhost:8080/getGoodAuctionList"
+                                        , toolbar: '#toolbarDemo'
+                                        , title: '商品信息数据表'
+                                        , totalRow: true
+                                        , cols: [[
+                                            {type: 'checkbox', fixed: 'left'}
+                                            , {
+                                                field: 'id',
+                                                title: 'ID',
+                                                width: 80,
+                                                fixed: 'left',
+                                                unresize: true,
+                                                sort: true,
+                                                totalRowText: '合计'
+                                            }
+                                            , {field: 'good_name', title: '商品名称', width: 120}
+                                            , {
+                                                field: 'good_type',
+                                                title: '分类',
+                                                width: 80,
+                                                sort: true,
+                                                templet: function (d) {
+                                                    return showGoodType(d.good_type);
+                                                }
+                                            }
+                                            , {field: 'saler_name', title: '卖家', width: 100, sort: true}
+                                            , {field: 'start_price', title: '起拍价', width: 80}
+                                            , {field: 'price_plus', title: '竞拍增量', width: 100, sort: true}
+                                            , {field: 'now_price', title: '当前竞拍价(元)', width: 140, sort: true}
+                                            , {
+                                                field: 'end_time', title: '截止时间', sort: true, templet: function (d) {
+                                                    return showTime(d.end_time);
+                                                }
+                                            }
+                                            , {
+                                                field: 'status',
+                                                title: '状态',
+                                                width: 80,
+                                                sort: true,
+                                                templet: function (d) {
+                                                    return showGoodsStatus(d.status);
+                                                }
+                                            }
+                                            , {fixed: 'right', title: '操作', toolbar: '#adOptions', width: 120}
+                                        ]]
+                                        , page: true
+                                    });
 
-                                        });
-                                    </script>
+                                });
+                            </script>
 
 
-                    </div>
+                        </div>
 
                     </div>
 
@@ -513,30 +573,58 @@
                             </script>
 
                             <script>
-                                layui.use('table', function(){
+                                layui.use('table', function () {
                                     var table = layui.table;
 
                                     table.render({
                                         elem: '#adAuctionRecord'
-                                        ,url:"http://localhost:8080/getAuctionRecordList"
-                                        ,toolbar: '#toolbarDemo'
-                                        ,title: '商品信息数据表'
-                                        ,totalRow: true
-                                        ,cols: [[
+                                        , url: "http://localhost:8080/getAuctionRecordList"
+                                        , toolbar: '#toolbarDemo'
+                                        , title: '商品信息数据表'
+                                        , totalRow: true
+                                        , cols: [[
                                             {type: 'checkbox', fixed: 'left'}
-                                            ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
-                                            ,{field:'good_name', title:'商品名称', width:120}
-                                            ,{field:'start_price', title:'起始价', width:80, sort: true}
-                                            ,{field:'now_price', title:'当前竞拍价格(元)', width:140, sort: true}
-                                            ,{field:'my_plus', title:'竞拍增量(元)', width:100}
-                                            ,{field:'account_name', title:'拍卖者', width:100, sort: true}
-                                            ,{field:'status', title:'竞拍状态',width:100, sort: true, templet:function (d) {return showAuctionStatus(d.status);}}
-                                            ,{field:'start_time', title:'开始时间',  sort: true, templet:function (d) {return showTime(d.start_time);}}
-                                            ,{field:'end_time', title:'截止时间',  sort: true, templet:function (d) {return showTime(d.end_time);}}
-                                            ,{field:'create_time', title:'竞拍时间',  sort: true, templet:function (d) {return showTime(d.create_time);}}
-                                            ,{fixed: 'right', title:'操作', toolbar: '#adAuctionRed', width:80}
+                                            , {
+                                                field: 'id',
+                                                title: 'ID',
+                                                width: 80,
+                                                fixed: 'left',
+                                                unresize: true,
+                                                sort: true,
+                                                totalRowText: '合计'
+                                            }
+                                            , {field: 'good_name', title: '商品名称', width: 120}
+                                            , {field: 'start_price', title: '起始价', width: 80, sort: true}
+                                            , {field: 'now_price', title: '当前竞拍价格(元)', width: 140, sort: true}
+                                            , {field: 'my_plus', title: '竞拍增量(元)', width: 100}
+                                            , {field: 'account_name', title: '拍卖者', width: 100, sort: true}
+                                            , {
+                                                field: 'status',
+                                                title: '竞拍状态',
+                                                width: 100,
+                                                sort: true,
+                                                templet: function (d) {
+                                                    return showAuctionStatus(d.status);
+                                                }
+                                            }
+                                            , {
+                                                field: 'start_time', title: '开始时间', sort: true, templet: function (d) {
+                                                    return showTime(d.start_time);
+                                                }
+                                            }
+                                            , {
+                                                field: 'end_time', title: '截止时间', sort: true, templet: function (d) {
+                                                    return showTime(d.end_time);
+                                                }
+                                            }
+                                            , {
+                                                field: 'create_time', title: '竞拍时间', sort: true, templet: function (d) {
+                                                    return showTime(d.create_time);
+                                                }
+                                            }
+                                            , {fixed: 'right', title: '操作', toolbar: '#adAuctionRed', width: 80}
                                         ]]
-                                        ,page: true
+                                        , page: true
                                     });
 
                                 });
@@ -580,30 +668,56 @@
                             </script>
 
                             <script>
-                                layui.use('table', function(){
+                                layui.use('table', function () {
                                     var table = layui.table;
 
                                     table.render({
                                         elem: '#order'
-                                        ,url:'http://localhost:8080/getOrderList'
-                                        ,toolbar: '#toolbarOrder' // 工具栏的id
-                                        ,title: '订单数据表'
-                                        ,totalRow: true
-                                        ,cols: [[
+                                        , url: 'http://localhost:8080/getOrderList'
+                                        , toolbar: '#toolbarOrder' // 工具栏的id
+                                        , title: '订单数据表'
+                                        , totalRow: true
+                                        , cols: [[
                                             {type: 'checkbox', fixed: 'left'}
-                                            ,{field:'order_id', title:'订单编号', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
-                                            ,{field:'account', title:'下单账号', width:100}
-                                            ,{field:'good_name', title:'拍品名称', width:100, sort: true}
-                                            ,{field:'start_price', title:'起始价格', width:80, sort: true, totalRow: true}
-                                            ,{field:'end_price', title:'到手价格', width:80, sort: true, totalRow: true}
-                                            ,{field:'account_name', title:'卖家名称', width:80}
-                                            ,{field:'salerAddress', title:'发货地址'}
-                                            ,{field:'address', title:'收货地址'}
-                                            ,{field:'create_time', title:'创建时间', sort: true, templet:function (d) {return showTime(d.create_time);}}
-                                            ,{field:'status', title:'订单状态', sort: true, width:80, templet:function (d) {return showOrderStatus(d.status);}}
-                                            ,{fixed: 'right', title:'操作', toolbar: '#barOrder', width:120}
+                                            , {
+                                                field: 'order_id',
+                                                title: '订单编号',
+                                                width: 80,
+                                                fixed: 'left',
+                                                unresize: true,
+                                                sort: true,
+                                                totalRowText: '合计'
+                                            }
+                                            , {field: 'account', title: '下单账号', width: 100}
+                                            , {field: 'good_name', title: '拍品名称', width: 100, sort: true}
+                                            , {
+                                                field: 'start_price',
+                                                title: '起始价格',
+                                                width: 80,
+                                                sort: true,
+                                                totalRow: true
+                                            }
+                                            , {field: 'end_price', title: '到手价格', width: 80, sort: true, totalRow: true}
+                                            , {field: 'account_name', title: '卖家名称', width: 80}
+                                            , {field: 'salerAddress', title: '发货地址'}
+                                            , {field: 'address', title: '收货地址'}
+                                            , {
+                                                field: 'create_time', title: '创建时间', sort: true, templet: function (d) {
+                                                    return showTime(d.create_time);
+                                                }
+                                            }
+                                            , {
+                                                field: 'status',
+                                                title: '订单状态',
+                                                sort: true,
+                                                width: 80,
+                                                templet: function (d) {
+                                                    return showOrderStatus(d.status);
+                                                }
+                                            }
+                                            , {fixed: 'right', title: '操作', toolbar: '#barOrder', width: 120}
                                         ]]
-                                        ,page: true
+                                        , page: true
                                     });
                                 });
 
@@ -642,44 +756,55 @@
 
                             <script type="text/html" id="adAPPLY">
                                 {{# if(d.status == 0){}}
-                                    <a class="layui-btn layui-btn-xs" lay-event="agree">同意</a>
-                                    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="refuse">拒绝</a>
-                                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                <a class="layui-btn layui-btn-xs" id="adagree{{d.id}}" lay-event="agree">同意</a>
+                                <a class="layui-btn layui-btn-warm layui-btn-xs" id="adrefuse{{d.id}}" lay-event="refuse">拒绝</a>
+                                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                                 {{# } else { }}
-                                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                                 {{#  } }}
                             </script>
 
                             <script>
-                                layui.use('table', function(){
+                                layui.use('table', function () {
                                     var table = layui.table;
 
                                     table.render({
                                         elem: '#adsalerApply'
-                                        ,url:"http://localhost:8080/getSalerApply"
-                                        ,toolbar: '#toolbarDemo'
-                                        ,title: '商家申请数据表'
-                                        ,totalRow: true
-                                        ,cols: [[
+                                        , url: "http://localhost:8080/getSalerApply"
+                                        , toolbar: '#toolbarDemo'
+                                        , title: '商家申请数据表'
+                                        , totalRow: true
+                                        , cols: [[
                                             {type: 'checkbox', fixed: 'left'}
-                                            ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
-                                            ,{field:'busine_name', title:'商家名称', width:120}
-                                            ,{field:'saler_name', title:'经营者', width:80, sort: true}
-                                            ,{field:'busine_contact', title:'联系方式', width:140, sort: true}
-                                            ,{field:'saler_email', title:'电子邮箱', width:100}
-                                            ,{field:'apply_reason', title:'申请理由', width:100, sort: true}
-                                            ,{field:'account', title:'申请账号',width:100, sort: true}
-                                            ,{field:'status', title:'状态',  sort: true, templet:function (d) {return showSalerApply(d.status);}}
-                                            ,{fixed: 'right', title:'操作', toolbar: '#adAPPLY', width:200}
+                                            , {
+                                                field: 'id',
+                                                title: 'ID',
+                                                width: 80,
+                                                fixed: 'left',
+                                                unresize: true,
+                                                sort: true,
+                                                totalRowText: '合计'
+                                            }
+                                            , {field: 'busine_name', title: '商家名称', width: 120}
+                                            , {field: 'saler_name', title: '经营者', width: 80, sort: true}
+                                            , {field: 'busine_contact', title: '联系方式', width: 140, sort: true}
+                                            , {field: 'saler_email', title: '电子邮箱', width: 100}
+                                            , {field: 'apply_reason', title: '申请理由', width: 100, sort: true}
+                                            , {field: 'account', title: '申请账号', width: 100, sort: true}
+                                            , {
+                                                field: 'status', title: '状态', sort: true, templet: function (d) {
+                                                    return showSalerApply(d.status);
+                                                }
+                                            }
+                                            , {fixed: 'right', title: '操作', toolbar: '#adAPPLY', width: 200}
                                         ]]
-                                        ,page: true
+                                        , page: true
                                     });
 
                                 });
                             </script>
 
                         </div>
-
 
 
                     </div>
@@ -749,7 +874,7 @@
                                 </div>
 
                                 <!--  下半部  -->
-                                <div >
+                                <div>
 
                                 </div>
 
@@ -774,11 +899,10 @@
 
 
 <script>
-    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+    $(function () {
+        $("[data-toggle='tooltip']").tooltip();
+    });
 </script>
-
-
-
 
 
 </body>

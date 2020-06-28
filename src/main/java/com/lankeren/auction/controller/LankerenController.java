@@ -46,6 +46,30 @@ public class LankerenController {
         return res;
     }
 
+    @RequestMapping(value = "/forbiddenAccount/{aid}/{status}", method = RequestMethod.GET)
+    public Object forbiddenAccount(@PathVariable Integer aid, @PathVariable Integer status){
+        Object res =  lankerenService.forbiddenAccount(aid, status);
+        return res;
+    }
+
+    @RequestMapping(value = "/pswReset/{aid}", method = RequestMethod.GET)
+    public Object pswReset(@PathVariable Integer aid){
+        Object res =  lankerenService.pswReset(aid);
+        return res;
+    }
+
+
+    @RequestMapping(value = "/delAccount/{aid}", method = RequestMethod.GET)
+    public Object delAccount(@PathVariable Integer aid){
+        Object res =  lankerenService.delAccount(aid);
+        return res;
+    }
+
+    @RequestMapping(value = "/adsalerApply/{sid}/{status}", method = RequestMethod.GET)
+    public Object adsalerApply(@PathVariable Integer sid, @PathVariable Integer status){
+        Object res =  lankerenService.salerApply(sid, status);
+        return res;
+    }
 
 
 }

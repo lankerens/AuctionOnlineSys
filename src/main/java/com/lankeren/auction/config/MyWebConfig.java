@@ -24,4 +24,5 @@ public class MyWebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/picFiles/**").addResourceLocations("file:E:/JavaWorkPlace/School/auctiononlinesys/src/main/resources/static/imgs/goods/");
     }
+
 }

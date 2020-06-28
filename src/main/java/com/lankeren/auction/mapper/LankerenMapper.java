@@ -1,7 +1,9 @@
 package com.lankeren.auction.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 import java.util.Map;
@@ -20,13 +22,25 @@ public interface LankerenMapper {
     List<Map<String, Object>> getAuctionRecordList();
 
 //    @Select("SELECT order_id, account, good_name, start_price, end_price, account_name, address, create_time, `status` from `order`")
-    @Select("SELECT order_id, o.account, good_name, start_price, end_price, account_name, address, create_time, `status`, saler_id, (SELECT busine_address from saler_info WHERE id = saler_id) salerAddress from `order` o")
+    @Select("SELECT order_id, o.account, good_name, start_price, end_price, account_name, address, create_time, `status`, saler_id, goods_id, (SELECT busine_address from saler_info WHERE id = saler_id) salerAddress from `order` o")
     List<Map<String, Object>> getOrderList();
 
     @Select("SELECT id, busine_name, saler_name, busine_contact, saler_email, apply_reason, account, `status` from saler_info ")
     List<Map<String, Object>> getSalerApply();
 
+    @Update("UPDATE `auctiononlinesys`.`account` SET `status` = #{status} WHERE `id` = #{aid} ")
+    Integer forbiddenAccount(Integer aid, Integer status);
 
+    @Update("UPDATE `auctiononlinesys`.`account` SET `password` = #{DefualtPsw} WHERE `id` = #{aid}")
+    Integer pswReset(String DefualtPsw, Integer aid);
+
+
+    @Delete("DELETE FROM `auctiononlinesys`.`account` WHERE `id` = #{aid}")
+    Integer delAccount(Integer aid);
+
+
+    @Update("UPDATE `auctiononlinesys`.`saler_info` SET `status` = #{status} WHERE `id` = #{sid}")
+    Integer updateSalerInfo(Integer status, Integer sid);
 
 
 }

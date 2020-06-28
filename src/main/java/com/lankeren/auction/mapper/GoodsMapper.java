@@ -104,4 +104,14 @@ public interface GoodsMapper {
     @Delete("DELETE from goods_auction WHERE account_id = #{aid} and id = #{gid}")
     Integer delMyGoods(Integer aid, Integer gid);
 
+
+    @Select("SELECT id from goods_auction where end_time < #{nowTime} and `status` = 1")
+    List<Integer> getOldId(String nowTime);
+
+    @Update("UPDATE `goods_auction` SET `status` = '0' WHERE `id` in ( ${ids} )")
+    Integer updateOldGoods(String ids);
+
+    @Select("SELECT `status` from goods_auction where id = #{gid}")
+    Integer getGoodsStatus(Integer gid);
+
 }

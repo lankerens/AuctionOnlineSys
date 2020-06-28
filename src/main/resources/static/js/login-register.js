@@ -4,7 +4,7 @@ function myInfoPage() {
     var b = storge.getItem("AccountInfo");
     console.log(b);
     console.log(typeof b);
-    if (b != null) {
+    if (b != null && b !== "null") {
         console.log("不为空呀");
         // 利用之前存的....
         goOtherPage($.parseJSON(b));
@@ -78,6 +78,7 @@ function shoppingCart() {
 
 
 $(document).ready(function () {
+
     $.ajax({
         type: "get",
         dataType: "json",

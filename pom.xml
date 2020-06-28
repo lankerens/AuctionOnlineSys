@@ -33,11 +33,11 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring-boot-starter -->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.shiro</groupId>-->
-            <!--<artifactId>shiro-spring-boot-starter</artifactId>-->
-            <!--<version>1.5.3</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring-boot-starter</artifactId>
+            <version>1.5.3</version>
+        </dependency>
 
         <dependency><!--热部署依赖-->
             <groupId>org.springframework.boot</groupId>

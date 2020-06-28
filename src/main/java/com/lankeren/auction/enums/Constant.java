@@ -14,4 +14,6 @@ public class Constant {
     public static final Integer AdminUser = 3;
     public static final Integer SalerVIPuser = 4;
 
+    public static final String DefualtPsw = "123";
+
 }

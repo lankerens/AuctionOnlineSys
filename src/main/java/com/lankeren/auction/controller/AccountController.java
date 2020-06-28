@@ -4,12 +4,16 @@ import com.alibaba.fastjson.JSONObject;
 import com.lankeren.auction.bean.Account;
 import com.lankeren.auction.bean.AccountInfo;
 import com.lankeren.auction.service.AccountService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -26,7 +30,23 @@ public class AccountController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Object login(@RequestBody Account account){
-        Object res = accountService.login(account);
+
+        JSONObject res = new JSONObject();
+
+        // 登录认证
+        UsernamePasswordToken token = new UsernamePasswordToken(account.getAccount(), account.getPassword());
+        // 获取 subject 对象
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(token);
+            res.put("msg", "ok");
+            Account realAccount = (Account)subject.getPrincipal();
+            realAccount.setPassword("null");
+            res.put("account", realAccount);
+        }catch (Exception e){
+            res.put("msg", "f");
+            res.put("error", e.getMessage());
+        }
         return res;
     }
 
@@ -57,6 +77,15 @@ public class AccountController {
         return res;
     }
 
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public Object updateAccountPsw(){
+        JSONObject res= new JSONObject();
+        res.put("msg", "ok");
+        Subject lvSubject=SecurityUtils.getSubject();
+        lvSubject.logout();
+        return res;
+    }
 
 
 }

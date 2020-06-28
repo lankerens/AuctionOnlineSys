@@ -8,6 +8,7 @@ import com.lankeren.auction.enums.Constant;
 import com.lankeren.auction.mapper.AccountMapper;
 import com.lankeren.auction.mapper.GoodsMapper;
 import com.lankeren.auction.service.GoodsService;
+import com.lankeren.auction.utils.DealOld;
 import com.lankeren.auction.utils.MFileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,8 @@ public class GoodsServiceImpl implements GoodsService {
     public Object saveGoodInfo(GoodAuction goodAuction) {
         JSONObject res = new JSONObject();
         res.put("msg", "f");
+        boolean b= goodAuction.getGoodType() == null || goodAuction.getStartPrice() == null || goodAuction.getPricePlus() == null;
+        if(b){ return  res;}
         Integer id = goodAuction.getAccountId();
         if(goodsMapper.getIdentity(id) < Constant.SalerUser){
             return res;
@@ -110,6 +113,7 @@ public class GoodsServiceImpl implements GoodsService {
             res1.put("AuctionNums", goodsMapper.getAucNums(nowTime));
             res1.put("AuctionList", list);
             res0.put("data", res1);
+            new Thread(new DealOld(goodsMapper)).start();
         }catch (Exception e){
             res0.put("msg", "f");
             System.out.println(e);
@@ -161,7 +165,10 @@ public class GoodsServiceImpl implements GoodsService {
     public Object auction(AuctionRecord auctionRecord) {
         JSONObject res = new JSONObject();
         res.put("msg", "f");
-        if(auctionRecord == null || auctionRecord.getMyPlus() == null || auctionRecord.getMyPlus() < goodsMapper.getMixPricePlus(auctionRecord.getGid()))
+        boolean b = auctionRecord == null || auctionRecord.getMyPlus() == null ||
+                auctionRecord.getMyPlus() < goodsMapper.getMixPricePlus(auctionRecord.getGid()) ||
+                goodsMapper.getGoodsStatus(auctionRecord.getGid()) != 1;
+        if(b)
         { return res; }
         auctionRecord.setNowPrice(auctionRecord.getStartPrice() + auctionRecord.getMyPlus());
         auctionRecord.setCreateTime(LocalDateTime.now());

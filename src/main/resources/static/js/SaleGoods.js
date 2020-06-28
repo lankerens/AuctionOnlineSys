@@ -50,6 +50,19 @@ layui.use(['form', 'layedit', 'laydate'], function () {
 // 提交
 $(document).ready(function () {
 
+    // ----------------隐藏bug
+
+    var res0 = window.sessionStorage.getItem("account");
+    try {
+        var account = $.parseJSON(res0)
+        if(account == null){
+            window.location.href = "./login.html";
+        }
+    }catch (e) {
+        window.location.href = "./login.html";
+    }
+
+    //  --------------------
 
     layui.$("#salerGoodInfoSubmit").on("click", function () {
         var data = layui.form.val('example');

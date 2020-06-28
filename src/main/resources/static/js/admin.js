@@ -43,7 +43,7 @@ $(document).ready(function(){
 });
 
 
-function adminAjax(url, name) {
+function adminAjax(url) {
 
     $.ajax({
         type: "get",
@@ -51,16 +51,15 @@ function adminAjax(url, name) {
         url: url,
         async: false,
         success: function (data) {
-            console.log(data);
+            // console.log(data);
             if (data.msg === "ok") {
-                var storage = window.sessionStorage;
-                storage.setItem(name, JSON.stringify(data.data));
-
+                myTips("操作成功!");
+            }else {
+                myTips("操作失败");
             }
-
         },
         error: function (e) {
-            console.log("获取列表失败" + e);
+            console.log("出现了不可预料的错误" + e);
         }
     })
 }
@@ -123,7 +122,13 @@ function showSalerApply(i) {
 }
 
 
-
+var res0 = window.sessionStorage.getItem("account");
+var account ;
+try {
+    account = $.parseJSON(res0);
+}catch (e) {
+    account = null;
+}
 
 layui.use('table', function() {
     var table = layui.table;
@@ -137,15 +142,56 @@ layui.use('table', function() {
         if (layEvent === 'forbidden') { //禁用
             //
             console.log(tr[1].textContent);
+            var aid = tr[1].textContent;
+            // console.log(data);
+            // console.log(tr);
+            console.log(tr[0].childNodes[8].childNodes[0].childNodes[1]);
+            if(account!=null && account.identity === 3) {
+                var url = "http://localhost:8080/forbiddenAccount/" + parseInt(aid) + "/" + obj.data.status;
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: url,
+                    async: false,
+                    success: function (data) {
+                        // console.log(data);
+                        if (data.msg === "ok") {
+                            obj.update({
+                                status: data.Leaststatus
+                            });
+                            var mya = tr[0].childNodes[8].childNodes[0].childNodes[1];
+                            console.log(data.Leaststatus == 1);
+                            console.log(data.Leaststatus == 0);
+                            if(data.Leaststatus == 1){
+                                mya.innerText = "禁用";
+                                mya.className = "layui-btn layui-btn-danger layui-btn-xs";
+                            }else if(data.Leaststatus == 0){
+                                mya.innerText = "激活";
+                                mya.className = "layui-btn layui-btn-primary layui-btn-xs";
+                            }
+                            myTips("操作成功!");
+                        }else {
+                            myTips("操作失败");
+                        }
+                    },
+                    error: function (e) {
+                        console.log("出现了不可预料的错误" + e);
+                    }
+                });
+            }
         } else if (layEvent === 'del') { //删除
             layer.confirm('真的删除该用户吗？。？', function (index) {
                 obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                 layer.close(index);
                 //向服务端发送删除指令
-
+                var aid = tr[1].textContent;
+                var url = "http://localhost:8080/delAccount/" + parseInt(aid);
+                adminAjax(url);
             });
         } else if (layEvent === "pswReset") {
-            console.log("reset");
+            var aid = tr[1].textContent;
+            var url = "http://localhost:8080/pswReset/" + parseInt(aid);
+            adminAjax(url);
         }
     });
 
@@ -155,9 +201,31 @@ layui.use('table', function() {
         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
         var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
 
+        var gid = parseInt(tr[1].textContent);
+
         if (layEvent === 'detail') { //查看商品信息
             //
             console.log(tr[1].textContent);
+            // 查看用户是否加入购物车了
+            var aid = account.id == null ? -1 : account.id;
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "http://localhost:8080/getGoodInfoById/" + gid + "/" + aid,
+                async: false,
+                success: function (data) {
+                    console.log(data);
+                    var s = window.sessionStorage;
+                    s.setItem("GoodInfo", JSON.stringify(data.GoodInfo));
+
+                    window.location.href = "./GoodInfo.html";
+                },
+                error: function (e) {
+                    console.log("查看商品信息失败...");
+                    window.location.href = "./404.html";
+                }
+            });
+
         } else if (layEvent === 'del') { //删除
             layer.confirm('真的删除该商品吗？。？', function (index) {
                 obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
@@ -190,9 +258,25 @@ layui.use('table', function() {
         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
         var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
 
+        console.log(data);
+
         if (layEvent === 'detail') { //查看
             //
             console.log(tr[1].textContent);
+
+
+            var myhtml= "<a href='javascript:;' onclick=\"getGoodsInfoByOrder("+ data.goods_id +")\">查看订单商品</a>";
+
+            // 居中弹出窗
+            layui.use('layer', function () {
+                var $ = layui.jquery, layer = layui.layer;
+
+                layer.open({
+                    title: '订单信息'
+                    , content: myhtml
+                });
+            });
+
         } else if (layEvent === 'del') { //删除
             layer.confirm('真的删除该订单吗？。？', function (index) {
                 obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
@@ -209,9 +293,39 @@ layui.use('table', function() {
         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
         var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
 
+        var sid = parseInt(tr[1].textContent);
+        var agree = 1;
+        var refuse = 2;
         if (layEvent === 'agree') { // 同意
             //
             console.log(tr[1].textContent);
+            // adsalerApply
+            var url = "http://localhost:8080/adsalerApply/" + sid + "/" + agree;
+
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: url,
+                async: false,
+                success: function (data) {
+                    // console.log(data);
+                    if (data.msg === "ok") {
+                        obj.update({
+                            status: agree
+                        });
+                        console.log(showSalerApply(agree));
+                        $("#adagree" + sid).remove();
+                        $("#adrefuse" + sid).remove();
+                        myTips("操作成功!");
+                    }else {
+                        myTips("操作失败");
+                    }
+                },
+                error: function (e) {
+                    console.log("出现了不可预料的错误" + e);
+                }
+            });
+
         } else if (layEvent === 'del') { //删除
             layer.confirm('真的删除该用户的申请记录吗？。？', function (index) {
                 obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
@@ -221,8 +335,53 @@ layui.use('table', function() {
             });
         } else if (layEvent === "refuse") {
             console.log("refuse");
+            var url = "http://localhost:8080/adsalerApply/" + sid + "/" + refuse;
+
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: url,
+                async: false,
+                success: function (data) {
+                    // console.log(data);
+                    if (data.msg === "ok") {
+                        obj.update({
+                            status: refuse
+                        });
+                        $("#adagree" + sid).remove();
+                        $("#adrefuse" + sid).remove();
+                        myTips("操作成功!");
+                    }else {
+                        myTips("操作失败");
+                    }
+                },
+                error: function (e) {
+                    console.log("出现了不可预料的错误" + e);
+                }
+            });
         }
     });
 
 });
 
+function getGoodsInfoByOrder(gid) {
+    // 查看用户是否加入购物车了
+    var aid = account.id == null ? -1 : account.id;
+    $.ajax({
+        type: "get",
+        dataType: "json",
+        url: "http://localhost:8080/getGoodInfoById/" + gid + "/" + aid,
+        async: false,
+        success: function (data) {
+            console.log(data);
+            var s = window.sessionStorage;
+            s.setItem("GoodInfo", JSON.stringify(data.GoodInfo));
+
+            window.location.href = "./GoodInfo.html";
+        },
+        error: function (e) {
+            console.log("查看商品信息失败...");
+            window.location.href = "./404.html";
+        }
+    });
+}

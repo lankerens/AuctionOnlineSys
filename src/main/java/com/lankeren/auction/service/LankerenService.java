@@ -13,5 +13,13 @@ public interface LankerenService {
 
     public Object getSalerApply( Integer curr, Integer pageSize);
 
+    public Object forbiddenAccount( Integer aid, Integer status);
+
+    public Object pswReset( Integer aid );
+
+    public Object delAccount( Integer aid );
+
+    public Object salerApply( Integer sid, Integer status );
+
 
 }
