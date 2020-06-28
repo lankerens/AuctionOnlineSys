@@ -121,5 +121,12 @@ public class GoodsController {
         return res;
     }
 
+    @RequestMapping(value = "/searchAuctionList", method = RequestMethod.POST)
+    public  Object searchAuctionList(String condition, Integer curr, Integer pageSize){
+        Object res =  goodsService.searchAuctionList(condition, curr, pageSize);
+        return res;
+    }
+
+
 
 }

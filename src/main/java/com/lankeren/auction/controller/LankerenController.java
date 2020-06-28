@@ -71,5 +71,17 @@ public class LankerenController {
         return res;
     }
 
+    @RequestMapping(value = "/identityManagerInfoList", method = RequestMethod.GET)
+    public Object identityManagerInfoList(){
+        Object res =  lankerenService.identityManagerInfoList();
+        return res;
+    }
+
+    @RequestMapping(value = "/updateIndentityInfo/{aid}/{identity}", method = RequestMethod.GET)
+    public Object updateIndentityInfo(@PathVariable Integer aid, @PathVariable Integer identity){
+        Object res =  lankerenService.updateIndentityInfo(aid, identity);
+        return res;
+    }
+
 
 }

@@ -52,22 +52,20 @@
                 所有分类 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="#">手机</a></li>
-                <li><a href="#">钻戒</a></li>
-                <li><a href="#">手表</a></li>
-                <li class="divider"></li>
-                <li><a href="#">图画</a></li>
-                <li><a href="#">瓷器</a></li>
+                <li><a href="#">陶瓷</a></li>
+                <li><a href="#">古剑</a></li>
                 <li><a href="#">旗袍</a></li>
+                <li class="divider"></li>
+                <li><a href="#">名画</a></li>
             </ul>
         </div>
     </div>
     <div class="mysearch clearfix">
         <form class="navbar-form" role="search">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" autocomplete="off" value="" class="form-control mySearchContents" placeholder="Search">
             </div>
-            <button type="submit" class="btn btn-default">搜索</button>
+            <button type="button" class="btn btn-default" onclick="searchGoods()">搜索</button>
         </form>
     </div>
     <div class="myauction">

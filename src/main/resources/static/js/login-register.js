@@ -231,3 +231,39 @@ function pageJump(curr) {
 }
 
 
+function searchGoods() {
+
+    var condition = $(".mySearchContents").val();
+    var myData = {
+        condition: condition,
+        curr: 1 ,
+        pageSize: 1
+    };
+// 查看
+    $.ajax({
+        type: "post",
+        dataType: "json",
+        url: "http://localhost:8080/searchAuctionList",
+        // contentType:"application/json",
+        // data: JSON.stringify(myData),
+        data: myData,
+        async: false,
+        success: function (data) {
+            console.log(data);
+            if(data.msg === "ok"){
+                var storage = window.sessionStorage;
+                storage.setItem("AuctionListData", JSON.stringify(data.data.AuctionList));
+                setMyPageHelper(data.data.totalSize, data.data.AuctionNums);
+                setAuctionListContent(data.data);
+            }
+
+        },
+        error: function (e) {
+            console.log("搜索失败...");
+            window.location.href = "./404.html";
+        }
+
+    });
+
+
+}

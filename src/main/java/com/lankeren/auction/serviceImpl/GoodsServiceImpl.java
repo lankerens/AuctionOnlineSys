@@ -231,5 +231,27 @@ public class GoodsServiceImpl implements GoodsService {
         return res;
     }
 
+    @Override
+    public Object searchAuctionList(String condition, Integer curr, Integer pageSize) {
+        JSONObject res0 = new JSONObject();
+        JSONObject res1 = new JSONObject();
+        try {
+            PageHelper.startPage(curr, pageSize);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String nowTime = formatter.format(LocalDateTime.now());
+            List<GoodCard> list = goodsMapper.searchAuctionList(nowTime, "%"+condition+"%");
+            PageInfo<GoodCard> pageInfo = new PageInfo<>(list);
+            res0.put("msg", "ok");
+            res1.put("totalSize", pageInfo.getPages());
+            res1.put("AuctionNums", goodsMapper.getAucNums(nowTime));
+            res1.put("AuctionList", list);
+            res0.put("data", res1);
+        }catch (Exception e){
+            res0.put("msg", "f");
+            System.out.println(e);
+        }
+        return res0;
+    }
+
 
 }

@@ -31,4 +31,6 @@ public interface GoodsService {
 
     public Object delMyGoods(Integer aid, Integer gid);
 
+    public Object searchAuctionList(String condition, Integer curr, Integer pageSize);
+
 }

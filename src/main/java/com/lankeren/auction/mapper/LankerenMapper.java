@@ -43,4 +43,12 @@ public interface LankerenMapper {
     Integer updateSalerInfo(Integer status, Integer sid);
 
 
+    @Select("SELECT `dec`, id from identity where identity_name != 'admin'")
+    List<Map<String, Object>> identityManagerInfoList();
+
+
+    @Update("UPDATE `auctiononlinesys`.`account` SET `identity` = #{identity} WHERE `id` = #{aid}")
+    Integer updateIndentityInfo(Integer identity, Integer aid);
+
+
 }

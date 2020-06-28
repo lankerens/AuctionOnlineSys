@@ -114,4 +114,11 @@ public interface GoodsMapper {
     @Select("SELECT `status` from goods_auction where id = #{gid}")
     Integer getGoodsStatus(Integer gid);
 
+    @Select("SELECT g.id, g.good_name, g.pic, g.saler_name, g.now_price,(SELECT count(*) ttt from auction_record WHERE gid = g.id) aucNum from goods_auction g " +
+            "WHERE end_time > #{nowTime}  and `status` = 1 and good_name like #{condition}" +
+            "ORDER BY end_time ASC")
+    List<GoodCard> searchAuctionList(String nowTime, String condition);
+
+
+
 }

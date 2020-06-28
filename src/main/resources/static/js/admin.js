@@ -130,19 +130,21 @@ try {
     account = null;
 }
 
-layui.use('table', function() {
-    var table = layui.table;
+layui.use(['layer','table','form'], function() {
+    var table = layui.table
+        ,form = layui.form, $ = layui.jquery, layer = layui.layer;
 
     // 用户管理
     table.on('tool(test)', function (obj) {
         var data = obj.data; //获得当前行数据
         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
         var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+        var aid = tr[1].textContent;
 
         if (layEvent === 'forbidden') { //禁用
             //
             console.log(tr[1].textContent);
-            var aid = tr[1].textContent;
+
             // console.log(data);
             // console.log(tr);
             console.log(tr[0].childNodes[8].childNodes[0].childNodes[1]);
@@ -184,14 +186,57 @@ layui.use('table', function() {
                 obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                 layer.close(index);
                 //向服务端发送删除指令
-                var aid = tr[1].textContent;
+                // var aid = tr[1].textContent;
                 var url = "http://localhost:8080/delAccount/" + parseInt(aid);
                 adminAjax(url);
             });
         } else if (layEvent === "pswReset") {
-            var aid = tr[1].textContent;
+            // var aid = tr[1].textContent;
             var url = "http://localhost:8080/pswReset/" + parseInt(aid);
             adminAjax(url);
+        } else if(layEvent === "identityManager"){
+            // 身份管理
+
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "http://localhost:8080/identityManagerInfoList",
+                async: false,
+                success: function (res) {
+                    // console.log(data);
+                    if (res.msg === "ok" && account!= null && account !== "null"){
+                        var divs = "" ;
+                        var list = res.identityNameList;
+                        for (var i in list){
+                            var c = "checked = \"\"";
+                            var b = data.identity == list[i].id;
+                            divs += "<label><input type=\"radio\" name=\"myIndentityCheck\" value=\""+ list[i].id +"\""+(b===true?c:"")+">"+ list[i].dec +"</label>";
+                        }
+
+                        //询问框
+                        layer.confirm(divs, {
+                            btn: ['修改','取消'] //按钮
+                        }, function(data){
+                            layer.msg('修改成功', {icon: 1});
+                            console.log(data); // 1
+                            var identityId = $("input[name='myIndentityCheck']:checked").val();
+                            console.log(identityId);
+                            updateIndentityInfo(aid, identityId);
+                            obj.update({
+                                identity: identityId
+                            });
+
+                        }, function (e) {
+                            console.log(e); // 1
+                        });
+
+                    }
+                },
+                error: function (e) {
+                    console.log("出现了不可预料的错误" + e);
+                }
+            });
+
         }
     });
 
@@ -382,6 +427,24 @@ function getGoodsInfoByOrder(gid) {
         error: function (e) {
             console.log("查看商品信息失败...");
             window.location.href = "./404.html";
+        }
+    });
+}
+
+
+function updateIndentityInfo(aid, identity) {
+    $.ajax({
+        type: "get",
+        dataType: "json",
+        url: "http://localhost:8080/updateIndentityInfo/" + aid + "/" + identity,
+        success: function (res) {
+            // console.log(data);
+            if (res.msg === "ok" ){
+                // console.log(res);
+            }
+        },
+        error: function (e) {
+            console.log("出现了不可预料的错误" + e);
         }
     });
 }

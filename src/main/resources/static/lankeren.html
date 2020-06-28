@@ -372,6 +372,7 @@
                                 <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="forbidden">激活</a>
                                 {{#  } }}
                                 <a class="layui-btn layui-btn-xs" lay-event="pswReset">密码重置</a>
+                                <a class="layui-btn layui-btn-xs" lay-event="identityManager">身份管理</a>
                                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                                 {{#  } else { }}
                                 <a class="layui-btn layui-btn-xs" lay-event="myad">管理员</a>
@@ -393,7 +394,7 @@
                                             , {
                                                 field: 'id',
                                                 title: 'ID',
-                                                width: 80,
+                                                width: 50,
                                                 fixed: 'left',
                                                 unresize: true,
                                                 sort: true,
@@ -404,20 +405,20 @@
                                             , {
                                                 field: 'identity',
                                                 title: '用户身份',
-                                                width: 100,
+                                                width: 90,
                                                 sort: true,
                                                 templet: function (d) {
                                                     return showUserIdentity(d.identity);
                                                 }
                                             }
-                                            , {field: 'email', title: '电子邮箱', width: 160}
+                                            , {field: 'email', title: '电子邮箱', width: 140}
                                             , {field: 'phone', title: '手机号', width: 120, sort: true}
                                             , {
                                                 field: 'reg_time', title: '注册时间', sort: true, templet: function (d) {
                                                     return showTime(d.reg_time);
                                                 }
                                             }
-                                            , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200}
+                                            , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 260}
                                         ]]
                                         , page: true
                                     });
@@ -884,6 +885,7 @@
 
                     </div>
 
+
                 </div>
 
 
@@ -902,6 +904,7 @@
     $(function () {
         $("[data-toggle='tooltip']").tooltip();
     });
+
 </script>
 
 

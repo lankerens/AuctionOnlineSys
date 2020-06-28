@@ -100,6 +100,33 @@ public class LankerenServiceImpl implements LankerenService {
         return res;
     }
 
+    @Override
+    public Object identityManagerInfoList() {
+        JSONObject res = new JSONObject();
+        List<Map<String, Object>> list = lankerenMapper.identityManagerInfoList();
+        res.put("msg", "ok");
+        res.put("identityNameList", list);
+        return res;
+    }
+
+    @Override
+    public Object updateIndentityInfo(Integer aid, Integer identity) {
+        JSONObject res = new JSONObject();
+        res.put("msg", "f");
+        if(aid == null || identity == null){  return  res; }
+        try {
+            /**
+             *  修改成卖家的时候还有给卖家的那里添加一下东西
+             */
+            lankerenMapper.updateIndentityInfo(identity, aid);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return res;
+        }
+        res.put("msg", "ok");
+        return res;
+    }
+
 
     private Object theSame(List<Map<String, Object>> list, String name){
         JSONObject res1 = new JSONObject();

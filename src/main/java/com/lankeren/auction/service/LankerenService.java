@@ -21,5 +21,9 @@ public interface LankerenService {
 
     public Object salerApply( Integer sid, Integer status );
 
+    public Object identityManagerInfoList();
+
+    public Object updateIndentityInfo( Integer aid, Integer identity);
+
 
 }
