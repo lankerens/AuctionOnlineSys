@@ -83,6 +83,15 @@ function myinfoUpdateSubmitBtn() {
             if (j.msg === "ok") {
                 stroge.setItem("AccountInfo", jsonData);
                 flushMyInfo();
+
+                var accounttemp = window.sessionStorage.getItem("account");
+                try {
+                    accounttemp = $.parseJSON(accounttemp);
+                }catch (e) {
+                    accounttemp = null;
+                }
+                $("#topAccountName")[0].text = name;
+                accounttemp.name = name;
             } else if (j.msg === "f") {
                 console.log("出现了不可意料的错误");
             }
@@ -242,6 +251,12 @@ $(document).ready(function () {
             console.log(JSON.stringify(data));
             salerToApply(data);
         });
+    });
+
+
+    layui.$("#myGoodsEditBtn").on("click", function () {
+        var data = layui.form.val('updateGoods');
+
     });
 
 });
@@ -587,7 +602,7 @@ function getMyAuctionInfo() {
                 "                                        <td>" + myOrderStatus[orderStatus] + "</td>\n" +
                 "                                        <td>\n" +
                 "                                            <a href=\"javascript:;\" onclick=\"goodInfo(" + auctionInfoList[i].id + ")\">查看</a>\n" +
-                "                                            <a href=\"javascript:;\">编辑</a>\n" +
+                "                                            <a href=\"#\"  data-toggle=\"modal\" data-target=\"#myGoodEditBtn\">编辑</a>\n" +
                 "                                            <a href=\"javascript:;\" data-toggle=\"tooltip\" data-placement=\"right\"\n" +
                 "                                               title=\"真的要删除我吗\" onclick=\"btnConfirmGoods(" + auctionInfoList[i].id + ")\">删除</a>\n" +
                 "                                        </td>\n" +

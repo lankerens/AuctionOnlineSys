@@ -94,6 +94,12 @@ public class LankerenServiceImpl implements LankerenService {
         res.put("msg", "f");
         if(status == null || status == null) {return  res;}
         Integer f = lankerenMapper.updateSalerInfo(status, sid);
+        /**
+         *  如果同意卖家， 身份跟着改
+         */
+        if(status == 1){
+            updateIndentityInfo(sid, Constant.SalerUser);
+        }
         if(f != 0){
             res.put("msg", "ok");
         }

@@ -86,16 +86,22 @@
             <!--  左侧导航  -->
             <div class="left-daohang">
                 <ul class="clearfix">
-                    <li><a class="myactive-daohang" href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-div')">基本信息</a></li>
-                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myVIP')" >会员特权</a></li>
+                    <li><a class="myactive-daohang" href="javascript:;"
+                           onclick="changeActiveDaohang(this, 'right-info-div')">基本信息</a></li>
+                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myVIP')">会员特权</a></li>
                     <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-psw')">修改密码</a></li>
-                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-shopcart');myShoppingCart();">购物车</a></li>
-                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myauction');myAuction();">我的竞拍</a></li>
-                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myGoods');getMyAuctionInfo();">我的商品</a></li>
-                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myOrderInfo'); getMyOrderList();">我的订单</a></li>
+                    <li><a href="javascript:;"
+                           onclick="changeActiveDaohang(this, 'right-info-shopcart');myShoppingCart();">购物车</a></li>
+                    <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-myauction');myAuction();">我的竞拍</a>
+                    </li>
+                    <li><a href="javascript:;"
+                           onclick="changeActiveDaohang(this, 'right-info-myGoods');getMyAuctionInfo();">我的商品</a></li>
+                    <li><a href="javascript:;"
+                           onclick="changeActiveDaohang(this, 'right-info-myOrderInfo'); getMyOrderList();">我的订单</a>
+                    </li>
                     <li><a href="javascript:;" onclick="changeActiveDaohang(this, 'right-info-mysaler')">申请商家</a></li>
-                    <li><a href="./index.html"  data-toggle="tooltip" data-placement="bottom"
-                           title="真的要离开我这个页面了吗(Q.Q)" >返回首页</a></li>
+                    <li><a href="./index.html" data-toggle="tooltip" data-placement="bottom"
+                           title="真的要离开我这个页面了吗(Q.Q)">返回首页</a></li>
                 </ul>
 
             </div>
@@ -108,8 +114,10 @@
                     <!-- 基本信息 -->
                     <div class="right-info-div ">
                         <div class="info-title clearfix">
-                                <p>基本信息</p>
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalmyinfo1" onclick="myinfoUpdateBtn()" >修改</button>
+                            <p>基本信息</p>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalmyinfo1"
+                                    onclick="myinfoUpdateBtn()">修改
+                            </button>
                         </div>
 
                         <div class="left-bottom-myinfo clearfix">
@@ -199,11 +207,11 @@
                         </div>
 
 
-
                     </div>
 
                     <!-- 模态框（Modal） -->
-                    <div class="modal fade" id="myModalmyinfo1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="myModalmyinfo1" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -272,7 +280,8 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                                     </button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="myinfoUpdateSubmitBtn()" >
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                            onclick="myinfoUpdateSubmitBtn()">
                                         提交更改
                                     </button>
                                 </div>
@@ -292,30 +301,32 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <!--  上面两个是外界框  -->
-                        <div class="myinfo-psw-update">
-                            <div class="form-group">
-                                <label for="mypassword0">原密码</label>
-                                <input type="password" class="form-control" id="mypassword0"
-                                      >
-                            </div>
-                            <div class="form-group">
-                                <label for="mypassword1">新密码</label>
-                                <input type="password" class="form-control" id="mypassword1"
-                                       data-toggle="tooltip" data-placement="right" title="密码至少包含字母&数字两种字符"   >
-                            </div>
-                            <div class="form-group">
-                                <label for="mypassword2">再次输入新密码</label>
-                                <input type="password" class="form-control" id="mypassword2"
-                                       data-toggle="tooltip" data-placement="right" title="必须与上面的密码一致" >
-                            </div>
+                                <div class="myinfo-psw-update">
+                                    <div class="form-group">
+                                        <label for="mypassword0">原密码</label>
+                                        <input type="password" class="form-control" id="mypassword0"
+                                        >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mypassword1">新密码</label>
+                                        <input type="password" class="form-control" id="mypassword1"
+                                               data-toggle="tooltip" data-placement="right" title="密码至少包含字母&数字两种字符">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mypassword2">再次输入新密码</label>
+                                        <input type="password" class="form-control" id="mypassword2"
+                                               data-toggle="tooltip" data-placement="right" title="必须与上面的密码一致">
+                                    </div>
 
-                           <div class="myinfo-psw-btn">
-                               <p>
-                                   <button type="button" class="btn btn-info" onclick="myinfoUpdatePsw()">提交更改</button>
-                               </p>
-                           </div>
+                                    <div class="myinfo-psw-btn">
+                                        <p>
+                                            <button type="button" class="btn btn-info" onclick="myinfoUpdatePsw()">
+                                                提交更改
+                                            </button>
+                                        </p>
+                                    </div>
 
-                        </div>
+                                </div>
                                 <!--  外界框 the end div -->
                             </div>
                         </div>
@@ -341,8 +352,8 @@
                                 </button>
                                 </span>
                                 <input type="text" class="form-control" placeholder="按商品名称进行搜索">
-                                </div><!-- /input-group -->
-                            </div>
+                            </div><!-- /input-group -->
+                        </div>
 
                         <!--  列表内容  -->
                         <div class="shopcart-info-listcontent">
@@ -375,7 +386,7 @@
                         </div>
 
 
-                        </div>
+                    </div>
 
                     <!--  我的竞拍 -->
                     <div class="right-info-myauction myActiveInRightInfo">
@@ -414,7 +425,6 @@
                                     </tr>
                                     </thead>
                                     <tbody id="myaucton-table">
-
 
 
                                     </tbody>
@@ -492,6 +502,120 @@
 
                     </div>
 
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="myGoodEditBtn" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="myGoodEditBtn2">
+                                        商品信息
+                                    </h4>
+                                </div>
+                                <form class="layui-form" action="" lay-filter="updateGoods">
+                                    <div class="modal-body">
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">商品名称</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="goodName" lay-verify="title" autocomplete="off"
+                                                       placeholder="请输入标题"
+                                                       class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">该分类</label>
+                                            <div class="layui-input-block">
+                                                <select name="goodType" lay-filter="aihao">
+                                                    <option value=""></option>
+                                                    <option value="0">陶瓷</option>
+                                                    <option value="1">手表</option>
+                                                    <option value="2">名画</option>
+                                                    <option value="3">古剑</option>
+                                                    <option value="4">旗袍</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">卖家承诺</label>
+                                            <div class="layui-input-block">
+                                                <input type="checkbox" name="packMail" title="包邮">
+                                                <input type="checkbox" name="oimei" title="假一赔十">
+                                                <input type="checkbox" name="ensure" title="协议保障">
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">立即上架</label>
+                                            <div class="layui-input-block">
+                                                <input type="checkbox" name="status" lay-skin="switch"
+                                                       lay-text="ON|OFF">
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">起拍价</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="startPrice" lay-verify="title"
+                                                       autocomplete="off" placeholder="￥" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">最低竞拍额</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="pricePlus" lay-verify="title"
+                                                       autocomplete="off" placeholder="￥" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-form-item layui-form-text">
+                                            <label class="layui-form-label">商品描述</label>
+                                            <div class="layui-input-block">
+                                                <textarea placeholder="请输入内容" class="layui-textarea" autocomplete="off"
+                                                          name="goodsDec"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">截止时间</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="endTime" class="layui-input" autocomplete="off"
+                                                       id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">商品图片</label>
+                                            <div class="layui-upload-drag " id="picFile">
+                                                <i class="layui-icon"></i>
+                                                <p>点击上传，或将文件拖拽到此处</p>
+                                                <div class="layui-hide" id="uploadDemoView">
+                                                    <hr>
+                                                    <img src="" alt="上传成功后渲染" style="max-width: 196px">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                        </button>
+                                        <button type="button" class="btn btn-primary" id="myGoodsEditBtn">
+                                            提交更改
+                                        </button>
+                                    </div>
+                                </form>
+
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+
                     <!--   我的订单 -->
                     <div class="right-info-myOrderInfo myActiveInRightInfo">
 
@@ -531,8 +655,6 @@
                                     <tbody id="myOrder-table">
 
 
-
-
                                     </tbody>
                                 </table>
 
@@ -568,21 +690,24 @@
                                         <div class="form-group">
                                             <label for="mysalerName">商家名称</label>
                                             <input type="text" name="busineName" class="form-control" id="mysalerName"
-                                                    >
+                                            >
                                         </div>
                                         <div class="form-group">
                                             <label for="myrealsalerName">经营者名称</label>
-                                            <input type="text" name="salerName" class="form-control" id="myrealsalerName"
+                                            <input type="text" name="salerName" class="form-control"
+                                                   id="myrealsalerName"
                                             >
                                         </div>
                                         <div class="form-group">
                                             <label for="mysalerAdress">商家地址</label>
-                                            <input type="text" name="busineAddress" class="form-control" id="mysalerAdress"
+                                            <input type="text" name="busineAddress" class="form-control"
+                                                   id="mysalerAdress"
                                             >
                                         </div>
                                         <div class="form-group">
                                             <label for="mysalerContact">商家联系方式</label>
-                                            <input type="text" name="busineContact" class="form-control" id="mysalerContact"
+                                            <input type="text" name="busineContact" class="form-control"
+                                                   id="mysalerContact"
                                             >
                                         </div>
                                         <div class="form-group">
@@ -597,11 +722,12 @@
                                         </div>
 
                                         <!--  提交申请按钮  -->
-                                       <div class="mysaler-info-btn">
-                                           <p>
-                                                <button type="button" id="mySalerToApply" class="btn btn-info">提交申请</button>
-                                           </p>
-                                       </div>
+                                        <div class="mysaler-info-btn">
+                                            <p>
+                                                <button type="button" id="mySalerToApply" class="btn btn-info">提交申请
+                                                </button>
+                                            </p>
+                                        </div>
                                     </div>
                                 </form>
 
@@ -635,13 +761,15 @@
                                         </div>
                                         <!--  名称 -->
                                         <div class="myVIP-info-topLeft2">
-                                                <span class="myVIP-info-topLeft2-name myinfo-div-name">lankeren(默认)</span>
-                                                <span class="myinfo-div-sgin">个性签名...</span>
+                                            <span class="myVIP-info-topLeft2-name myinfo-div-name">lankeren(默认)</span>
+                                            <span class="myinfo-div-sgin">个性签名...</span>
                                         </div>
 
                                         <!--  vip 图标  -->
                                         <div class="myVIP-btn">
-                                            <button type="button" id="myVIPIcon" class="btn btn-default" disabled="disabled">VIP</button>
+                                            <button type="button" id="myVIPIcon" class="btn btn-default"
+                                                    disabled="disabled">VIP
+                                            </button>
                                             <!--<button type="button" class="btn btn-danger" >VIP</button>-->
                                         </div>
 
@@ -699,7 +827,9 @@
 
 
 <script>
-    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+    $(function () {
+        $("[data-toggle='tooltip']").tooltip();
+    });
 </script>
 
 </body>
