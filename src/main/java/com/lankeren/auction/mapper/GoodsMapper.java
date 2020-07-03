@@ -30,7 +30,7 @@ public interface GoodsMapper {
     int saveSalerInfo(SalerInfo salerInfo);
 
 
-    @Select("select count(*) from account where account = #{account}")
+    @Select("select count(*) from saler_info where account = #{account}")
     int theUserIsExists(String account);
 
 

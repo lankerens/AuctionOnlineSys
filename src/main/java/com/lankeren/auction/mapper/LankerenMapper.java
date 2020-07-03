@@ -50,5 +50,8 @@ public interface LankerenMapper {
     @Update("UPDATE `auctiononlinesys`.`account` SET `identity` = #{identity} WHERE `id` = #{aid}")
     Integer updateIndentityInfo(Integer identity, Integer aid);
 
-
+    @Select("SELECT a.id from saler_info s " +
+            "LEFT JOIN account a on s.account = a.account " +
+            "where s.id = #{sid}")
+    Integer getAccountbySalerInfo(Integer sid);
 }

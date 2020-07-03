@@ -86,6 +86,7 @@ public class GoodsServiceImpl implements GoodsService {
         res.put("msg", "f");
         if("null".equals(salerInfo.getAccount())  || "null".equals(salerInfo.getBusineName()) ){return  res;}
         int exists = goodsMapper.theUserIsExists(salerInfo.getAccount());
+        System.out.println(exists);
         if(exists == 1){
             res.put("msg", "exists");
             return res;

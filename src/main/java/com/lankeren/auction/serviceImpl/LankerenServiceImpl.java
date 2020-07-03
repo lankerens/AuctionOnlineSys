@@ -98,7 +98,8 @@ public class LankerenServiceImpl implements LankerenService {
          *  如果同意卖家， 身份跟着改
          */
         if(status == 1){
-            updateIndentityInfo(sid, Constant.SalerUser);
+            Integer aid = lankerenMapper.getAccountbySalerInfo(sid);
+            updateIndentityInfo(aid, Constant.SalerUser);
         }
         if(f != 0){
             res.put("msg", "ok");
